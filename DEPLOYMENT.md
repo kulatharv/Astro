@@ -137,3 +137,4 @@ sudo certbot --nginx -d astrologic.com -d www.astrologic.com
 - [x] **Non-Root Containers**: Dockerfiles run as unprivileged users (`nextjs` and `appuser`).
 - [x] **Default-Deny Authentication**: FastAPI gateway enforces authorization and ratelimiting on non-public endpoints.
 - [x] **Health Checks**: Live Docker and Uvicorn health monitoring via `/health`.
+

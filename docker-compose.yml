@@ -53,3 +53,4 @@ networks:
   astrologic-network:
     name: astrologic_network
     driver: bridge
+

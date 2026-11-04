@@ -35,3 +35,4 @@ services:
           type: web
           name: astrologic-backend
           property: host
+
