@@ -1,0 +1,37 @@
+services:
+  # 1. FastAPI Gateway & Ephemeris Engine
+  - type: web
+    name: astrologic-backend
+    env: python
+    region: oregon
+    plan: standard
+    buildCommand: pip install --upgrade pip && pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn gateway.main:app --host 0.0.0.0 --port $PORT --workers 4
+    healthCheckPath: /health
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: PYTHON_VERSION
+        value: 3.11.8
+
+  # 2. Next.js 16 Luxury Frontend
+  - type: web
+    name: astrologic-frontend
+    env: node
+    region: oregon
+    plan: standard
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npm run start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.12.2
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: astrologic-backend
+          property: host
+      - key: BACKEND_API_URL
+        fromService:
+          type: web
+          name: astrologic-backend
+          property: host

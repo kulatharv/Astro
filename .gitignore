@@ -228,3 +228,13 @@ frontend/.next/
 frontend/out/
 .env
 .env.local
+.env*
+!.env.example
+!.env.production.example
+*.pem
+*.key
+*.cert
+*.p12
+credentials.json
+token.json
+secrets.json
