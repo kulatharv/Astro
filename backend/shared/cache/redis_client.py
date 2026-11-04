@@ -152,5 +152,11 @@ class CacheService:
         return f"kundali:{hash_str}"
 
 
+def get_redis_client():
+    """Return active redis client instance or None."""
+    return cache._redis_client if getattr(cache, "_use_redis", False) else None
+
+
+
 
 

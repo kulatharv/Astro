@@ -122,3 +122,7 @@ def generate_kundali_pdf_buffer(chart: dict) -> io.BytesIO:
         buffer.write(text_content.encode("utf-8"))
         buffer.seek(0)
         return buffer
+
+
+# Backward-compatibility alias
+generate_kundali_pdf = generate_kundali_pdf_buffer

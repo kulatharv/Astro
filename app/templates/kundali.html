@@ -372,11 +372,8 @@ footer{position:relative;z-index:1;text-align:center;padding:24px;font-size:12px
   // ================================================================
 // kundali.js — AstroLogic Complete Frontend v2
 // Fixes: getRashi, house analysis, dasha timeline, download
-// ================================================================
-const API_URL = window.location.hostname === "localhost" 
-  || window.location.hostname === "127.0.0.1"
-  ? "http://127.0.0.1:8000"
-  : "https://astrologic-vedic-1.onrender.com";
+// Kundali API base URL
+const API_URL = window.location.origin;
 const safe = v => (v == null || v === "") ? "—" : v;
 const safeNum = (v, fb = 0) => { const n = parseFloat(v); return isNaN(n) ? fb : n; };
 
@@ -464,8 +461,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadCities() {
   try {
-    // const r = await fetch('https://astrologic-vedic-1.onrender.com/api/cities');
-    const r = await fetch('api/cities');
+    const r = await fetch('/api/cities');
     if (r.ok) _cities = await r.json();
   } catch {}
 }
@@ -764,7 +760,7 @@ async function generateKundali() {
   btn.disabled = true; btn.innerText = "Calculating…";
 
   try {
-    const res = await fetch('api/kundali', {
+    const res = await fetch('/api/kundali', {
       method:"POST", headers:{"Content-Type":"application/json"},
       body: JSON.stringify({year, month, day, hour, minute, city})
     });
@@ -856,11 +852,29 @@ function openFeedbackModal(module, person, onDone){
   if(old) old.remove();
   const modal = document.createElement("div");
   modal.id = "testingFeedbackModal";
-  modal.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:10000;display:flex;align-items:center;justify-content:center;padding:18px";
+  modal.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(4px);z-index:10000;display:flex;align-items:center;justify-content:center;padding:18px";
+
+  const closeFn = () => {
+    modal.remove();
+    document.removeEventListener("keydown", escHandler);
+  };
+
+  const escHandler = (e) => {
+    if(e.key === "Escape") closeFn();
+  };
+  document.addEventListener("keydown", escHandler);
+
+  modal.onclick = (e) => {
+    if(e.target === modal) closeFn();
+  };
+
   modal.innerHTML = `
-    <form id="testingFeedbackForm" style="width:100%;max-width:460px;background:#071426;border:1px solid rgba(245,193,108,.28);border-radius:16px;padding:22px;color:#e8e8e8;font-family:Inter,sans-serif">
-      <h3 style="font-family:Cinzel,serif;color:#f5c16c;margin-bottom:8px">Quick Testing Feedback</h3>
-      <p style="color:rgba(232,232,232,.62);font-size:13px;line-height:1.5;margin-bottom:14px">Please submit this before leaving or downloading. It helps us improve the early product.</p>
+    <form id="testingFeedbackForm" style="width:100%;max-width:460px;background:#071426;border:1px solid rgba(245,193,108,.28);border-radius:16px;padding:22px;color:#e8e8e8;font-family:Inter,sans-serif;position:relative;box-shadow:0 20px 40px rgba(0,0,0,.6)">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+        <h3 style="font-family:Cinzel,serif;color:#f5c16c;margin:0;font-size:18px">Quick Testing Feedback</h3>
+        <button type="button" id="closeKundaliFeedbackBtn" aria-label="Close" style="background:transparent;border:none;color:#aaa;font-size:22px;cursor:pointer;line-height:1;padding:0 4px">✕</button>
+      </div>
+      <p style="color:rgba(232,232,232,.62);font-size:13px;line-height:1.5;margin-bottom:14px">Please submit this feedback to help us calibrate the Vedic algorithms.</p>
       <div style="font-size:12px;color:#9bdcff;margin-bottom:12px">${person?.name || "-"} | ${person?.dob || "-"} ${person?.tob || ""} | ${person?.city || "-"}</div>
       <label style="font-size:11px;color:rgba(232,232,232,.62);font-weight:700">Accuracy</label>
       <select name="accuracy" required style="width:100%;margin:6px 0 12px;padding:10px;border-radius:8px;background:#111f30;color:#fff;border:1px solid rgba(255,255,255,.16)"><option value="">Select</option><option>Very accurate</option><option>Mostly accurate</option><option>Average</option><option>Not accurate</option></select>
@@ -869,9 +883,16 @@ function openFeedbackModal(module, person, onDone){
       <label style="font-size:11px;color:rgba(232,232,232,.62);font-weight:700">Usefulness</label>
       <select name="usefulness" required style="width:100%;margin:6px 0 12px;padding:10px;border-radius:8px;background:#111f30;color:#fff;border:1px solid rgba(255,255,255,.16)"><option value="">Select</option><option>Very useful</option><option>Useful</option><option>Somewhat useful</option><option>Not useful</option></select>
       <textarea name="comments" placeholder="Anything we should improve?" style="width:100%;min-height:80px;margin-bottom:14px;padding:10px;border-radius:8px;background:#111f30;color:#fff;border:1px solid rgba(255,255,255,.16)"></textarea>
-      <button style="width:100%;background:linear-gradient(135deg,#f5c16c,#d89b3c);border:0;border-radius:9px;padding:11px;font-weight:800;color:#000">Submit Feedback</button>
+      <div style="display:flex;gap:10px">
+        <button type="button" id="cancelKundaliFeedbackBtn" style="flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:9px;padding:11px;color:#ccc;cursor:pointer;font-weight:600">Close</button>
+        <button type="submit" style="flex:2;background:linear-gradient(135deg,#f5c16c,#d89b3c);border:0;border-radius:9px;padding:11px;font-weight:800;color:#000;cursor:pointer">Submit Feedback</button>
+      </div>
     </form>`;
   document.body.appendChild(modal);
+
+  document.getElementById("closeKundaliFeedbackBtn").onclick = closeFn;
+  document.getElementById("cancelKundaliFeedbackBtn").onclick = closeFn;
+
   document.getElementById("testingFeedbackForm").addEventListener("submit", async e => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
@@ -890,7 +911,7 @@ function openFeedbackModal(module, person, onDone){
         comments: fd.get("comments")
       })
     });
-    modal.remove();
+    closeFn();
     onDone?.();
   });
 }
@@ -1500,7 +1521,7 @@ async function sendMessage() {
   cb.scrollTop = cb.scrollHeight;
 
   try {
-    const r = await fetch('api/kundali-chat' , {
+    const r = await fetch('/api/kundali-chat', {
       method:"POST", headers:{"Content-Type":"application/json"},
       body: JSON.stringify({ message: msg, chart: _data })
     });

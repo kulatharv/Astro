@@ -1,0 +1,110 @@
+/**
+ * AstroLogic Design System — Celestial Luxury Master Tokens
+ * Conforming to Section 4: Art Direction & Design Tokens
+ */
+
+:root {
+  /* ── Core Celestial Luxury Palette ── */
+  --color-bg-base: #050B16;
+  --color-bg-secondary: #081426;
+  --color-surface-card: #0D1929;
+  --color-surface-elevated: #122136;
+  --color-surface-glass: rgba(13, 25, 41, 0.72);
+  --color-surface-hover: rgba(18, 33, 54, 0.90);
+  
+  /* ── Sacred Gold Accents (Restrained & Meaningful) ── */
+  --color-gold: #E8B85B;
+  --color-gold-hover: #F2CA7A;
+  --color-gold-deep: #C99A45;
+  --color-gold-dim: rgba(232, 184, 91, 0.10);
+  --color-gold-dim-hover: rgba(232, 184, 91, 0.18);
+  --color-gold-border: rgba(232, 184, 91, 0.28);
+  --color-gold-border-bright: rgba(232, 184, 91, 0.55);
+  --color-gold-glow: rgba(232, 184, 91, 0.20);
+  
+  /* ── Celestial Blue / Cyan Accents ── */
+  --color-blue: #8BC7ED;
+  --color-blue-dim: rgba(139, 199, 237, 0.12);
+  --color-blue-border: rgba(139, 199, 237, 0.24);
+  
+  /* ── Functional / Status Colors ── */
+  --color-success: #36B37E;
+  --color-success-dim: rgba(54, 179, 126, 0.14);
+  --color-success-border: rgba(54, 179, 126, 0.32);
+  --color-error: #E56B6F;
+  --color-error-dim: rgba(229, 107, 111, 0.14);
+  --color-error-border: rgba(229, 107, 111, 0.32);
+
+  /* ── Structural Borders ── */
+  --color-border-subtle: #1E2D42;
+  --color-border-medium: #263448;
+  --color-border-light: rgba(255, 255, 255, 0.12);
+  --backdrop-blur: blur(20px);
+
+  /* ── Typography & Contrast Colors (WCAG 2.2 AA compliant) ── */
+  --color-text-primary: #F5F3EE;
+  --color-text-secondary: #A8B3C5;  /* >5.6:1 contrast ratio against #050B16 */
+  --color-text-dim: #7B889B;
+  --color-text-on-gold: #050B16;
+
+  /* ── Font Stacks ── */
+  --font-serif: 'Cinzel', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-editorial: 'Crimson Pro', Georgia, serif;
+
+  /* ── Spacing Scale ── */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+
+  /* ── Radii ── */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ── Elevation Shadows ── */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.55);
+  --shadow-gold: 0 8px 28px rgba(232, 184, 91, 0.22);
+  --shadow-blue: 0 8px 28px rgba(139, 199, 237, 0.16);
+
+  /* ── Motion & Transitions ── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.18s var(--ease-out-expo);
+  --transition-base: 0.28s var(--ease-out-expo);
+  --transition-smooth: 0.45s var(--ease-out-expo);
+
+  /* ── Layout Constraints ── */
+  --header-height: 74px;
+  --container-max: 1240px;
+}
+
+/* ── Focus Visibility Standard (WCAG 2.2 AA) ── */
+:focus-visible {
+  outline: 2px solid var(--color-gold) !important;
+  outline-offset: 3px !important;
+}
+
+/* ── Reduced Motion Preference ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

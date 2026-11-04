@@ -1,0 +1,362 @@
+{
+  "about.html": {
+    "size_bytes": 27055,
+    "title": "AstroLogic | About Vedic Astrology",
+    "api_endpoints": [],
+    "form_count": 0,
+    "input_names": [],
+    "script_blocks": 1,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/",
+      "/about",
+      "/blogs",
+      "/blogs.html",
+      "/horoscope",
+      "/kundali",
+      "/logout",
+      "/panchang.html",
+      "/prediction",
+      "/profile"
+    ]
+  },
+  "admin-activity.html": {
+    "size_bytes": 5374,
+    "title": "AstroLogic | Admin Activity",
+    "api_endpoints": [],
+    "form_count": 0,
+    "input_names": [],
+    "script_blocks": 0,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/",
+      "/admin/activity",
+      "/admin/blogs",
+      "/admin/feedback",
+      "/admin/logout",
+      "/admin/users"
+    ]
+  },
+  "admin-blog.html": {
+    "size_bytes": 8475,
+    "title": "AstroLogic | Admin Blogs",
+    "api_endpoints": [
+      "/api/admin/blogs",
+      "/api/admin/blogs/delete/${blog.id}",
+      "/api/admin/blogs/update/${id}"
+    ],
+    "form_count": 2,
+    "input_names": [
+      "title"
+    ],
+    "script_blocks": 1,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/",
+      "/admin/activity",
+      "/admin/blogs",
+      "/admin/feedback",
+      "/admin/logout",
+      "/admin/users"
+    ]
+  },
+  "admin-feedback.html": {
+    "size_bytes": 4656,
+    "title": "AstroLogic | Testing Feedback",
+    "api_endpoints": [],
+    "form_count": 0,
+    "input_names": [],
+    "script_blocks": 0,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/",
+      "/admin/activity",
+      "/admin/blogs",
+      "/admin/feedback",
+      "/admin/logout",
+      "/admin/users"
+    ]
+  },
+  "admin-login.html": {
+    "size_bytes": 4062,
+    "title": "AstroLogic | Admin Login",
+    "api_endpoints": [],
+    "form_count": 1,
+    "input_names": [
+      "password",
+      "username"
+    ],
+    "script_blocks": 0,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/"
+    ]
+  },
+  "admin-users.html": {
+    "size_bytes": 5592,
+    "title": "AstroLogic | Admin Users",
+    "api_endpoints": [],
+    "form_count": 0,
+    "input_names": [],
+    "script_blocks": 0,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/",
+      "/admin/activity",
+      "/admin/blogs",
+      "/admin/feedback",
+      "/admin/logout",
+      "/admin/users"
+    ]
+  },
+  "auth.html": {
+    "size_bytes": 10990,
+    "title": "AstroLogic | Authentication",
+    "api_endpoints": [],
+    "form_count": 1,
+    "input_names": [
+      "email",
+      "name",
+      "password",
+      "phone"
+    ],
+    "script_blocks": 1,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/",
+      "/login",
+      "/signup"
+    ]
+  },
+  "base.html": {
+    "size_bytes": 861,
+    "title": "No Title",
+    "api_endpoints": [],
+    "form_count": 0,
+    "input_names": [],
+    "script_blocks": 0,
+    "style_blocks": 0,
+    "internal_nav_links": [
+      "/change-language/bn",
+      "/change-language/en",
+      "/change-language/gu",
+      "/change-language/hi",
+      "/change-language/kn",
+      "/change-language/mr",
+      "/change-language/ta",
+      "/change-language/te"
+    ]
+  },
+  "blog-detail.html": {
+    "size_bytes": 7395,
+    "title": "AstroLogic | Blog",
+    "api_endpoints": [
+      "/api/blogs/${blogId}"
+    ],
+    "form_count": 0,
+    "input_names": [],
+    "script_blocks": 1,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/",
+      "/about",
+      "/blogs",
+      "/horoscope",
+      "/logout",
+      "/panchang.html",
+      "/prediction",
+      "/profile"
+    ]
+  },
+  "blogs.html": {
+    "size_bytes": 21127,
+    "title": "AstroLogic | Astrology Blog",
+    "api_endpoints": [
+      "/api/blogs"
+    ],
+    "form_count": 0,
+    "input_names": [],
+    "script_blocks": 1,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/",
+      "/about",
+      "/blog/${b.id}",
+      "/blog/${first.id}",
+      "/blogs",
+      "/horoscope",
+      "/kundali",
+      "/logout",
+      "/panchang.html",
+      "/prediction",
+      "/profile"
+    ]
+  },
+  "daily-horoscope.html": {
+    "size_bytes": 25449,
+    "title": "AstroLogic | Daily Horoscope",
+    "api_endpoints": [
+      "/api/horoscope/${signIdx}"
+    ],
+    "form_count": 0,
+    "input_names": [],
+    "script_blocks": 1,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/",
+      "/about",
+      "/blogs",
+      "/horoscope",
+      "/kundali",
+      "/logout",
+      "/panchang.html",
+      "/prediction",
+      "/profile"
+    ]
+  },
+  "index.html": {
+    "size_bytes": 80097,
+    "title": "AstroLogic | Vedic Astrology & AI Celestial Insights",
+    "api_endpoints": [
+      "/api/panchang"
+    ],
+    "form_count": 0,
+    "input_names": [],
+    "script_blocks": 1,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/",
+      "/about",
+      "/about#dashas",
+      "/about#nakshatras",
+      "/about#privacy",
+      "/about#terms",
+      "/blogs",
+      "/change-language/",
+      "/horoscope",
+      "/horoscope?sign=0",
+      "/horoscope?sign=1",
+      "/horoscope?sign=10",
+      "/horoscope?sign=11",
+      "/horoscope?sign=2",
+      "/horoscope?sign=3",
+      "/horoscope?sign=4",
+      "/horoscope?sign=5",
+      "/horoscope?sign=6",
+      "/horoscope?sign=7",
+      "/horoscope?sign=8",
+      "/horoscope?sign=9",
+      "/kundali",
+      "/login",
+      "/logout",
+      "/panchang",
+      "/prediction",
+      "/profile",
+      "/signup",
+      "/static/css/tokens.css"
+    ]
+  },
+  "kundali.html": {
+    "size_bytes": 80339,
+    "title": "AstroLogic | Vedic Birth Kundali",
+    "api_endpoints": [
+      "/api/cities",
+      "/api/kundali",
+      "/api/kundali-chat",
+      "/api/testing-feedback",
+      "/api/user-activity"
+    ],
+    "form_count": 1,
+    "input_names": [],
+    "script_blocks": 4,
+    "style_blocks": 3,
+    "internal_nav_links": [
+      "/",
+      "/about",
+      "/blogs",
+      "/horoscope",
+      "/kundali",
+      "/logout",
+      "/panchang.html",
+      "/prediction",
+      "/profile"
+    ]
+  },
+  "panchang.html": {
+    "size_bytes": 55562,
+    "title": "AstroLogic | Daily Panchang & Vedic Decision Engine",
+    "api_endpoints": [
+      "/api/festivals/upcoming?limit=14",
+      "/api/panchang",
+      "/api/panchang/decision",
+      "/api/panchang/resolve-profile"
+    ],
+    "form_count": 0,
+    "input_names": [],
+    "script_blocks": 2,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/",
+      "/about",
+      "/blogs",
+      "/horoscope",
+      "/kundali",
+      "/logout",
+      "/panchang",
+      "/panchang.html",
+      "/prediction",
+      "/profile"
+    ]
+  },
+  "prediction.html": {
+    "size_bytes": 48497,
+    "title": "AstroLogic | Life Domain Predictions",
+    "api_endpoints": [
+      "/api/cities",
+      "/api/domains",
+      "/api/testing-feedback",
+      "/api/user-activity"
+    ],
+    "form_count": 1,
+    "input_names": [],
+    "script_blocks": 1,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/",
+      "/about",
+      "/blogs",
+      "/horoscope",
+      "/kundali",
+      "/logout",
+      "/panchang.html",
+      "/prediction",
+      "/profile"
+    ]
+  },
+  "profile.html": {
+    "size_bytes": 13267,
+    "title": "AstroLogic | Profile",
+    "api_endpoints": [],
+    "form_count": 2,
+    "input_names": [
+      "birth_city",
+      "birth_date",
+      "birth_time",
+      "name",
+      "phone",
+      "zodiac_sign"
+    ],
+    "script_blocks": 0,
+    "style_blocks": 1,
+    "internal_nav_links": [
+      "/",
+      "/blogs",
+      "/horoscope",
+      "/kundali",
+      "/logout",
+      "/panchang.html",
+      "/prediction",
+      "/profile"
+    ]
+  }
+}

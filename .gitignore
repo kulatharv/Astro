@@ -218,4 +218,13 @@ astrologic.db
 .vscode/
 .idea/
 .DS_Store
-Thumbs.db
+Thumbs.db
+
+venv/
+.venv/
+node_modules/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+.env
+.env.local

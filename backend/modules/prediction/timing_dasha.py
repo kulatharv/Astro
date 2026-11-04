@@ -157,14 +157,53 @@ def score_dasha_periods(
     f_start = start_date.strftime("%Y-%m-%d")
     f_end = end_date.strftime("%Y-%m-%d")
 
-    dasha_info = chart.get("dasha", {})
-    md_lord = dasha_info.get("current_mahadasha", "Jupiter")
-    balance_years = dasha_info.get("balance_years", 10.0)
+    birth_dt = chart.get("birth_datetime")
+    if not isinstance(birth_dt, datetime):
+        d_info = chart.get("dasha", {})
+        birth_dt = d_info.get("birth_datetime")
+    if not isinstance(birth_dt, datetime) and "birth_year" in chart:
+        birth_dt = datetime(
+            int(chart["birth_year"]),
+            int(chart.get("birth_month", 1)),
+            int(chart.get("birth_day", 1)),
+            int(chart.get("birth_hour", 12)),
+            int(chart.get("birth_minute", 0)),
+        )
+    if not isinstance(birth_dt, datetime):
+        raw_b = chart.get("basic_details", {})
+        date_str = raw_b.get("date") or chart.get("birth_date") or chart.get("date")
+        time_val = raw_b.get("time") or chart.get("time", 12.0)
+        if date_str:
+            for fmt in ("%Y-%m-%d", "%d-%m-%Y", "%d/%m/%Y", "%Y/%m/%d"):
+                try:
+                    parsed_d = datetime.strptime(str(date_str).strip(), fmt)
+                    if isinstance(time_val, (int, float)):
+                        hour = int(time_val)
+                        minute = int(round((time_val - hour) * 60))
+                        birth_dt = parsed_d.replace(hour=hour, minute=minute)
+                    else:
+                        birth_dt = parsed_d
+                    break
+                except ValueError:
+                    pass
+    if not isinstance(birth_dt, datetime):
+        birth_dt = datetime(start_date.year, start_date.month, start_date.day)
 
-    now_dt = datetime(start_date.year, start_date.month, start_date.day)
-    timeline = generate_dasha_timeline(md_lord, balance_years)
+    timeline = chart.get("dasha", {}).get("timeline")
+    if not timeline:
+        dasha_info = chart.get("dasha", {})
+        md_lord = dasha_info.get("current_mahadasha") or chart.get("mahadasha", "Jupiter")
+        bal = dasha_info.get("balance_years")
+        if bal is None:
+            raw_bal = chart.get("dasha_balance", "10.0")
+            try:
+                bal = float(str(raw_bal).split()[0])
+            except Exception:
+                bal = 10.0
+        timeline = generate_dasha_timeline(md_lord, float(bal))
+
     dasha_chain = generate_dasha_chain(
-        birth_datetime=now_dt,
+        birth_datetime=birth_dt,
         timeline=timeline,
         filter_start=f_start,
         filter_end=f_end,

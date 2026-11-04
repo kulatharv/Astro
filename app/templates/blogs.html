@@ -325,7 +325,7 @@ function renderBlogs(blogs) {
   const [first, ...rest] = blogs;
   const cat = first.category || 'Astrology';
   feat.innerHTML = `
-    <a href="/blogs/${first.id}" class="featured-post">
+    <a href="/blog/${first.id}" class="featured-post">
       <span class="fp-tag">${ICONS[cat]||'✦'} Featured · ${cat}</span>
       <div class="fp-title">${first.title}</div>
       <div class="fp-excerpt">${excerpt(first.content, 200)}</div>
@@ -338,7 +338,7 @@ function renderBlogs(blogs) {
 
   grid.innerHTML = rest.map(b => {
     const bc = b.category || 'Astrology';
-    return `<a href="/blogs/${b.id}" class="blog-card">
+    return `<a href="/blog/${b.id}" class="blog-card">
       <div class="bc-cat">${ICONS[bc]||'✦'} ${bc}</div>
       <div class="bc-title">${b.title}</div>
       <div class="bc-excerpt">${excerpt(b.content)}</div>
@@ -353,7 +353,7 @@ function renderBlogs(blogs) {
 function renderRecent(blogs) {
   document.getElementById('recentPosts').innerHTML = blogs.map(b => {
     const bc = b.category || 'Astrology';
-    return `<a href="/blogs/${b.id}" class="recent-item">
+    return `<a href="/blog/${b.id}" class="recent-item">
       <span class="ri-icon">${ICONS[bc]||'📄'}</span>
       <div><div class="ri-title">${b.title}</div>
         <div class="ri-date">${timeAgo(b.date || b.created_at)}</div></div>

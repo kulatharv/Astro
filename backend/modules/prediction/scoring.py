@@ -171,20 +171,31 @@ def _build_ctx(chart: dict) -> dict:
     for pname, pdata in planet_map.items():
         net_scores[pname] = pdata["str_score"]
 
+    lagna_deg = chart.get("lagna_degree_decimal")
+    if lagna_deg is None:
+        lagna_deg = parse_degree(chart.get("lagna_degree", 0.0))
+
     return {
-        "lagna":       lagna,
-        "lagna_idx":   lagna_idx,
-        "planet_map":  planet_map,
-        "house_lords": house_lords,
-        "house_signs": house_signs,
-        "mahadasha":   mahadasha,
-        "antardasha":  antardasha,
-        "transit_map": transit_map,
-        "net_scores":  net_scores,
-        "yogas":       chart.get("yogas", []),
-        "doshas":      chart.get("doshas", []),
-        "scores":      chart.get("scores", {}),
-        "fn":          {},
+        "lagna":                lagna,
+        "lagna_idx":            lagna_idx,
+        "lagna_degree":         lagna_deg,
+        "lagna_degree_decimal": lagna_deg,
+        "d9_lagna":             chart.get("d9_lagna", ""),
+        "d9_houses":            chart.get("d9_houses", {}),
+        "planet_map":           planet_map,
+        "house_lords":          house_lords,
+        "house_signs":          house_signs,
+        "mahadasha":            mahadasha,
+        "antardasha":           antardasha,
+        "transit_map":          transit_map,
+        "net_scores":           net_scores,
+        "yogas":                chart.get("yogas", []),
+        "doshas":               chart.get("doshas", []),
+        "scores":               chart.get("scores", {}),
+        "fn":                   {},
+        "birth_date":           chart.get("birth_date") or chart.get("date") or chart.get("basic_details", {}).get("date", ""),
+        "birth_datetime":       chart.get("birth_datetime"),
+        "raw_chart":            chart,
     }
 
 

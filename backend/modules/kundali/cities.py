@@ -1,6 +1,6 @@
 import logging
 import requests
-from typing import Optional, Tuple, Dict, List
+from typing import Optional, Tuple, Dict, List, Any
 
 logger = logging.getLogger(__name__)
 
@@ -124,16 +124,48 @@ CITIES: Dict[str, Dict[str, float]] = {
     "Goa": {"lat": 15.2993, "lon": 74.1240, "timezone": 5.5, "elevation": 10.0},
 
     # ── International Capitals & Hubs ──
-    "London": {"lat": 51.5074, "lon": -0.1278, "timezone": 0.0, "elevation": 25.0},
-    "New York": {"lat": 40.7128, "lon": -74.0060, "timezone": -5.0, "elevation": 10.0},
-    "San Francisco": {"lat": 37.7749, "lon": -122.4194, "timezone": -8.0, "elevation": 16.0},
-    "Dubai": {"lat": 25.2048, "lon": 55.2708, "timezone": 4.0, "elevation": 5.0},
-    "Singapore": {"lat": 1.3521, "lon": 103.8198, "timezone": 8.0, "elevation": 15.0},
-    "Toronto": {"lat": 43.6532, "lon": -79.3832, "timezone": -5.0, "elevation": 76.0},
-    "Sydney": {"lat": -33.8688, "lon": 151.2093, "timezone": 10.0, "elevation": 19.0},
+    "London": {"lat": 51.5074, "lon": -0.1278, "timezone": 0.0, "elevation": 25.0, "tz_name": "Europe/London"},
+    "New York": {"lat": 40.7128, "lon": -74.0060, "timezone": -5.0, "elevation": 10.0, "tz_name": "America/New_York"},
+    "San Francisco": {"lat": 37.7749, "lon": -122.4194, "timezone": -8.0, "elevation": 16.0, "tz_name": "America/Los_Angeles"},
+    "Dubai": {"lat": 25.2048, "lon": 55.2708, "timezone": 4.0, "elevation": 5.0, "tz_name": "Asia/Dubai"},
+    "Singapore": {"lat": 1.3521, "lon": 103.8198, "timezone": 8.0, "elevation": 15.0, "tz_name": "Asia/Singapore"},
+    "Toronto": {"lat": 43.6532, "lon": -79.3832, "timezone": -5.0, "elevation": 76.0, "tz_name": "America/Toronto"},
+    "Sydney": {"lat": -33.8688, "lon": 151.2093, "timezone": 10.0, "elevation": 19.0, "tz_name": "Australia/Sydney"},
+    "Kathmandu": {"lat": 27.7172, "lon": 85.3240, "timezone": 5.75, "elevation": 1400.0, "tz_name": "Asia/Kathmandu"},
+    "Colombo": {"lat": 6.9271, "lon": 79.8612, "timezone": 5.5, "elevation": 1.0, "tz_name": "Asia/Colombo"},
+    "Tokyo": {"lat": 35.6762, "lon": 139.6503, "timezone": 9.0, "elevation": 40.0, "tz_name": "Asia/Tokyo"},
 }
 
-CITY_CACHE: Dict[str, Dict[str, float]] = {}
+CITY_CACHE: Dict[str, Dict[str, Any]] = {}
+
+
+def get_city_details(name: str) -> Optional[Dict[str, Any]]:
+    """Return dictionary with lat, lon, timezone, tz_name, elevation for a city."""
+    if not name:
+        return None
+
+    clean_name = name.strip()
+    c = CITIES.get(clean_name)
+
+    if not c:
+        lower_name = clean_name.lower()
+        for key, val in CITIES.items():
+            if key.lower() == lower_name:
+                c = val
+                break
+
+    if not c and clean_name in CITY_CACHE:
+        c = CITY_CACHE[clean_name]
+
+    if not c:
+        return None
+
+    res = dict(c)
+    if "tz_name" not in res:
+        res["tz_name"] = "Asia/Kolkata" if res.get("timezone") == 5.5 else "UTC"
+    if "timezone_offset" not in res and "timezone" in res:
+        res["timezone_offset"] = res["timezone"]
+    return res
 
 
 def get_city(name: str) -> Optional[Tuple[float, float, float]]:

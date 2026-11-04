@@ -42,6 +42,9 @@ class Settings(BaseSettings):
     CHART_CACHE_TTL_SECONDS: int = 2592000  # 30 days
     CHART_CACHE_LRU_SIZE: int = 1000
 
+    # Ephemeris Settings
+    EPHE_PATH: Optional[str] = None  # Path to Swiss Ephemeris .se1 files; if None, falls back safely to Moshier mode
+
     @property
     def cors_origins_list(self) -> list[str]:
         if isinstance(self.ALLOWED_ORIGINS, str):

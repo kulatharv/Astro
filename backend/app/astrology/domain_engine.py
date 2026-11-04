@@ -786,8 +786,8 @@ def analyse_health(ctx: dict) -> dict:
         "domain":"Health & Longevity","icon":"✚","score":pct,
         "weak_organs":weak_organs,"lagna_organs":lagna_organs,
         "ayurvedic_dosha":ayurvedic_dosha,"mental_health_ok":mental_ok,
-        "surgery_risk":surgery_risk,
-        "surgery_txt":"Surgical procedures may come into life — timing matters. Avoid surgery during Mars/Saturn dasha." if surgery_risk else "No strong surgery indicators.",
+        "surgery_risk": False,
+        "surgery_txt": "Planetary patterns remind to maintain routine preventive lifestyle and consult qualified medical professionals for all healthcare decisions.",
         "arishta_doshas":arishta,"disease_periods":disease_periods,
         "first_lord":f"{lord_1} in {_ordinal(l1d.get('house',0))}H — {l1d.get('strength','')}",
         "dasha_active":dasha_active,"timing":timing,"remedies":remedies,
@@ -2252,10 +2252,8 @@ def _health(ctx: dict) -> dict:
     moon_h=moon.get("house",1); moon_ns=ns.get("Moon",0)
     mental_ok=moon_h not in (6,8,12) and moon_ns>=-0.5
 
-    mars_h=mars.get("house",0); sat_h=saturn.get("house",0)
-    surgery=(mars_h in (6,8) or sat_h==8)
-    surgery_txt="Mars/Saturn in 6th or 8th — surgery or accident risk. Time operations carefully." if surgery else \
-                "No strong surgery indicators. Preventive healthcare sufficient."
+    surgery = False
+    surgery_txt = "Planetary patterns remind to maintain routine preventive lifestyle and consult qualified medical professionals for all healthcare decisions."
 
     arishta=[y for y in yogas if any(k in y for k in ("Arishta","Balarishta","Kaal Sarp","Grahan"))]
 

@@ -139,20 +139,39 @@ def build_event_explanation(chart: dict, event_type: str) -> str:
     )
 
 
-def generate_full_chart(year: int, month: int, day: int, hour: float, latitude: float, longitude: float) -> dict:
+def generate_full_chart(
+    year: int,
+    month: int,
+    day: int,
+    hour: float,
+    latitude: float,
+    longitude: float,
+    timezone_offset: float = 5.5,
+    tz_name: str | None = None,
+) -> dict:
     """
     Generate comprehensive birth chart for prediction and AI reasoning.
+    Supports timezone offset and IANA tz_name conversions.
     """
-    timezone_offset = 5.5
-    utc_hour = hour - timezone_offset
-    calc_day = day
+    from shared.timezone.tz import to_utc_jd
 
-    if utc_hour < 0:
-        utc_hour += 24.0
-        calc_day -= 1
+    int_hour = int(hour)
+    int_minute = int(round((hour - int_hour) * 60.0))
+    if int_minute >= 60:
+        int_hour += 1
+        int_minute -= 60
+
+    _, _, _, _, jd = to_utc_jd(
+        year=year,
+        month=month,
+        day=day,
+        hour=int_hour,
+        minute=int_minute,
+        tz_name=tz_name,
+        tz_offset=timezone_offset,
+    )
 
     swe.set_sid_mode(swe.SIDM_LAHIRI)
-    jd = swe.julday(year, month, calc_day, utc_hour)
 
     planet_positions = calculate_all_planets(jd)
     asc_degree, lagna_sign = calculate_lagna(jd, latitude, longitude)

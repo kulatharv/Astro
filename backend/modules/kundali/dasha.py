@@ -114,10 +114,18 @@ def compute_pratyantardasha(md_lord: str, ad_lord: str, ad_start: datetime, ad_e
     return pds
 
 
-def generate_dasha_chain(birth_datetime: datetime, timeline: list[dict], filter_start: str | None = None, filter_end: str | None = None) -> list[dict]:
+def generate_dasha_chain(
+    birth_datetime: datetime,
+    timeline: list[dict],
+    filter_start: str | None = None,
+    filter_end: str | None = None,
+    year_convention: str = "solar_365_25",
+) -> list[dict]:
     """
     Generate nested MD/AD/PD periods for chart forecast within optional filter date range.
+    Supports 'solar_365_25' (default, 365.25 days) and 'savana_360' (360 days) conventions.
     """
+    days_per_year = 360.0 if year_convention == "savana_360" else 365.25
     chain = []
     curr_md_start = birth_datetime
 
@@ -126,7 +134,7 @@ def generate_dasha_chain(birth_datetime: datetime, timeline: list[dict], filter_
 
     for md in timeline:
         md_lord = md["lord"]
-        md_duration_days = md["years"] * 365.25
+        md_duration_days = md["years"] * days_per_year
         curr_md_end = curr_md_start + timedelta(days=md_duration_days)
 
         # Quick boundary prune
@@ -167,3 +175,91 @@ def generate_dasha_chain(birth_datetime: datetime, timeline: list[dict], filter_
         curr_md_start = curr_md_end
 
     return chain
+
+
+# ---------------------------------------------------------------------------
+# Birth-Time Uncertainty & Dasha Stability Evaluation
+# ---------------------------------------------------------------------------
+
+def evaluate_dasha_birth_time_sensitivity(
+    moon_longitude: float,
+    uncertainty_minutes: float = 15.0,
+) -> dict:
+    """
+    Quantify Dasha balance drift and Nakshatra Sandhi risk over a given birth-time error window.
+    Average Moon speed is ~13.1763° / 24 hours ≈ 0.00915° per minute.
+    """
+    delta_deg = uncertainty_minutes * (13.1763 / 1440.0)  # ~0.137° per 15 min
+    curr_nak_idx = int((moon_longitude % 360.0) / NAKSHATRA_SIZE) % 27
+    lower_nak_idx = int(((moon_longitude - delta_deg) % 360.0) / NAKSHATRA_SIZE) % 27
+    upper_nak_idx = int(((moon_longitude + delta_deg) % 360.0) / NAKSHATRA_SIZE) % 27
+
+    nak_cross = (curr_nak_idx != lower_nak_idx) or (curr_nak_idx != upper_nak_idx)
+    rem_in_nak = (moon_longitude % 360.0) % NAKSHATRA_SIZE
+    dist_to_sandhi = min(rem_in_nak, NAKSHATRA_SIZE - rem_in_nak)
+
+    # Shift in balance years
+    curr_lord = DASHA_SEQUENCE[curr_nak_idx % 9]
+    lord_total_years = DASHA_YEARS[curr_lord]
+    drift_years = round((delta_deg / NAKSHATRA_SIZE) * lord_total_years, 2)
+
+    if nak_cross:
+        stability = "HIGHLY_SENSITIVE"
+        description = f"Birth-time uncertainty of ±{uncertainty_minutes}m crosses Nakshatra boundary, altering starting Mahadasha lord."
+    elif drift_years >= 0.5:
+        stability = "MODERATELY_SENSITIVE"
+        description = f"Birth-time uncertainty of ±{uncertainty_minutes}m shifts Dasha timeline by ±{drift_years} years ({int(drift_years*12)} months)."
+    else:
+        stability = "STABLE"
+        description = f"Dasha timeline is stable within ±{drift_years} years ({int(drift_years*12)} months) for ±{uncertainty_minutes}m window."
+
+    return {
+        "stability": stability,
+        "uncertainty_minutes": uncertainty_minutes,
+        "moon_drift_degrees": round(delta_deg, 3),
+        "dasha_drift_years": drift_years,
+        "dist_to_sandhi_degrees": round(dist_to_sandhi, 3),
+        "nakshatra_boundary_crossed": nak_cross,
+        "description": description,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Optional Alternate Dasha Profile: Yogini Dasha (36-year cycle)
+# ---------------------------------------------------------------------------
+
+YOGINI_LORDS = [
+    ("Mangala", "Moon", 1),
+    ("Pingala", "Sun", 2),
+    ("Dhanya", "Jupiter", 3),
+    ("Bhramari", "Mars", 4),
+    ("Bhadrika", "Mercury", 5),
+    ("Ulka", "Saturn", 6),
+    ("Siddha", "Venus", 7),
+    ("Sankata", "Rahu", 8),
+]
+TOTAL_YOGINI_YEARS = 36
+
+
+def calculate_yogini_dasha(moon_longitude: float) -> dict:
+    """
+    Calculate starting Yogini Dasha balance as an explicit alternate profile (Phaladeepika Ch. 20).
+    Cycle = 36 years. Nakshatra index (0..26) + 3 mod 8 determines starting Yogini.
+    """
+    nak_index = int((moon_longitude % 360.0) / NAKSHATRA_SIZE) % 27
+    yogini_idx = nak_index % 8
+    name, planet, full_years = YOGINI_LORDS[yogini_idx]
+
+    remainder = (moon_longitude % 360.0) % NAKSHATRA_SIZE
+    balance_frac = (NAKSHATRA_SIZE - remainder) / NAKSHATRA_SIZE
+    balance_years = round(balance_frac * full_years, 2)
+
+    return {
+        "profile": "yogini",
+        "starting_yogini": name,
+        "ruler_planet": planet,
+        "full_years": full_years,
+        "balance_years": balance_years,
+        "cycle_total_years": TOTAL_YOGINI_YEARS,
+    }
+

@@ -12,6 +12,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 
 from gateway.middleware.language import LanguageDetectionMiddleware
+from gateway.middleware.rate_limit import RateLimitMiddleware
 from shared.config.settings import settings
 from shared.logging.logger import get_logger
 from shared.db.session import init_db
@@ -41,6 +42,8 @@ class DefaultDenyAuthMiddleware(BaseHTTPMiddleware):
 
     PUBLIC_API_PREFIXES = (
         "/health",
+        "/ready",
+        "/api/ready",
         "/metrics",
         "/api/locales",
         "/api/panchang",
@@ -48,6 +51,13 @@ class DefaultDenyAuthMiddleware(BaseHTTPMiddleware):
         "/api/horoscope",
         "/api/daily-horoscope",
         "/api/cities",
+        "/api/kundali",
+        "/api/kundali-chat",
+        "/api/download-kundali",
+        "/api/domains",
+        "/api/prediction",
+        "/api/chat",
+        "/api/system/ephemeris",
         "/api/auth/login",
         "/api/auth/signup",
         "/api/auth/logout",
@@ -107,7 +117,44 @@ app = FastAPI(
 @app.get("/health")
 def health_check():
     """Application Health Check Endpoint."""
-    return {"status": "ok", "app": settings.app_name, "environment": settings.environment}
+    from shared.ephemeris.wrapper import get_ephemeris_diagnostics
+    ephe_diag = get_ephemeris_diagnostics()
+    return {
+        "status": "ok",
+        "app": settings.app_name,
+        "environment": settings.environment,
+        "ephemeris_mode": ephe_diag.get("runtime_mode", "moshier"),
+    }
+
+
+@app.get("/api/system/ephemeris")
+def get_ephemeris_status():
+    """Return observable Swiss Ephemeris runtime mode, accuracy tier, and licensing diagnostics."""
+    from shared.ephemeris.wrapper import get_ephemeris_diagnostics
+    return get_ephemeris_diagnostics()
+
+
+@app.get("/ready")
+@app.get("/api/ready")
+def readiness_check():
+    """Readiness probe checking database connectivity and cache availability."""
+    from shared.db.session import check_db_health
+    from shared.ephemeris.wrapper import get_ephemeris_diagnostics
+
+    db_healthy = check_db_health()
+    ephe_diag = get_ephemeris_diagnostics()
+
+    status_code = 200 if db_healthy else 503
+    return JSONResponse(
+        status_code=status_code,
+        content={
+            "status": "ready" if db_healthy else "not_ready",
+            "database": "connected" if db_healthy else "disconnected",
+            "cache": "operational",
+            "ephemeris": ephe_diag.get("runtime_mode", "moshier"),
+            "environment": settings.environment,
+        },
+    )
 
 
 @app.get("/metrics")
@@ -163,23 +210,22 @@ if static_dir.exists():
 templates = Jinja2Templates(directory=str(templates_dir))
 app.state.templates = templates
 
-# Security & Session & Language Middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=settings.cors_origins_list,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-app.add_middleware(LanguageDetectionMiddleware)
+# Security & Session & Language Middleware (Outer-most executed first via Starlette stack)
 app.add_middleware(DefaultDenyAuthMiddleware)
-
+app.add_middleware(LanguageDetectionMiddleware)
+app.add_middleware(RateLimitMiddleware)
 app.add_middleware(
     SessionMiddleware,
     secret_key=settings.session_secret_key,
     same_site="lax",
     https_only=settings.is_production,
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors_origins_list,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
 )
 
 # Register All Sub-Routers

@@ -233,3 +233,31 @@ def admin_login(request: Request, username: str = Form(...), password: str = For
     templates = request.app.state.templates
     return templates.TemplateResponse("admin-login.html", {"request": request, "error": "Invalid administrator credentials"}, status_code=200)
 
+
+@auth_router.post("/api/auth/signup", status_code=201)
+def api_signup(request: Request, data: UserRegister, db: Session = Depends(get_db)):
+    """JSON API endpoint for user registration."""
+    user, err = auth_engine.register_user(db, data)
+    if err:
+        raise HTTPException(status_code=400, detail=err)
+    request.session["user_id"] = user.id
+    return {"status": "ok", "user": {"id": user.id, "email": user.email, "name": user.name}}
+
+
+@auth_router.post("/api/auth/login")
+def api_login(request: Request, data: UserLogin, db: Session = Depends(get_db)):
+    """JSON API endpoint for user login."""
+    user = auth_engine.authenticate_user(db, data)
+    if not user:
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    request.session["user_id"] = user.id
+    return {"status": "ok", "user": {"id": user.id, "email": user.email, "name": user.name}}
+
+
+@auth_router.post("/api/auth/logout")
+def api_logout(request: Request):
+    """JSON API endpoint for user logout."""
+    request.session.clear()
+    return {"status": "ok", "message": "Logged out successfully"}
+
+

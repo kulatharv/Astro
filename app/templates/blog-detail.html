@@ -114,9 +114,15 @@ const blogId = "{{ blog_id }}";
 async function loadBlog() {
   try {
     const res = await fetch(`/api/blogs/${blogId}`);
+    if (!res.ok) {
+      document.getElementById('blogTitle').textContent = 'Article Not Found';
+      document.getElementById('blogContent').textContent = 'The requested article could not be found. It may have been unpublished or removed.';
+      return;
+    }
     const blog = await res.json();
-    if (!blog || blog.error) {
-      document.getElementById('blogTitle').textContent = 'Article not found';
+    if (!blog || blog.detail || blog.error) {
+      document.getElementById('blogTitle').textContent = 'Article Not Found';
+      document.getElementById('blogContent').textContent = 'The requested article could not be found. It may have been unpublished or removed.';
       return;
     }
     document.getElementById('blogTitle').textContent = blog.title || 'Untitled';
@@ -126,6 +132,7 @@ async function loadBlog() {
     document.getElementById('blogContent').textContent = blog.content || '';
   } catch(e) {
     document.getElementById('blogTitle').textContent = 'Error loading article';
+    document.getElementById('blogContent').textContent = 'Unable to load article at this time. Please try again later.';
   }
 }
 loadBlog();

@@ -1,0 +1,825 @@
+[
+  {
+    "path": "/",
+    "name": "home_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/about",
+    "name": "about_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/admin/blogs",
+    "name": "admin_blogs_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/admin/login",
+    "name": "admin_login",
+    "methods": [
+      "POST"
+    ],
+    "doc": "",
+    "tags": [
+      "Admin"
+    ]
+  },
+  {
+    "path": "/admin/login",
+    "name": "admin_login_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/api/admin/cache/flush",
+    "name": "flush_admin_cache",
+    "methods": [
+      "POST"
+    ],
+    "doc": "Flush in-memory and Redis cache entries (Admin only).",
+    "tags": []
+  },
+  {
+    "path": "/api/admin/cache/stats",
+    "name": "get_admin_cache_stats",
+    "methods": [
+      "GET"
+    ],
+    "doc": "Return cache statistics (Admin only).",
+    "tags": []
+  },
+  {
+    "path": "/api/auth/login",
+    "name": "api_login",
+    "methods": [
+      "POST"
+    ],
+    "doc": "JSON API endpoint for user login.",
+    "tags": [
+      "Authentication"
+    ]
+  },
+  {
+    "path": "/api/auth/logout",
+    "name": "api_logout",
+    "methods": [
+      "POST"
+    ],
+    "doc": "JSON API endpoint for user logout.",
+    "tags": [
+      "Authentication"
+    ]
+  },
+  {
+    "path": "/api/auth/signup",
+    "name": "api_signup",
+    "methods": [
+      "POST"
+    ],
+    "doc": "JSON API endpoint for user registration.",
+    "tags": [
+      "Authentication"
+    ]
+  },
+  {
+    "path": "/api/blogs",
+    "name": "create_blog",
+    "methods": [
+      "POST"
+    ],
+    "doc": "",
+    "tags": [
+      "blogs"
+    ]
+  },
+  {
+    "path": "/api/blogs",
+    "name": "list_blogs",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "blogs"
+    ]
+  },
+  {
+    "path": "/api/blogs/{slug}",
+    "name": "get_blog",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "blogs"
+    ]
+  },
+  {
+    "path": "/api/chat",
+    "name": "astro_chat",
+    "methods": [
+      "POST"
+    ],
+    "doc": "Chat with AstroAI using birth chart context from user session.",
+    "tags": [
+      "Predictions & Domains"
+    ]
+  },
+  {
+    "path": "/api/cities",
+    "name": "get_cities",
+    "methods": [
+      "GET"
+    ],
+    "doc": "Return sorted list of all supported city names.",
+    "tags": [
+      "Kundali & Charts"
+    ]
+  },
+  {
+    "path": "/api/daily-horoscope/{sign}",
+    "name": "get_daily_horoscope",
+    "methods": [
+      "GET"
+    ],
+    "doc": "Retrieve transit-based daily horoscope for a given zodiac sign name.",
+    "tags": [
+      "Horoscope"
+    ]
+  },
+  {
+    "path": "/api/domains",
+    "name": "get_life_domains",
+    "methods": [
+      "POST"
+    ],
+    "doc": "Calculate deep analysis across all 10 life domains for prediction UI.",
+    "tags": [
+      "Predictions & Domains"
+    ]
+  },
+  {
+    "path": "/api/download-kundali",
+    "name": "download_kundali",
+    "methods": [
+      "GET"
+    ],
+    "doc": "Generate and return an in-memory PDF report for the session's Kundali.",
+    "tags": [
+      "Kundali & Charts"
+    ]
+  },
+  {
+    "path": "/api/feedback",
+    "name": "create_feedback",
+    "methods": [
+      "POST"
+    ],
+    "doc": "",
+    "tags": [
+      "feedback"
+    ]
+  },
+  {
+    "path": "/api/feedback",
+    "name": "get_feedback_list",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "feedback"
+    ]
+  },
+  {
+    "path": "/api/festivals/today",
+    "name": "festivals_today",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Panchang & Festivals"
+    ]
+  },
+  {
+    "path": "/api/festivals/upcoming",
+    "name": "festivals_upcoming",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Panchang & Festivals"
+    ]
+  },
+  {
+    "path": "/api/generate-chart",
+    "name": "generate_chart_api",
+    "methods": [
+      "POST"
+    ],
+    "doc": "Generate basic planetary degrees and Lagna for chart rendering.",
+    "tags": [
+      "Kundali & Charts"
+    ]
+  },
+  {
+    "path": "/api/horoscope/{sign_idx}",
+    "name": "horoscope_by_sign_index",
+    "methods": [
+      "GET"
+    ],
+    "doc": "Retrieve daily horoscope by 0-11 zodiac index.",
+    "tags": [
+      "Horoscope"
+    ]
+  },
+  {
+    "path": "/api/kundali",
+    "name": "get_kundali",
+    "methods": [
+      "POST"
+    ],
+    "doc": "Calculate comprehensive Vedic Kundali with D9, Yogas, Doshas, and Dasha.",
+    "tags": [
+      "Kundali & Charts"
+    ]
+  },
+  {
+    "path": "/api/kundali-chat",
+    "name": "kundali_chat",
+    "methods": [
+      "POST"
+    ],
+    "doc": "Contextual life questions assistant using natal chart positions.",
+    "tags": [
+      "Kundali & Charts"
+    ]
+  },
+  {
+    "path": "/api/kundali/saved-charts",
+    "name": "create_saved_chart",
+    "methods": [
+      "POST"
+    ],
+    "doc": "Create and persist a new birth chart for the authenticated user.",
+    "tags": [
+      "Kundali & Charts"
+    ]
+  },
+  {
+    "path": "/api/kundali/saved-charts",
+    "name": "list_saved_charts",
+    "methods": [
+      "GET"
+    ],
+    "doc": "List all birth charts saved by the authenticated user.",
+    "tags": [
+      "Kundali & Charts"
+    ]
+  },
+  {
+    "path": "/api/kundali/saved-charts/{chart_id}",
+    "name": "delete_saved_chart",
+    "methods": [
+      "DELETE"
+    ],
+    "doc": "Delete a saved chart with ownership verification.",
+    "tags": [
+      "Kundali & Charts"
+    ]
+  },
+  {
+    "path": "/api/kundali/saved-charts/{chart_id}",
+    "name": "get_saved_chart",
+    "methods": [
+      "GET"
+    ],
+    "doc": "Retrieve a single saved birth chart with ownership verification.",
+    "tags": [
+      "Kundali & Charts"
+    ]
+  },
+  {
+    "path": "/api/kundali/saved-charts/{chart_id}",
+    "name": "update_saved_chart",
+    "methods": [
+      "PUT"
+    ],
+    "doc": "Update metadata or recalculate birth details of an owned chart.",
+    "tags": [
+      "Kundali & Charts"
+    ]
+  },
+  {
+    "path": "/api/locales/{lang}",
+    "name": "get_locale_translations",
+    "methods": [
+      "GET"
+    ],
+    "doc": "Return JSON translation dictionary for client-side i18n dynamic switching.",
+    "tags": []
+  },
+  {
+    "path": "/api/narrative/chat",
+    "name": "chat_narrative",
+    "methods": [
+      "POST"
+    ],
+    "doc": "",
+    "tags": [
+      "narrative"
+    ]
+  },
+  {
+    "path": "/api/narrative/generate",
+    "name": "generate_narrative",
+    "methods": [
+      "POST"
+    ],
+    "doc": "",
+    "tags": [
+      "narrative"
+    ]
+  },
+  {
+    "path": "/api/narrative/{job_id}",
+    "name": "get_narrative_job_status",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "narrative"
+    ]
+  },
+  {
+    "path": "/api/narrative/{job_id}/stream",
+    "name": "stream_narrative_job",
+    "methods": [
+      "GET"
+    ],
+    "doc": "Server-Sent Events (SSE) streaming endpoint for job progress.",
+    "tags": [
+      "narrative"
+    ]
+  },
+  {
+    "path": "/api/panchang",
+    "name": "panchang_city",
+    "methods": [
+      "POST"
+    ],
+    "doc": "",
+    "tags": [
+      "Panchang & Festivals"
+    ]
+  },
+  {
+    "path": "/api/panchang/calendar.ics",
+    "name": "panchang_calendar_ics",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Panchang & Festivals"
+    ]
+  },
+  {
+    "path": "/api/panchang/decision",
+    "name": "decision_assistant",
+    "methods": [
+      "POST"
+    ],
+    "doc": "",
+    "tags": [
+      "Panchang & Festivals"
+    ]
+  },
+  {
+    "path": "/api/panchang/resolve-profile",
+    "name": "resolve_profile",
+    "methods": [
+      "POST"
+    ],
+    "doc": "",
+    "tags": [
+      "Panchang & Festivals"
+    ]
+  },
+  {
+    "path": "/api/panchang/share-image",
+    "name": "panchang_share_image",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Panchang & Festivals"
+    ]
+  },
+  {
+    "path": "/api/prediction",
+    "name": "generate_prediction",
+    "methods": [
+      "POST"
+    ],
+    "doc": "Generate AI Marriage and Career predictions using Vedic chart synthesis.",
+    "tags": [
+      "Predictions & Domains"
+    ]
+  },
+  {
+    "path": "/api/prediction/timing/{domain}",
+    "name": "get_domain_timing",
+    "methods": [
+      "POST"
+    ],
+    "doc": "Standalone endpoint returning concrete Dasha + Gochara timing windows for a specific domain.",
+    "tags": [
+      "Predictions & Domains"
+    ]
+  },
+  {
+    "path": "/api/ready",
+    "name": "readiness_check",
+    "methods": [
+      "GET"
+    ],
+    "doc": "Readiness probe checking database connectivity and cache availability.",
+    "tags": []
+  },
+  {
+    "path": "/api/system/ephemeris",
+    "name": "get_ephemeris_status",
+    "methods": [
+      "GET"
+    ],
+    "doc": "Return observable Swiss Ephemeris runtime mode, accuracy tier, and licensing diagnostics.",
+    "tags": []
+  },
+  {
+    "path": "/blog/{blog_id}",
+    "name": "blog_detail_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/blogs",
+    "name": "blogs_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/change-language/{lang}",
+    "name": "change_language",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Authentication"
+    ]
+  },
+  {
+    "path": "/chat",
+    "name": "chat_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/docs",
+    "name": "swagger_ui_html",
+    "methods": [
+      "GET",
+      "HEAD"
+    ],
+    "doc": "",
+    "tags": []
+  },
+  {
+    "path": "/docs/oauth2-redirect",
+    "name": "swagger_ui_redirect",
+    "methods": [
+      "GET",
+      "HEAD"
+    ],
+    "doc": "",
+    "tags": []
+  },
+  {
+    "path": "/health",
+    "name": "health_check",
+    "methods": [
+      "GET"
+    ],
+    "doc": "Application Health Check Endpoint.",
+    "tags": []
+  },
+  {
+    "path": "/horoscope",
+    "name": "horoscope_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/kundali",
+    "name": "kundali_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/login",
+    "name": "login",
+    "methods": [
+      "POST"
+    ],
+    "doc": "",
+    "tags": [
+      "Authentication"
+    ]
+  },
+  {
+    "path": "/login",
+    "name": "login_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Authentication"
+    ]
+  },
+  {
+    "path": "/logout",
+    "name": "logout",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Authentication"
+    ]
+  },
+  {
+    "path": "/metrics",
+    "name": "get_metrics",
+    "methods": [
+      "GET"
+    ],
+    "doc": "Expose application and cache counters for observability/Prometheus.",
+    "tags": []
+  },
+  {
+    "path": "/openapi.json",
+    "name": "openapi",
+    "methods": [
+      "GET",
+      "HEAD"
+    ],
+    "doc": "",
+    "tags": []
+  },
+  {
+    "path": "/panchang",
+    "name": "panchang_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/panchang.html",
+    "name": "panchang_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/prediction",
+    "name": "prediction_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/profile",
+    "name": "profile_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Authentication"
+    ]
+  },
+  {
+    "path": "/profile",
+    "name": "update_profile",
+    "methods": [
+      "POST"
+    ],
+    "doc": "",
+    "tags": [
+      "Authentication"
+    ]
+  },
+  {
+    "path": "/ready",
+    "name": "readiness_check",
+    "methods": [
+      "GET"
+    ],
+    "doc": "Readiness probe checking database connectivity and cache availability.",
+    "tags": []
+  },
+  {
+    "path": "/redoc",
+    "name": "redoc_html",
+    "methods": [
+      "GET",
+      "HEAD"
+    ],
+    "doc": "",
+    "tags": []
+  },
+  {
+    "path": "/signup",
+    "name": "signup",
+    "methods": [
+      "POST"
+    ],
+    "doc": "",
+    "tags": [
+      "Authentication"
+    ]
+  },
+  {
+    "path": "/signup",
+    "name": "signup_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Authentication"
+    ]
+  },
+  {
+    "path": "/static",
+    "name": "static",
+    "methods": [],
+    "doc": "",
+    "tags": []
+  },
+  {
+    "path": "/{lang}/",
+    "name": "home_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/{lang}/about",
+    "name": "about_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/{lang}/blogs",
+    "name": "blogs_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/{lang}/chat",
+    "name": "chat_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/{lang}/horoscope",
+    "name": "horoscope_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/{lang}/kundali",
+    "name": "kundali_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/{lang}/panchang",
+    "name": "panchang_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  },
+  {
+    "path": "/{lang}/prediction",
+    "name": "prediction_html_page",
+    "methods": [
+      "GET"
+    ],
+    "doc": "",
+    "tags": [
+      "Pages"
+    ]
+  }
+]

@@ -69,7 +69,13 @@ async def get_job(job_id: str) -> Optional[NarrativeJobStatus]:
 
     res_obj = NarrativeJobResult(**data["result"]) if data.get("result") else None
     input_hash = data.get("input_hash") or (data.get("request", {}).get("input_hash") if isinstance(data.get("request"), dict) else "unknown")
-    created_at = data.get("created_at") or datetime.utcnow().isoformat()
+    raw_created = data.get("created_at")
+    if isinstance(raw_created, (int, float)):
+        created_at = datetime.utcfromtimestamp(raw_created).isoformat()
+    elif raw_created:
+        created_at = str(raw_created)
+    else:
+        created_at = datetime.utcnow().isoformat()
     return NarrativeJobStatus(
         job_id=data["job_id"],
         status=data["status"],
@@ -88,7 +94,8 @@ async def mark_running(job_id: str) -> None:
 
 async def mark_completed(job_id: str, result: NarrativeJobResult) -> None:
     """Update job state to COMPLETED with payload."""
-    await _update_job_status(job_id, JobStatus.COMPLETED, result=result.dict())
+    res_dict = result.model_dump() if hasattr(result, "model_dump") else result.dict()
+    await _update_job_status(job_id, JobStatus.COMPLETED, result=res_dict)
 
 
 async def mark_failed(job_id: str, error_msg: str) -> None:

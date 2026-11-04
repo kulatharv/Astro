@@ -24,11 +24,11 @@ def compute_input_hash(req_data: dict[str, Any] | BaseModel) -> str:
         "hour": float(data.get("hour", 12)),
         "minute": int(data.get("minute", 0)),
         "second": int(data.get("second", 0)),
-        "city": str(data.get("city", data.get("place", "Pune"))).strip().lower(),
-        "latitude": round(float(data.get("latitude", data.get("lat", 0.0))), 4) if "latitude" in data or "lat" in data else None,
-        "longitude": round(float(data.get("longitude", data.get("lon", 0.0))), 4) if "longitude" in data or "lon" in data else None,
-        "timezone": str(data.get("timezone", "Asia/Kolkata")).strip(),
-        "ayanamsa": str(data.get("ayanamsa", "Lahiri")).strip().lower(),
+        "city": str(data.get("city") or data.get("place") or "Pune").strip().lower(),
+        "latitude": round(float(data.get("latitude", data.get("lat", 0.0))), 4) if ("latitude" in data and data["latitude"] is not None) or ("lat" in data and data["lat"] is not None) else None,
+        "longitude": round(float(data.get("longitude", data.get("lon", 0.0))), 4) if ("longitude" in data and data["longitude"] is not None) or ("lon" in data and data["lon"] is not None) else None,
+        "timezone": str(data.get("timezone") or "Asia/Kolkata").strip(),
+        "ayanamsa": str(data.get("ayanamsa") or "Lahiri").strip().lower(),
     }
 
     # Filter out None values to keep payload tight

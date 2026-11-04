@@ -9,22 +9,25 @@ BASE_DIR = Path(__file__).resolve().parents[1]
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
-from app.core.config import settings
-from app.db.database import Base
-import app.models  # noqa: F401
+from shared.config.settings import settings
+from shared.db.session import Base
+import modules.auth.models  # noqa: F401
+import modules.kundali.models  # noqa: F401
+import modules.feedback.models  # noqa: F401
 
 config = context.config
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-config.set_main_option("sqlalchemy.url", settings.database_url)
+db_url = getattr(settings, "DATABASE_URL", None) or getattr(settings, "database_url", "sqlite:///./astrologic.db")
+config.set_main_option("sqlalchemy.url", db_url)
 target_metadata = Base.metadata
 
 
 def run_migrations_offline() -> None:
     context.configure(
-        url=settings.database_url,
+        url=db_url,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},

@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session, joinedload
 from app.api.dependencies import get_db, require_admin
 from app.core.config import settings
 from app.core.security import verify_password
+from app.core.templating import render_template
 from app.models.activity import UserActivity
 from app.models.admin import AdminUser
 from app.models.blog import Blog
@@ -30,7 +31,7 @@ def _render_admin(request: Request, template_name: str, context: dict | None = N
     }
     if context:
         base_ctx.update(context)
-    return templates.TemplateResponse(template_name, base_ctx)
+    return render_template(templates, request, template_name, base_ctx)
 
 
 # ── Admin Web Routes ───────────────────────────────────────────────

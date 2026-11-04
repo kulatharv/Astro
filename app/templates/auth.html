@@ -161,16 +161,20 @@ body::before{
 .alert{
   display:none;
   border-radius:9px;
-  padding:11px 13px;
-  font-size:13px;
+  padding:12px 14px;
+  font-size:13.5px;
   line-height:1.5;
-  margin-bottom:16px;
+  margin-bottom:18px;
+  text-align:left;
 }
 
 .alert.error{
-  color:var(--red);
-  background:rgba(248,113,113,.1);
-  border:1px solid rgba(248,113,113,.32);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#fca5a5;
+  background:rgba(239,68,68,.16);
+  border:1px solid rgba(239,68,68,.4);
 }
 
 .field{
@@ -338,7 +342,14 @@ body::before{
 
     <div class="divider"></div>
 
-    <div class="alert error" id="errorBox"></div>
+    {% if error %}
+    <div class="alert error" id="errorBox" style="display:flex;" role="alert" aria-live="assertive">
+      <span>⚠️</span>
+      <span>{{ error }}</span>
+    </div>
+    {% else %}
+    <div class="alert error" id="errorBox" style="display:none;" role="alert" aria-live="assertive"></div>
+    {% endif %}
 
     <form method="POST" id="authForm">
       <div class="field" id="nameField" style="display:none;">

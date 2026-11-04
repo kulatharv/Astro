@@ -54,6 +54,12 @@ def init_db() -> None:
     except Exception:
         pass
 
+    try:
+        with engine.begin() as conn:
+            conn.execute(text("ALTER TABLE users ADD COLUMN preferred_language VARCHAR(10) DEFAULT 'en'"))
+    except Exception:
+        pass
+
     db = SessionLocal()
     try:
         from app.models.admin import AdminUser

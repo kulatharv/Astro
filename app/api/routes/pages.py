@@ -2,6 +2,7 @@
 
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
+from app.core.templating import render_template
 from app.services.translation_service import SUPPORTED_LANGUAGES, load_translations
 
 router = APIRouter(tags=["Pages"])
@@ -25,7 +26,7 @@ def _render_page(request: Request, template_name: str, lang: str | None = None, 
     if context:
         base_ctx.update(context)
 
-    response = templates.TemplateResponse(template_name, base_ctx)
+    response = render_template(templates, request, template_name, base_ctx)
     response.set_cookie(key="lang", value=selected_lang, max_age=31536000)
     return response
 
@@ -81,6 +82,8 @@ def kundali_page(request: Request, lang: str | None = None):
 
 
 @router.get("/blog/{blog_id}", response_class=HTMLResponse)
+@router.get("/blogs/{blog_id}", response_class=HTMLResponse)
 @router.get("/{lang}/blog/{blog_id}", response_class=HTMLResponse)
+@router.get("/{lang}/blogs/{blog_id}", response_class=HTMLResponse)
 def blog_detail_page(request: Request, blog_id: int, lang: str | None = None):
     return _render_page(request, "blog-detail.html", lang=lang, context={"blog_id": blog_id})

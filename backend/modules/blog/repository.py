@@ -11,10 +11,14 @@ class BlogRepository:
         self.db = db
 
     def get_by_slug(self, slug: str) -> Optional[BlogPost]:
+        if str(slug).isdigit():
+            post = self.db.query(BlogPost).filter(BlogPost.id == int(slug)).first()
+            if post:
+                return post
         return self.db.query(BlogPost).filter(BlogPost.slug == slug).first()
 
     def list_posts(self, lang: str = "en", limit: int = 20, offset: int = 0) -> list[BlogPost]:
-        return (
+        posts = (
             self.db.query(BlogPost)
             .filter(BlogPost.language == lang)
             .order_by(BlogPost.created_at.desc())
@@ -22,6 +26,15 @@ class BlogRepository:
             .limit(limit)
             .all()
         )
+        if not posts and lang != "en":
+            posts = (
+                self.db.query(BlogPost)
+                .order_by(BlogPost.created_at.desc())
+                .offset(offset)
+                .limit(limit)
+                .all()
+            )
+        return posts
 
     def create_post(self, data: BlogPostCreate) -> BlogPost:
         post = BlogPost(

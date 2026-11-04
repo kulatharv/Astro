@@ -60,7 +60,11 @@ class ChatService:
         elif topic == "foreign":
             core = ChatService._answer_foreign(pm, lagna, md)
         elif topic == "timing":
-            core = f"**Current Dasha Period**: **{md}/{ad}** (Balance remaining: {bal}).\n\nPlanetary energies are primarily directed by {md}, activating associated house themes in your chart."
+            core = (
+                f"**Current Dasha Period**: **{md}/{ad}** (Balance remaining: {bal}).\n\n"
+                f"Planetary energies are primarily directed by {md}, activating associated house themes in your chart.\n\n"
+                f"*(Note: Astrological timing reflects traditional Parāśari period frameworks and symbolic Gochara alignment, not fixed event guarantees or predictive probabilities.)*"
+            )
         elif topic == "dosha":
             core = f"**Active Doshas Detected**: {', '.join(doshas) if doshas else 'No severe doshas detected.'}\n\n**Key Yogas**: {', '.join(yogas[:3]) if yogas else 'Standard planetary configurations.'}"
         elif topic == "remedy":
@@ -179,7 +183,8 @@ class ChatService:
             f"**Vitality & Health (1st & 6th Houses)**:\n"
             f"• Lagna Lord **{lord_1}** is in house {l1_h} ({l1_str}) governing physical stamina.\n"
             f"• Sun (Vitality indicator) is in house {ChatService._house_of(pm, 'Sun')} ({sun_str}).\n"
-            f"• Maintain balanced Ayurvedic lifestyle and regular physical activity to optimize planetary energies."
+            f"• Maintain balanced Ayurvedic lifestyle and regular physical activity to optimize planetary energies.\n"
+            f"*(Note: Astrological interpretations are non-diagnostic cultural reflections. Consult licensed medical providers for health advice.)*"
         )
 
     @staticmethod

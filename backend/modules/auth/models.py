@@ -33,6 +33,12 @@ class User(Base):
         back_populates="user",
         passive_deletes=True,
     )
+    saved_charts = relationship(
+        "UserSavedChart",
+        back_populates="user",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
 
 
 class UserProfile(Base):

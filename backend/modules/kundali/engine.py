@@ -7,7 +7,7 @@ from shared.veda.zodiac import SIGNS_SK, SIGN_LORDS, to_dms
 from shared.veda.nakshatra import calculate_nakshatra
 from modules.kundali.varga import calculate_navamsa
 from shared.veda.strength import planet_strength_label
-from modules.kundali.dasha import calculate_mahadasha, generate_antardasha
+from modules.kundali.dasha import calculate_mahadasha, generate_antardasha, generate_dasha_timeline
 from shared.veda.yogas import calculate_yogas
 from shared.veda.doshas import calculate_doshas
 
@@ -92,21 +92,40 @@ def calculate_chart_scores(planets: list[dict], lagna_sign: str, houses: dict) -
     }
 
 
-def calculate_kundali(year: int, month: int, day: int, hour: int, minute: int, lat: float, lon: float) -> dict:
+from typing import Optional
+from shared.timezone.tz import to_utc_jd
+
+
+def calculate_kundali(
+    year: int,
+    month: int,
+    day: int,
+    hour: int,
+    minute: int,
+    lat: float,
+    lon: float,
+    second: int = 0,
+    timezone_offset: Optional[float] = None,
+    tz_name: Optional[str] = None,
+) -> dict:
     """
     Master Kundali engine returning complete Rasi, Navamsa D9, Panchang, Dasha, Yogas, Doshas, and Scores.
+    Converts local wall-clock date/time to UTC Julian Day via IANA timezone name or numeric offset.
+    Defaults to Indian Standard Time (UTC+5:30) if neither tz_name nor timezone_offset is provided.
     """
     swe.set_sid_mode(swe.SIDM_LAHIRI)
     flags = swe.FLG_SWIEPH | swe.FLG_SIDEREAL | swe.FLG_SPEED
 
-    ist_offset = 5.5
-    utc_hours = (hour + minute / 60.0) - ist_offset
-    calc_day = day
-    if utc_hours < 0:
-        utc_hours += 24.0
-        calc_day -= 1
-
-    jd = swe.julday(year, month, calc_day, utc_hours)
+    _, _, _, _, jd = to_utc_jd(
+        year=year,
+        month=month,
+        day=day,
+        hour=hour,
+        minute=minute,
+        second=second,
+        tz_name=tz_name,
+        tz_offset=timezone_offset,
+    )
 
     cusps, ascmc = swe.houses_ex(jd, lat, lon, b'W', flags)
     lagna_lon = ascmc[0] % 360.0
@@ -235,8 +254,22 @@ def calculate_kundali(year: int, month: int, day: int, hour: int, minute: int, l
         "jd": round(jd, 6),
         "mahadasha": maha_lord,
         "dasha_balance": f"{balance_years:.1f} years",
+        "dasha_balance_float": round(balance_years, 4),
         "antardasha": antardasha[0]["lord"] if antardasha else "",
         "antardasha_list": antardasha,
+        "birth_datetime": datetime(year, month, day, hour, minute, second).isoformat(),
+        "birth_date": f"{year:04d}-{month:02d}-{day:02d}",
+        "birth_year": year,
+        "birth_month": month,
+        "birth_day": day,
+        "birth_hour": hour,
+        "birth_minute": minute,
+        "dasha": {
+            "current_mahadasha": maha_lord,
+            "balance_years": round(balance_years, 4),
+            "timeline": generate_dasha_timeline(maha_lord, balance_years),
+            "birth_datetime": datetime(year, month, day, hour, minute, second).isoformat(),
+        },
         "scores": scores,
         "yogas": yogas,
         "doshas": doshas,

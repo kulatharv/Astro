@@ -9,6 +9,7 @@ from app.models.activity import UserActivity
 from app.models.user import UserProfile
 from app.schemas.auth import UserLogin, UserRegister
 from app.schemas.user import UserProfileUpdate
+from app.core.templating import render_template
 from app.services.auth_service import auth_service
 from app.services.feedback_service import feedback_service
 from app.services.translation_service import load_translations
@@ -20,7 +21,9 @@ router = APIRouter(tags=["Authentication"])
 def _render_auth_page(request: Request, mode: str = "login", error: str | None = None, title: str = "User Login"):
     templates = request.app.state.templates
     lang = request.cookies.get("lang", "en")
-    return templates.TemplateResponse(
+    return render_template(
+        templates,
+        request,
         "auth.html",
         {
             "request": request,
@@ -149,7 +152,9 @@ def profile_page(request: Request, db: Session = Depends(get_db)):
 
     templates = request.app.state.templates
     lang = request.cookies.get("lang", "en")
-    return templates.TemplateResponse(
+    return render_template(
+        templates,
+        request,
         "profile.html",
         {
             "request": request,

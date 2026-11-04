@@ -42,6 +42,9 @@ def generate_chart_api(data: BirthData):
     }
 
 
+_CHART_CACHE: dict[str, dict] = {}
+
+
 @router.post("/kundali")
 def get_kundali(request: Request, data: KundaliRequest):
     """Calculate comprehensive Vedic Kundali with D9, Yogas, Doshas, and Dasha."""
@@ -65,16 +68,20 @@ def get_kundali(request: Request, data: KundaliRequest):
 
     result = calculate_kundali(year, month, day, hour, minute, lat, lon)
 
-    # Isolated per-session chart storage (no global cache or cross-user leaks)
-    request.session["kundali_chart"] = result
+    # Server-side cache by chart key to avoid Cookie Header Overflow (>4KB)
+    chart_id = f"{year}_{month}_{day}_{hour}_{minute}_{round(lat,2)}_{round(lon,2)}"
+    _CHART_CACHE[chart_id] = result
+    request.session["kundali_chart_id"] = chart_id
+    result["chart_id"] = chart_id
 
     return result
 
 
 @router.get("/download-kundali")
-def download_kundali(request: Request):
+def download_kundali(request: Request, chart_id: str | None = None):
     """Generate and return an in-memory PDF report for the session's Kundali."""
-    chart = request.session.get("kundali_chart")
+    cid = chart_id or request.session.get("kundali_chart_id")
+    chart = _CHART_CACHE.get(cid) if cid else request.session.get("kundali_chart")
     if not chart:
         raise HTTPException(
             status_code=400,
