@@ -44,6 +44,11 @@ class Settings(BaseSettings):
 
     # Ephemeris Settings
     EPHE_PATH: Optional[str] = None  # Path to Swiss Ephemeris .se1 files; if None, falls back safely to Moshier mode
+    EPHEMERIS_MODE: str = "auto"  # 'auto', 'swiss_ephemeris' (strict), or 'moshier' (force fallback)
+    REQUIRE_SWIEPH: bool = False  # If True, fails startup/initialization if .se1 Swiss Ephemeris files are not loaded
+
+    # Combustion Settings
+    TREAT_MOON_AS_COMBUST: bool = True  # If True, Moon within 12° of Sun (Surya Siddhanta Ch. 10 v. 1) is flagged combust; if False, classified as Amavasya
 
     @property
     def cors_origins_list(self) -> list[str]:

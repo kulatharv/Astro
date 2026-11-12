@@ -17,7 +17,7 @@ from .zodiac import SIGNS_SK, SIGN_LORDS
 from .strength import EXALTATION, DEBILITATION, OWN_SIGNS
 from .lordship import get_house_lord
 from .neech_bhanga import is_neech_bhanga, evaluate_neech_bhanga, is_neech_bhanga_raja_yoga
-from .combustion import is_combust
+from .combustion import is_combust, check_combustion
 from .doshas import evaluate_mangal_dosha_multiframe, check_mangal_cancellations
 
 
@@ -319,20 +319,13 @@ def _pred_karaka_venus_combust(ctx: dict, extra: dict) -> tuple[bool, str, list[
     pm = ctx.get("planet_map", {})
     sun = pm.get("Sun", {})
     venus = pm.get("Venus", {})
-    if sun and venus:
-        s_sign = sun.get("sign", "")
-        v_sign = venus.get("sign", "")
-        s_deg = float(sun.get("degree_decimal", sun.get("degree", 0.0)))
-        v_deg = float(venus.get("degree_decimal", venus.get("degree", 0.0)))
-        if s_sign in SIGNS_SK and v_sign in SIGNS_SK:
-            s_abs = SIGNS_SK.index(s_sign) * 30.0 + (s_deg % 30.0)
-            v_abs = SIGNS_SK.index(v_sign) * 30.0 + (v_deg % 30.0)
-            diff = abs(s_abs - v_abs) % 360.0
-            if diff > 180.0:
-                diff = 360.0 - diff
-            threshold = 8.0 if venus.get("retrograde") else 10.0
-            if diff <= threshold:
-                return True, f"Venus is combust within {diff:.1f}° of Sun (threshold {threshold}°)", ["Venus", "Sun"]
+    if not sun or not venus:
+        return False, "", []
+    res = check_combustion("Venus", venus, sun)
+    if res.is_combust is True:
+        sep_str = f"{res.separation:.1f}" if res.separation is not None else ""
+        lim_str = f"{res.limit:.0f}" if res.limit is not None else "10"
+        return True, f"Venus is combust within {sep_str}° of Sun (threshold {lim_str}°)", ["Venus", "Sun"]
     return False, "", []
 
 

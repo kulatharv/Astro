@@ -885,41 +885,90 @@ _register(YogaRule(
 
 
 def _pred_gauri(pmap, lagna, houses):
-    mh = house_of(pmap, "Moon")
     ms = sign_of(pmap, "Moon")
+    if not ms:
+        return False, "Absent", []
+    disp = SIGN_LORDS.get(ms)
+    if not disp:
+        return False, "Absent", []
+    dh = house_of(pmap, disp)
+    ds = sign_of(pmap, disp)
+    if not dh or not ds:
+        return False, "Absent", []
     jh = house_of(pmap, "Jupiter")
-    # Moon in Kendra/Trikona in own or exaltation sign, or aspected by Jupiter
-    in_k_t = mh in KENDRA.union(TRIKONA)
-    own_exalt = ms in OWN_SIGNS.get("Moon", []) or ms == EXALTATION.get("Moon")
-    asp_jup = aspects_house("Jupiter", jh, mh)
-    present = in_k_t and (own_exalt or asp_jup)
-    return present, "Medium" if present else "Absent", [f"Moon in {ms} in H{mh}"] if present else []
+    if not jh:
+        return False, "Absent", []
+
+    # 1. Candrarkṣapa (Moon's sign dispositor) in Kendra or Trikona
+    in_k_t = dh in KENDRA.union(TRIKONA)
+
+    # 2. Svoccagata: in own sign or exaltation sign
+    is_own = ds in OWN_SIGNS.get(disp, [])
+    is_exalt = ds == EXALTATION.get(disp)
+    own_exalt = is_own or is_exalt
+
+    # 3. Abhilakṣite jīvena: aspected by Jupiter
+    asp_jup = aspects_house("Jupiter", jh, dh)
+
+    # All three classical conditions concurrent per Phaladeepika Ch. 6, v. 21
+    present = in_k_t and own_exalt and asp_jup
+
+    strength = "Strong" if (present and is_exalt) else ("Medium" if present else "Absent")
+    details = [
+        f"Moon in {ms} (dispositor {disp} in {ds} in H{dh}, aspected by Jupiter from H{jh})"
+    ] if present else []
+
+    return present, strength, details
 
 _register(YogaRule(
     rule_id="YOGA-RAJA-GAURI-01",
     version="1.0.0",
     name="Gauri Yoga",
     category="Raja Yogas",
-    description="Moon in Kendra or Trikona in own/exaltation sign or aspected by Jupiter — radiant grace, pure character, and prosperity.",
+    description="Lord of the sign occupied by Moon (candrarkṣapa) in Kendra or Trikona in own or exaltation sign aspected by Jupiter — radiant grace, pure character, and prosperity.",
     source_reference="Phaladeepika Ch. 6, v. 21",
     predicate=_pred_gauri,
 ))
 
 
 def _pred_parvata(pmap, lagna, houses):
-    # Benefics in Kendra, and 6th/8th free of malefics
-    benefics_in_kendra = any(house_of(pmap, b) in KENDRA for b in ("Jupiter", "Venus", "Mercury"))
-    h6_malefics = any(house_of(pmap, m) == 6 for m in ("Mars", "Saturn", "Sun"))
-    h8_malefics = any(house_of(pmap, m) == 8 for m in ("Mars", "Saturn", "Sun"))
-    present = benefics_in_kendra and not h6_malefics and not h8_malefics
-    return present, "Medium" if present else "Absent", ["Benefics in Kendra and 6th/8th free of malefics"] if present else []
+    l1 = SIGN_LORDS.get(lagna)
+    if not l1:
+        return False, "Absent", []
+    s1 = sign_of(pmap, l1)
+    if not s1:
+        return False, "Absent", []
+    d1 = SIGN_LORDS.get(s1)
+    if not d1:
+        return False, "Absent", []
+    dh = house_of(pmap, d1)
+    ds = sign_of(pmap, d1)
+    if not dh or not ds:
+        return False, "Absent", []
+
+    # 1. D1 in Kendra or Trikona
+    in_k_t = dh in KENDRA.union(TRIKONA)
+
+    # 2. D1 in own sign or exaltation sign
+    is_own = ds in OWN_SIGNS.get(d1, [])
+    is_exalt = ds == EXALTATION.get(d1)
+    own_exalt = is_own or is_exalt
+
+    present = in_k_t and own_exalt
+
+    strength = "Strong" if (present and is_exalt) else ("Medium" if present else "Absent")
+    details = [
+        f"Lagna lord {l1} in {s1}, dispositor {d1} in {ds} in H{dh}"
+    ] if present else []
+
+    return present, strength, details
 
 _register(YogaRule(
     rule_id="YOGA-RAJA-PARVATA-01",
     version="1.0.0",
     name="Parvata Yoga",
     category="Raja Yogas",
-    description="Benefics in Kendra houses while 6th and 8th houses are unoccupied by malefics — steadfast fortune, charitable heart, and durable authority.",
+    description="Dispositor of the Lagna lord (lagnādhipāpta-bha-pati) in Kendra or Trikona in own or exaltation sign — steadfast fortune, durable authority, and noble character.",
     source_reference="Phaladeepika Ch. 6, v. 35",
     predicate=_pred_parvata,
 ))

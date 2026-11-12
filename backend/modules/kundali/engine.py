@@ -7,6 +7,7 @@ from shared.veda.zodiac import SIGNS_SK, SIGN_LORDS, to_dms
 from shared.veda.nakshatra import calculate_nakshatra
 from modules.kundali.varga import calculate_navamsa
 from shared.veda.strength import planet_strength_label
+from shared.veda.combustion import check_combustion
 from modules.kundali.dasha import calculate_mahadasha, generate_antardasha, generate_dasha_timeline
 from shared.veda.yogas import calculate_yogas
 from shared.veda.doshas import calculate_doshas
@@ -216,6 +217,12 @@ def calculate_kundali(
             nav_idx = SIGNS_SK.index(nav)
             d9_h = ((nav_idx - d9_lagna_idx) % 12) + 1
             d9_houses[d9_h].append(p["name"])
+
+    # Evaluate combustion for all planets against Sun
+    sun_entry = next(p for p in planet_data if p["name"] == "Sun")
+    for p in planet_data:
+        comb_res = check_combustion(p["name"], p, sun_entry)
+        p["is_combust"] = comb_res.is_combust
 
     planets_out = [{k: v for k, v in p.items() if k != "_raw_lon"} for p in planet_data]
     scores = calculate_chart_scores(planet_data, lagna_sign, houses)

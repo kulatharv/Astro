@@ -24,7 +24,11 @@ from math import floor
 
 
 # ── Setup ──────────────────────────────────────────────────────────────────
-swe.set_ephe_path('.')
+try:
+    from shared.ephemeris.wrapper import get_active_ephe_path
+    swe.set_ephe_path(get_active_ephe_path())
+except Exception:
+    swe.set_ephe_path('.')
 swe.set_sid_mode(swe.SIDM_LAHIRI)
 
 IST_OFFSET = 5.5

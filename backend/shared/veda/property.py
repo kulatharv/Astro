@@ -30,6 +30,7 @@ from typing import Callable, Any, Optional
 from .zodiac import SIGNS_SK, SIGN_LORDS
 from .strength import EXALTATION, DEBILITATION, OWN_SIGNS
 from .lordship import get_house_lord
+from .combustion import is_combust
 
 
 # ---------------------------------------------------------------------------
@@ -80,7 +81,7 @@ class PropertyRule:
     profile: str
     chart_frame: str
     predicate: Callable[[dict, dict], tuple[bool, str, list[str]]]
-    ordered_exceptions: list[Callable[[dict, dict], tuple[bool, str]]] = field(default_factory=list)
+    ordered_exceptions: list[Callable[[dict, dict], tuple[Optional[bool], str]]] = field(default_factory=list)
     dedupe_key: Optional[str] = None
     effect: str = "SUPPORTS"  # SUPPORTS, OBSTRUCTS, CONDITIONAL
     birth_time_sensitive: bool = False
@@ -151,7 +152,9 @@ def build_d4_chart(ctx: dict) -> dict[str, Any]:
     d4_planets = {}
     for p, pdata in pmap.items():
         p_sign = pdata.get("sign", "Mesha")
-        p_deg = pdata.get("degree", pdata.get("longitude", 15.0) % 30.0)
+        raw_lon = pdata.get("longitude")
+        fallback_deg = (raw_lon % 30.0) if raw_lon is not None else 15.0
+        p_deg = pdata.get("degree") if pdata.get("degree") is not None else fallback_deg
         d4_sign = calculate_chaturthamsa_d4(p_sign, p_deg)
         d4_s_idx = SIGNS_SK.index(d4_sign)
         d4_house = (d4_s_idx - d4_lagna_idx) % 12 + 1
@@ -219,10 +222,15 @@ def _has_aspect(ctx: dict, planet: str, target_house: int) -> bool:
     return False
 
 
-def _is_combust(ctx: dict, planet: str) -> bool:
+def _is_combust(ctx: dict, planet: str) -> Optional[bool]:
     pm = ctx.get("planet_map", {})
     pdata = pm.get(planet, {})
-    return bool(pdata.get("is_combust", False))
+    if pdata.get("is_combust") is not None:
+        return pdata["is_combust"]
+    if pdata.get("combust") is not None:
+        return pdata["combust"]
+    sun_data = pm.get("Sun", {})
+    return is_combust(planet, pdata, sun_data)
 
 
 def _is_retrograde(ctx: dict, planet: str) -> bool:
@@ -268,11 +276,16 @@ def pred_prop_res_01(ctx: dict, d4: dict) -> tuple[bool, str, list[str]]:
         return True, f"4th lord {l4} is well-placed in house {h} in {'own' if is_own else 'exalted'} sign {sign}, supporting residential stability.", [l4]
     return False, "", []
 
-def exc_prop_res_01(ctx: dict, d4: dict) -> tuple[bool, str]:
+def exc_prop_res_01(ctx: dict, d4: dict) -> tuple[Optional[bool], str]:
     l4 = _get_house_lord_safe(ctx, 4)
-    if _is_combust(ctx, l4):
+    if not l4:
+        return None, "4th lord not found in chart; combustion status is unknown"
+    cb = _is_combust(ctx, l4)
+    if cb is None:
+        return None, f"4th lord {l4} combustion status is unknown due to missing or invalid coordinates"
+    if cb is True:
         return True, f"4th lord {l4} is combust, mitigating domestic stability."
-    return False, ""
+    return False, f"4th lord {l4} is free from combustion"
 
 _register(PropertyRule(
     rule_id="PROP-RES-01",
@@ -412,10 +425,13 @@ def pred_prop_acq_01(ctx: dict, d4: dict) -> tuple[bool, str, list[str]]:
         return True, f"Mars (Bhumi-karaka) strong in house {h} in {'own' if is_own else 'exalted'} sign {sign} supports landed asset capacity.", ["Mars"]
     return False, "", []
 
-def exc_prop_acq_01(ctx: dict, d4: dict) -> tuple[bool, str]:
-    if _is_combust(ctx, "Mars"):
+def exc_prop_acq_01(ctx: dict, d4: dict) -> tuple[Optional[bool], str]:
+    cb = _is_combust(ctx, "Mars")
+    if cb is None:
+        return None, "Mars combustion status is unknown due to missing or invalid coordinates"
+    if cb is True:
         return True, "Mars is combust by the Sun, reducing landed asset signification."
-    return False, ""
+    return False, "Mars is free from combustion"
 
 _register(PropertyRule(
     rule_id="PROP-ACQ-01",
@@ -578,7 +594,7 @@ def pred_prop_acq_06(ctx: dict, d4: dict) -> tuple[bool, str, list[str]]:
     l4_data = pm.get(l4, {})
     sign = l4_data.get("sign", "")
     is_deb = (sign == DEBILITATION.get(l4, ""))
-    is_comb = _is_combust(ctx, l4)
+    is_comb = (_is_combust(ctx, l4) is True)
     if is_deb or is_comb:
         return True, f"4th lord {l4} is {'debilitated in ' + sign if is_deb else 'combust'}, indicating obstacles in real estate ownership.", [l4]
     return False, "", []
@@ -1212,6 +1228,7 @@ def evaluate_property_rules(ctx: dict, profile: str = "parashari") -> dict[str, 
 
     evidence_ledger: list[dict[str, Any]] = []
     seen_dedupe_keys: set[str] = set()
+    unverified_exceptions: list[dict[str, Any]] = []
 
     dimension_scores: dict[str, float] = {d: 50.0 for d in PROPERTY_DIMENSIONS}
 
@@ -1232,12 +1249,18 @@ def evaluate_property_rules(ctx: dict, profile: str = "parashari") -> dict[str, 
         # Check ordered exceptions
         exception_triggered = False
         exception_reason = ""
+        unverified_rule_exceptions = []
         for exc in rule.ordered_exceptions:
             exc_hit, exc_msg = exc(ctx, d4_chart)
-            if exc_hit:
+            if exc_hit is True:
                 exception_triggered = True
                 exception_reason = exc_msg
                 break
+            elif exc_hit is None:
+                unverified_rule_exceptions.append({
+                    "rule_id": rule.rule_id,
+                    "reason": exc_msg,
+                })
 
         if exception_triggered:
             evidence_ledger.append({
@@ -1255,10 +1278,14 @@ def evaluate_property_rules(ctx: dict, profile: str = "parashari") -> dict[str, 
                 seen_dedupe_keys.add(rule.dedupe_key)
             continue
 
+        if unverified_rule_exceptions:
+            unverified_exceptions.extend(unverified_rule_exceptions)
+            ctx.setdefault("unverified_exceptions", []).extend(unverified_rule_exceptions)
+
         if rule.dedupe_key:
             seen_dedupe_keys.add(rule.dedupe_key)
 
-        evidence_ledger.append({
+        rule_entry = {
             "rule_id": rule.rule_id,
             "version": rule.version,
             "effect": rule.effect,
@@ -1269,7 +1296,10 @@ def evaluate_property_rules(ctx: dict, profile: str = "parashari") -> dict[str, 
             "chart_frame": rule.chart_frame,
             "birth_time_sensitive": rule.birth_time_sensitive,
             "source_reference": rule.source_reference,
-        })
+        }
+        if unverified_rule_exceptions:
+            rule_entry["unverified_exceptions"] = [e["reason"] for e in unverified_rule_exceptions]
+        evidence_ledger.append(rule_entry)
 
         # Dimension delta
         delta = 6.0 if rule.effect == "SUPPORTS" else (-6.0 if rule.effect == "OBSTRUCTS" else 3.0)
@@ -1284,6 +1314,7 @@ def evaluate_property_rules(ctx: dict, profile: str = "parashari") -> dict[str, 
         "domain": "Property & Residence",
         "active_rules_count": active_rules_count,
         "evidence_ledger": evidence_ledger,
+        "unverified_exceptions": unverified_exceptions,
         "dimensions": dimension_scores,
         "overall_score": overall_score,
         "d4_chart": d4_chart,

@@ -226,12 +226,12 @@ def _compute_astronomical_base(
 
     swe.set_sid_mode(swe.SIDM_LAHIRI)
     anchor_jd = jd_rise
-    sun_res, _ = swe.calc_ut(anchor_jd, swe.SUN, swe.FLG_SWIEPH | swe.FLG_SPEED)
-    moon_res, _ = swe.calc_ut(anchor_jd, swe.MOON, swe.FLG_SWIEPH | swe.FLG_SPEED)
-    ayanamsa = swe.get_ayanamsa_ut(anchor_jd)
+    flags = swe.FLG_SWIEPH | swe.FLG_SIDEREAL | swe.FLG_SPEED
+    sun_res, sun_return_flags = swe.calc_ut(anchor_jd, swe.SUN, flags)
+    moon_res, moon_return_flags = swe.calc_ut(anchor_jd, swe.MOON, flags)
 
-    sun_sid = (sun_res[0] - ayanamsa) % 360.0
-    moon_sid = (moon_res[0] - ayanamsa) % 360.0
+    sun_sid = sun_res[0] % 360.0
+    moon_sid = moon_res[0] % 360.0
     sun_speed = sun_res[3]
     moon_speed = moon_res[3]
     rel_speed = moon_speed - sun_speed if (moon_speed - sun_speed) > 0 else 12.19
@@ -249,10 +249,9 @@ def _compute_astronomical_base(
     high_jd = anchor_jd + tithi_approx_days + 0.25
     for _ in range(22):
         mid_jd = (low_jd + high_jd) / 2.0
-        s_res, _ = swe.calc_ut(mid_jd, swe.SUN, swe.FLG_SWIEPH)
-        m_res, _ = swe.calc_ut(mid_jd, swe.MOON, swe.FLG_SWIEPH)
-        ay = swe.get_ayanamsa_ut(mid_jd)
-        diff = ((m_res[0] - ay) - (s_res[0] - ay)) % 360.0
+        s_res, _ = swe.calc_ut(mid_jd, swe.SUN, swe.FLG_SWIEPH | swe.FLG_SIDEREAL)
+        m_res, _ = swe.calc_ut(mid_jd, swe.MOON, swe.FLG_SWIEPH | swe.FLG_SIDEREAL)
+        diff = (m_res[0] - s_res[0]) % 360.0
         err = diff - target_tithi_diff
         if err > 180.0:
             err -= 360.0
@@ -278,9 +277,8 @@ def _compute_astronomical_base(
     high_jd = anchor_jd + nak_approx_days + 0.25
     for _ in range(22):
         mid_jd = (low_jd + high_jd) / 2.0
-        m_res, _ = swe.calc_ut(mid_jd, swe.MOON, swe.FLG_SWIEPH)
-        ay = swe.get_ayanamsa_ut(mid_jd)
-        moon_pos = (m_res[0] - ay) % 360.0
+        m_res, _ = swe.calc_ut(mid_jd, swe.MOON, swe.FLG_SWIEPH | swe.FLG_SIDEREAL)
+        moon_pos = m_res[0] % 360.0
         err = moon_pos - target_nak_deg
         if err > 180.0:
             err -= 360.0
@@ -307,10 +305,9 @@ def _compute_astronomical_base(
     high_jd = anchor_jd + yoga_approx_days + 0.25
     for _ in range(22):
         mid_jd = (low_jd + high_jd) / 2.0
-        s_res, _ = swe.calc_ut(mid_jd, swe.SUN, swe.FLG_SWIEPH)
-        m_res, _ = swe.calc_ut(mid_jd, swe.MOON, swe.FLG_SWIEPH)
-        ay = swe.get_ayanamsa_ut(mid_jd)
-        curr_sum = ((s_res[0] - ay) + (m_res[0] - ay)) % 360.0
+        s_res, _ = swe.calc_ut(mid_jd, swe.SUN, swe.FLG_SWIEPH | swe.FLG_SIDEREAL)
+        m_res, _ = swe.calc_ut(mid_jd, swe.MOON, swe.FLG_SWIEPH | swe.FLG_SIDEREAL)
+        curr_sum = (s_res[0] + m_res[0]) % 360.0
         err = curr_sum - target_yoga_deg
         if err > 180.0:
             err -= 360.0
@@ -337,10 +334,9 @@ def _compute_astronomical_base(
     high_jd = anchor_jd + karana_approx_days + 0.25
     for _ in range(22):
         mid_jd = (low_jd + high_jd) / 2.0
-        s_res, _ = swe.calc_ut(mid_jd, swe.SUN, swe.FLG_SWIEPH)
-        m_res, _ = swe.calc_ut(mid_jd, swe.MOON, swe.FLG_SWIEPH)
-        ay = swe.get_ayanamsa_ut(mid_jd)
-        diff = ((m_res[0] - ay) - (s_res[0] - ay)) % 360.0
+        s_res, _ = swe.calc_ut(mid_jd, swe.SUN, swe.FLG_SWIEPH | swe.FLG_SIDEREAL)
+        m_res, _ = swe.calc_ut(mid_jd, swe.MOON, swe.FLG_SWIEPH | swe.FLG_SIDEREAL)
+        diff = (m_res[0] - s_res[0]) % 360.0
         err = diff - target_karana_deg
         if err > 180.0:
             err -= 360.0
@@ -410,9 +406,10 @@ def _compute_astronomical_base(
     ]
 
     planets_out = []
+    flags_planet = swe.FLG_SWIEPH | swe.FLG_SIDEREAL | swe.FLG_SPEED
     for en_name, sk_name, pid in planet_constants:
-        pres, _ = swe.calc_ut(jd_noon, pid, swe.FLG_SWIEPH | swe.FLG_SPEED)
-        p_sid = (pres[0] - ayanamsa) % 360.0
+        pres, _ = swe.calc_ut(jd_noon, pid, flags_planet)
+        p_sid = pres[0] % 360.0
         p_sign_idx = int(p_sid / 30.0) % 12
         p_deg_in_sign = p_sid % 30.0
         p_nak_idx = int(p_sid / (360.0 / 27.0)) % 27
@@ -427,9 +424,8 @@ def _compute_astronomical_base(
             "retrograde": bool(p_retro)
         })
 
-    rahu_obj = planets_out[-1]
-    r_res, _ = swe.calc_ut(jd_noon, swe.TRUE_NODE, swe.FLG_SWIEPH)
-    k_sid = ((r_res[0] - ayanamsa) + 180.0) % 360.0
+    r_res, _ = swe.calc_ut(jd_noon, swe.TRUE_NODE, swe.FLG_SWIEPH | swe.FLG_SIDEREAL)
+    k_sid = (r_res[0] + 180.0) % 360.0
     k_sign_idx = int(k_sid / 30.0) % 12
     k_nak_idx = int(k_sid / (360.0 / 27.0)) % 27
 

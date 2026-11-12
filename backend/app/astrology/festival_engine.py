@@ -8,7 +8,11 @@ import swisseph as swe
 from datetime import datetime, timedelta, timezone
 from math import floor
 
-swe.set_ephe_path('.')
+try:
+    from shared.ephemeris.wrapper import get_active_ephe_path
+    swe.set_ephe_path(get_active_ephe_path())
+except Exception:
+    swe.set_ephe_path('.')
 swe.set_sid_mode(swe.SIDM_LAHIRI)
 
 IST_OFFSET = 5.5
@@ -755,7 +759,11 @@ def get_ist_now():
 
 from math import floor
 
-swe.set_ephe_path('.')
+try:
+    from shared.ephemeris.wrapper import get_active_ephe_path
+    swe.set_ephe_path(get_active_ephe_path())
+except Exception:
+    swe.set_ephe_path('.')
 swe.set_sid_mode(swe.SIDM_LAHIRI)
 
 IST_OFFSET = 5.5

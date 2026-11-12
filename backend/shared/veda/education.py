@@ -25,6 +25,7 @@ from typing import Callable, Any, Optional
 from .zodiac import SIGNS_SK, SIGN_LORDS
 from .strength import EXALTATION, DEBILITATION, OWN_SIGNS
 from .lordship import get_house_lord
+from .combustion import is_combust, extract_longitude, calculate_angular_separation
 
 
 # ---------------------------------------------------------------------------
@@ -70,7 +71,7 @@ class EducationRule:
     profile: str
     chart_frame: str
     predicate: Callable[[dict, dict], tuple[bool, str, list[str]]]
-    ordered_exceptions: list[Callable[[dict, dict], tuple[bool, str]]] = field(default_factory=list)
+    ordered_exceptions: list[Callable[[dict, dict], tuple[Optional[bool], str]]] = field(default_factory=list)
     dedupe_key: Optional[str] = None
     effect: str = "SUPPORTS"  # SUPPORTS, OBSTRUCTS, CONDITIONAL
     birth_time_sensitive: bool = False
@@ -184,8 +185,17 @@ def get_planets_in_house(pmap: dict, house: int) -> list[str]:
     return [p for p, d in pmap.items() if d.get("house") == house]
 
 
-def is_planet_combust(pdata: dict) -> bool:
-    return pdata.get("combust", False) or pdata.get("is_combust", False)
+def is_planet_combust(pdata: dict, sun_data: Optional[dict] = None) -> Optional[bool]:
+    if not isinstance(pdata, dict):
+        return None
+    if pdata.get("is_combust") is not None:
+        return pdata["is_combust"]
+    if pdata.get("combust") is not None:
+        return pdata["combust"]
+    if sun_data:
+        name = pdata.get("name", "")
+        return is_combust(name, pdata, sun_data)
+    return None
 
 
 def is_planet_dignified(planet: str, pdata: dict) -> bool:
@@ -224,12 +234,17 @@ def _pred_h4_lord_kt(ctx: dict, pmap: dict) -> tuple[bool, str, list[str]]:
         return True, f"4th lord {l4} placed in auspicious house {h} (Kendra/Trikona)", [l4]
     return False, "", []
 
-def _exc_h4_lord_kt_combust(ctx: dict, pmap: dict) -> tuple[bool, str]:
+def _exc_h4_lord_kt_combust(ctx: dict, pmap: dict) -> tuple[Optional[bool], str]:
     lagna = ctx.get("lagna", "")
     l4 = safe_house_lord(lagna, 4)
-    if l4 and l4 in pmap and is_planet_combust(pmap[l4]):
+    if not l4 or l4 not in pmap:
+        return None, "4th lord not found in chart; combustion status is unknown"
+    cb = is_planet_combust(pmap[l4], pmap.get("Sun"))
+    if cb is None:
+        return None, f"4th lord {l4} combustion status is unknown due to missing or invalid coordinates"
+    if cb is True:
         return True, f"4th lord {l4} is combust, tempering foundational stability"
-    return False, ""
+    return False, f"4th lord {l4} is free from combustion"
 
 _register(EducationRule(
     rule_id="EDU-H4-LORD-KENDRA-TRIKONA-01",
@@ -374,12 +389,17 @@ def _pred_h5_lord_kt(ctx: dict, pmap: dict) -> tuple[bool, str, list[str]]:
         return True, f"5th lord {l5} placed in auspicious house {h} (Kendra/Trikona)", [l5]
     return False, "", []
 
-def _exc_h5_lord_kt_combust(ctx: dict, pmap: dict) -> tuple[bool, str]:
+def _exc_h5_lord_kt_combust(ctx: dict, pmap: dict) -> tuple[Optional[bool], str]:
     lagna = ctx.get("lagna", "")
     l5 = safe_house_lord(lagna, 5)
-    if l5 and l5 in pmap and is_planet_combust(pmap[l5]):
+    if not l5 or l5 not in pmap:
+        return None, "5th lord not found in chart; combustion status is unknown"
+    cb = is_planet_combust(pmap[l5], pmap.get("Sun"))
+    if cb is None:
+        return None, f"5th lord {l5} combustion status is unknown due to missing or invalid coordinates"
+    if cb is True:
         return True, f"5th lord {l5} is combust, requiring deliberate conceptual pacing"
-    return False, ""
+    return False, f"5th lord {l5} is free from combustion"
 
 _register(EducationRule(
     rule_id="EDU-H5-LORD-KENDRA-TRIKONA-01",
@@ -524,12 +544,17 @@ def _pred_h9_lord_kt(ctx: dict, pmap: dict) -> tuple[bool, str, list[str]]:
         return True, f"9th lord {l9} placed in auspicious house {h} (Kendra/Trikona)", [l9]
     return False, "", []
 
-def _exc_h9_lord_combust(ctx: dict, pmap: dict) -> tuple[bool, str]:
+def _exc_h9_lord_combust(ctx: dict, pmap: dict) -> tuple[Optional[bool], str]:
     lagna = ctx.get("lagna", "")
     l9 = safe_house_lord(lagna, 9)
-    if l9 and l9 in pmap and is_planet_combust(pmap[l9]):
+    if not l9 or l9 not in pmap:
+        return None, "9th lord not found in chart; combustion status is unknown"
+    cb = is_planet_combust(pmap[l9], pmap.get("Sun"))
+    if cb is None:
+        return None, f"9th lord {l9} combustion status is unknown due to missing or invalid coordinates"
+    if cb is True:
         return True, f"9th lord {l9} is combust, requiring patience in mentor alignment"
-    return False, ""
+    return False, f"9th lord {l9} is free from combustion"
 
 _register(EducationRule(
     rule_id="EDU-H9-LORD-KENDRA-TRIKONA-01",
@@ -688,14 +713,21 @@ def _pred_mercury_dignity(ctx: dict, pmap: dict) -> tuple[bool, str, list[str]]:
         return True, f"Mercury dignified in {sign} ({label})", ["Mercury"]
     return False, "", []
 
-def _exc_mercury_combust(ctx: dict, pmap: dict) -> tuple[bool, str]:
+def _exc_mercury_combust(ctx: dict, pmap: dict) -> tuple[Optional[bool], str]:
     merc = pmap.get("Mercury", {})
     sun = pmap.get("Sun", {})
-    if is_planet_combust(merc) and merc.get("house") == sun.get("house"):
-        deg_diff = abs(merc.get("degree", 15.0) - sun.get("degree", 15.0))
-        if deg_diff < 3.0:
-            return True, f"Mercury is deeply combust within {deg_diff:.1f}° of Sun"
-    return False, ""
+    if not merc or not sun:
+        missing_target = "Mercury" if not merc else "Sun"
+        return None, f"Missing planetary data for {missing_target}; combustion status is unknown"
+    sun_lon = extract_longitude(sun)
+    merc_lon = extract_longitude(merc)
+    if sun_lon is None or merc_lon is None:
+        missing_target = "Sun" if sun_lon is None else "Mercury"
+        return None, f"Missing or invalid longitude coordinates for {missing_target}; combustion status is unknown"
+    deg_diff = calculate_angular_separation(sun_lon, merc_lon)
+    if deg_diff < 3.0:
+        return True, f"Mercury is deeply combust within {deg_diff:.1f}° of Sun"
+    return False, f"Mercury is free from deep combustion at {deg_diff:.1f}° from Sun"
 
 _register(EducationRule(
     rule_id="EDU-MERCURY-DIGNITY-EXALTED-OWN-01",
@@ -793,7 +825,7 @@ def _pred_mercury_affliction(ctx: dict, pmap: dict) -> tuple[bool, str, list[str
     sign = merc.get("sign", "")
     is_deb = (sign == "Meena")
     is_dusthana = (h in DUSTHANA)
-    is_cb = is_planet_combust(merc)
+    is_cb = (is_planet_combust(merc, pmap.get("Sun")) is True)
 
     if (is_deb and merc.get("str_score", 0) < 0) or (is_dusthana and is_cb):
         reasons = []
@@ -1203,6 +1235,7 @@ def evaluate_education_rules(ctx: dict, profile: str = "all") -> dict[str, Any]:
     matched_rules = []
     rejected_rules = []
     cancelled_rules = []
+    unverified_exceptions = []
 
     dim_ledgers: dict[str, dict] = {
         d: {"support": 0, "obstruct": 0, "conditional": 0, "evidence": []}
@@ -1226,12 +1259,18 @@ def evaluate_education_rules(ctx: dict, profile: str = "all") -> dict[str, Any]:
         # Check ordered exceptions
         cancelled = False
         cancel_reason = ""
+        unverified_rule_exceptions = []
         for exc in rule.ordered_exceptions:
             c_fired, c_reason = exc(ctx, pmap)
-            if c_fired:
+            if c_fired is True:
                 cancelled = True
                 cancel_reason = c_reason
                 break
+            elif c_fired is None:
+                unverified_rule_exceptions.append({
+                    "rule_id": rule.rule_id,
+                    "reason": c_reason,
+                })
 
         if cancelled:
             cancelled_rules.append({
@@ -1239,6 +1278,10 @@ def evaluate_education_rules(ctx: dict, profile: str = "all") -> dict[str, Any]:
                 "reason": cancel_reason,
             })
             continue
+
+        if unverified_rule_exceptions:
+            unverified_exceptions.extend(unverified_rule_exceptions)
+            ctx.setdefault("unverified_exceptions", []).extend(unverified_rule_exceptions)
 
         rule_record = {
             "rule_id": rule.rule_id,
@@ -1251,6 +1294,8 @@ def evaluate_education_rules(ctx: dict, profile: str = "all") -> dict[str, Any]:
             "confidence": rule.confidence,
             "dimensions": rule.dimensions,
         }
+        if unverified_rule_exceptions:
+            rule_record["unverified_exceptions"] = [e["reason"] for e in unverified_rule_exceptions]
         matched_rules.append(rule_record)
 
         for d in rule.dimensions:
@@ -1311,6 +1356,7 @@ def evaluate_education_rules(ctx: dict, profile: str = "all") -> dict[str, Any]:
         "matched_rules": matched_rules,
         "rejected_rules": rejected_rules,
         "cancelled_rules": cancelled_rules,
+        "unverified_exceptions": unverified_exceptions,
         "karaka_status": {
             "mercury": {
                 "house": merc.get("house", 0),

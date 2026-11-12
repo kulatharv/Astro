@@ -4,10 +4,11 @@ from datetime import datetime, timedelta
 from math import floor
 from app.astrology.cities import CITIES
 
-swe.set_ephe_path(".")
-
-
-swe.set_ephe_path('.')  # your ephemeris folder path
+try:
+    from shared.ephemeris.wrapper import get_active_ephe_path
+    swe.set_ephe_path(get_active_ephe_path())
+except Exception:
+    swe.set_ephe_path(".")
 swe.set_sid_mode(swe.SIDM_LAHIRI)
 
 NAKSHATRAS = [
@@ -248,7 +249,11 @@ from datetime import datetime
 # INITIAL SETUP
 # ===============================
 
-swe.set_ephe_path('.')  
+try:
+    from shared.ephemeris.wrapper import get_active_ephe_path
+    swe.set_ephe_path(get_active_ephe_path())
+except Exception:
+    swe.set_ephe_path('.')  
 swe.set_sid_mode(swe.SIDM_LAHIRI)
 
 IST_OFFSET = 5.5
@@ -498,7 +503,11 @@ def get_ist_now():
 # BASIC SETTINGS
 # ==============================
 
-swe.set_ephe_path('.')
+try:
+    from shared.ephemeris.wrapper import get_active_ephe_path
+    swe.set_ephe_path(get_active_ephe_path())
+except Exception:
+    swe.set_ephe_path('.')
 swe.set_sid_mode(swe.SIDM_LAHIRI)
 
 IST_OFFSET = 5.5

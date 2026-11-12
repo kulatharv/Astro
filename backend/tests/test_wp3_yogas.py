@@ -619,11 +619,13 @@ def test_special_character_and_raja_yogas():
     res_rs = calculate_yogas(p_rs, "Mesha", {})
     assert find_yoga(res_rs, "Raja Sambandha Yoga")["present"] is True
 
-    # Gauri Yoga: Moon in Vrishabha (exalted) in H2 aspected by Jupiter from H6 (trine aspect 9th from H6=H2)
+    # Gauri Yoga: Moon in Mesha (dispositor Mars) in H1, Mars in own sign Mesha in H1 (Kendra/Trikona), aspected by Jupiter from H5 (9th aspect)
     p_gy, _, _ = make_chart([
-        {"name": "Moon", "house": 1, "sign": "Karka"},  # in own sign in Kendra
-    ], lagna="Karka")
-    res_gy = calculate_yogas(p_gy, "Karka", {})
+        {"name": "Moon", "house": 1, "sign": "Mesha"},
+        {"name": "Mars", "house": 1, "sign": "Mesha"},
+        {"name": "Jupiter", "house": 5, "sign": "Simha"},
+    ], lagna="Mesha")
+    res_gy = calculate_yogas(p_gy, "Mesha", {})
     assert find_yoga(res_gy, "Gauri Yoga")["present"] is True
 
 
@@ -711,3 +713,235 @@ def test_ashubha_and_arishta_with_cancellation():
     assert find_yoga(res_ab, "Arishta Bhanga")["present"] is True
     assert find_yoga(res_ab, "Arishta Yoga")["present"] is False
     assert find_yoga(res_ab, "Arishta Yoga")["cancelled"] is True
+
+
+def test_gauri_yoga_classical_conditions():
+    # 1. Valid Gauri Yoga: Moon in Vrischika (dispositor Mars), Mars exalted in Makara in H10 (Kendra), aspected by Jupiter from H4 (7th aspect)
+    p1, _, _ = make_chart([
+        {"name": "Moon", "house": 8, "sign": "Vrischika"},
+        {"name": "Mars", "house": 10, "sign": "Makara"},
+        {"name": "Jupiter", "house": 4, "sign": "Karka"},
+    ], lagna="Mesha")
+    res1 = calculate_yogas(p1, "Mesha", {})
+    y1 = find_yoga(res1, "Gauri Yoga")
+    assert y1["present"] is True
+    assert y1["strength"] == "Strong"
+
+    # 2. Moon in own sign but its dispositor does not satisfy conditions (Moon in Karka H1, but Jupiter in H11 - no aspect)
+    p2, _, _ = make_chart([
+        {"name": "Moon", "house": 1, "sign": "Karka"},
+        {"name": "Jupiter", "house": 11, "sign": "Vrishabha"},
+    ], lagna="Karka")
+    res2 = calculate_yogas(p2, "Karka", {})
+    assert find_yoga(res2, "Gauri Yoga")["present"] is False
+
+    # 3. Moon's dispositor in own sign and aspected by Jupiter (Moon in Mesha, Mars in Mesha H1 Kendra/Trikona, Jupiter in Simha H5 - 9th aspect)
+    p3, _, _ = make_chart([
+        {"name": "Moon", "house": 1, "sign": "Mesha"},
+        {"name": "Mars", "house": 1, "sign": "Mesha"},
+        {"name": "Jupiter", "house": 5, "sign": "Simha"},
+    ], lagna="Mesha")
+    res3 = calculate_yogas(p3, "Mesha", {})
+    y3 = find_yoga(res3, "Gauri Yoga")
+    assert y3["present"] is True
+    assert y3["strength"] == "Medium"
+
+    # 4. Moon's dispositor in exaltation and aspected by Jupiter (Moon in Simha H5, Sun in Mesha H1 Kendra/Trikona exalted, Jupiter in Tula H7 - 7th aspect)
+    p4, _, _ = make_chart([
+        {"name": "Moon", "house": 5, "sign": "Simha"},
+        {"name": "Sun", "house": 1, "sign": "Mesha"},
+        {"name": "Jupiter", "house": 7, "sign": "Tula"},
+    ], lagna="Mesha")
+    res4 = calculate_yogas(p4, "Mesha", {})
+    y4 = find_yoga(res4, "Gauri Yoga")
+    assert y4["present"] is True
+    assert y4["strength"] == "Strong"
+
+    # 5. Dispositor in Kendra without Jupiter's required aspect (Mars in Mesha H1, Jupiter in Vrishabha H2 - no aspect to H1)
+    p5, _, _ = make_chart([
+        {"name": "Moon", "house": 1, "sign": "Mesha"},
+        {"name": "Mars", "house": 1, "sign": "Mesha"},
+        {"name": "Jupiter", "house": 2, "sign": "Vrishabha"},
+    ], lagna="Mesha")
+    res5 = calculate_yogas(p5, "Mesha", {})
+    assert find_yoga(res5, "Gauri Yoga")["present"] is False
+
+    # 6. Dispositor in Trikona without Jupiter's required aspect (Sun in Simha H5, Jupiter in Kanya H6 - no aspect to H5)
+    p6, _, _ = make_chart([
+        {"name": "Moon", "house": 5, "sign": "Simha"},
+        {"name": "Sun", "house": 5, "sign": "Simha"},
+        {"name": "Jupiter", "house": 6, "sign": "Kanya"},
+    ], lagna="Mesha")
+    res6 = calculate_yogas(p6, "Mesha", {})
+    assert find_yoga(res6, "Gauri Yoga")["present"] is False
+
+    # 7. Jupiter aspects the Moon but not the dispositor (Moon in H1, dispositor Mars in Makara H10; Jupiter in Tula H7 aspects Moon in H1 but not Mars in H10)
+    p7, _, _ = make_chart([
+        {"name": "Moon", "house": 1, "sign": "Mesha"},
+        {"name": "Mars", "house": 10, "sign": "Makara"},
+        {"name": "Jupiter", "house": 7, "sign": "Tula"},
+    ], lagna="Mesha")
+    res7 = calculate_yogas(p7, "Mesha", {})
+    assert find_yoga(res7, "Gauri Yoga")["present"] is False
+
+    # 8. Dispositor is debilitated but aspected by Jupiter (Mars in Karka H4 debilitated, Jupiter in Makara H10 aspects H4)
+    p8, _, _ = make_chart([
+        {"name": "Moon", "house": 1, "sign": "Mesha"},
+        {"name": "Mars", "house": 4, "sign": "Karka"},
+        {"name": "Jupiter", "house": 10, "sign": "Makara"},
+    ], lagna="Mesha")
+    res8 = calculate_yogas(p8, "Mesha", {})
+    assert find_yoga(res8, "Gauri Yoga")["present"] is False
+
+    # 9. Missing Moon sign
+    p9a, _, _ = make_chart([
+        {"name": "Moon", "house": 1, "sign": ""},
+        {"name": "Mars", "house": 1, "sign": "Mesha"},
+        {"name": "Jupiter", "house": 5, "sign": "Simha"},
+    ], lagna="Mesha")
+    assert find_yoga(calculate_yogas(p9a, "Mesha", {}), "Gauri Yoga")["present"] is False
+
+    p9b, _, _ = make_chart([
+        {"name": "Mars", "house": 1, "sign": "Mesha"},
+        {"name": "Jupiter", "house": 5, "sign": "Simha"},
+    ], lagna="Mesha")
+    assert find_yoga(calculate_yogas(p9b, "Mesha", {}), "Gauri Yoga")["present"] is False
+
+    # 10. Missing dispositor position (Moon in Mesha -> dispositor Mars missing from chart)
+    p10, _, _ = make_chart([
+        {"name": "Moon", "house": 1, "sign": "Mesha"},
+        {"name": "Jupiter", "house": 5, "sign": "Simha"},
+    ], lagna="Mesha")
+    assert find_yoga(calculate_yogas(p10, "Mesha", {}), "Gauri Yoga")["present"] is False
+
+    # 11. Missing Jupiter position (Moon in Mesha, Mars in Mesha H1, Jupiter missing)
+    p11, _, _ = make_chart([
+        {"name": "Moon", "house": 1, "sign": "Mesha"},
+        {"name": "Mars", "house": 1, "sign": "Mesha"},
+    ], lagna="Mesha")
+    assert find_yoga(calculate_yogas(p11, "Mesha", {}), "Gauri Yoga")["present"] is False
+
+    # 12. Boundary cases for house and aspect calculations:
+    # 12a: Jupiter 5th aspect on dispositor (Lagna=Dhanu, Moon in Kanya H10 -> disp Mercury in Kanya H10 exalted; Jupiter in Vrishabha H6 -> 5th aspect to H10)
+    p12a, _, _ = make_chart([
+        {"name": "Moon", "house": 10, "sign": "Kanya"},
+        {"name": "Mercury", "house": 10, "sign": "Kanya"},
+        {"name": "Jupiter", "house": 6, "sign": "Vrishabha"},
+    ], lagna="Dhanu")
+    assert find_yoga(calculate_yogas(p12a, "Dhanu", {}), "Gauri Yoga")["present"] is True
+
+    # 12b: Dispositor in Dusthana H6 even if exalted and aspected by Jupiter (Mercury in Kanya H6, Jupiter in Makara H10 - 9th aspect to H6)
+    p12b, _, _ = make_chart([
+        {"name": "Moon", "house": 6, "sign": "Kanya"},
+        {"name": "Mercury", "house": 6, "sign": "Kanya"},
+        {"name": "Jupiter", "house": 10, "sign": "Makara"},
+    ], lagna="Mesha")
+    assert find_yoga(calculate_yogas(p12b, "Mesha", {}), "Gauri Yoga")["present"] is False
+
+
+def test_parvata_yoga_classical_conditions():
+    # 1. Own-sign D1 in Kendra: Mesha lagna (L1=Mars in Tula H7 -> D1=Venus in Tula H7 own sign Kendra)
+    p1, _, _ = make_chart([
+        {"name": "Mars", "house": 7, "sign": "Tula"},
+        {"name": "Venus", "house": 7, "sign": "Tula"},
+    ], lagna="Mesha")
+    res1 = calculate_yogas(p1, "Mesha", {})
+    y1 = find_yoga(res1, "Parvata Yoga")
+    assert y1["present"] is True
+    assert y1["strength"] == "Medium"
+
+    # 2. Exalted D1 in Kendra: Karka lagna (L1=Moon in Mesha H10 -> D1=Mars in Makara H7 Kendra Exalted)
+    p2, _, _ = make_chart([
+        {"name": "Moon", "house": 10, "sign": "Mesha"},
+        {"name": "Mars", "house": 7, "sign": "Makara"},
+    ], lagna="Karka")
+    res2 = calculate_yogas(p2, "Karka", {})
+    y2 = find_yoga(res2, "Parvata Yoga")
+    assert y2["present"] is True
+    assert y2["strength"] == "Strong"
+
+    # 3. Own-sign D1 in Trikona: Mesha lagna (L1=Mars in Simha H5 -> D1=Sun in Simha H5 own sign Trikona)
+    p3, _, _ = make_chart([
+        {"name": "Mars", "house": 5, "sign": "Simha"},
+        {"name": "Sun", "house": 5, "sign": "Simha"},
+    ], lagna="Mesha")
+    res3 = calculate_yogas(p3, "Mesha", {})
+    y3 = find_yoga(res3, "Parvata Yoga")
+    assert y3["present"] is True
+    assert y3["strength"] == "Medium"
+
+    # 4. Exalted D1 in Trikona: Karka lagna (L1=Moon in Dhanu H6 -> D1=Jupiter in Karka H1 Trikona/Kendra Exalted)
+    p4, _, _ = make_chart([
+        {"name": "Moon", "house": 6, "sign": "Dhanu"},
+        {"name": "Jupiter", "house": 1, "sign": "Karka"},
+    ], lagna="Karka")
+    res4 = calculate_yogas(p4, "Karka", {})
+    y4 = find_yoga(res4, "Parvata Yoga")
+    assert y4["present"] is True
+    assert y4["strength"] == "Strong"
+
+    # 5. Kendra placement without required dignity (Sun in Makara H10 is in enemy sign)
+    p5, _, _ = make_chart([
+        {"name": "Mars", "house": 5, "sign": "Simha"},
+        {"name": "Sun", "house": 10, "sign": "Makara"},
+    ], lagna="Mesha")
+    assert find_yoga(calculate_yogas(p5, "Mesha", {}), "Parvata Yoga")["present"] is False
+
+    # 6. Own-sign dignity in Dusthana (Mars in Vrischika H8 own sign, but H8 is Dusthana)
+    p6, _, _ = make_chart([
+        {"name": "Mars", "house": 8, "sign": "Vrischika"},
+    ], lagna="Mesha")
+    assert find_yoga(calculate_yogas(p6, "Mesha", {}), "Parvata Yoga")["present"] is False
+
+    # 7. Debilitated D1 in Kendra: Dhanu lagna (L1=Jupiter in Mithuna H7 -> D1=Mercury in Meena H4 Kendra Debilitated)
+    p7, _, _ = make_chart([
+        {"name": "Jupiter", "house": 7, "sign": "Mithuna"},
+        {"name": "Mercury", "house": 4, "sign": "Meena"},
+    ], lagna="Dhanu")
+    assert find_yoga(calculate_yogas(p7, "Dhanu", {}), "Parvata Yoga")["present"] is False
+
+    # 8. Lagna lord is its own dispositor (Mars in Mesha H1 own sign Kendra)
+    p8, _, _ = make_chart([
+        {"name": "Mars", "house": 1, "sign": "Mesha"},
+    ], lagna="Mesha")
+    res8 = calculate_yogas(p8, "Mesha", {})
+    y8 = find_yoga(res8, "Parvata Yoga")
+    assert y8["present"] is True
+    assert y8["strength"] == "Medium"
+
+    # 9. Missing Lagna
+    p9, _, _ = make_chart([
+        {"name": "Mars", "house": 1, "sign": "Mesha"},
+    ], lagna="")
+    assert find_yoga(calculate_yogas(p9, "", {}), "Parvata Yoga")["present"] is False
+
+    # 10. Missing Lagna lord in chart
+    p10, _, _ = make_chart([
+        {"name": "Venus", "house": 1, "sign": "Tula"},
+    ], lagna="Mesha")
+    assert find_yoga(calculate_yogas(p10, "Mesha", {}), "Parvata Yoga")["present"] is False
+
+    # 11. Missing D1 in chart (Mars in Vrishabha H2 requires Venus, but Venus absent)
+    p11, _, _ = make_chart([
+        {"name": "Mars", "house": 2, "sign": "Vrishabha"},
+    ], lagna="Mesha")
+    assert find_yoga(calculate_yogas(p11, "Mesha", {}), "Parvata Yoga")["present"] is False
+
+    # 12. D1 in H11 despite own-sign dignity (Saturn in Kumbha H11 own sign, not Kendra or Trikona)
+    p12, _, _ = make_chart([
+        {"name": "Mars", "house": 10, "sign": "Makara"},
+        {"name": "Saturn", "house": 11, "sign": "Kumbha"},
+    ], lagna="Mesha")
+    assert find_yoga(calculate_yogas(p12, "Mesha", {}), "Parvata Yoga")["present"] is False
+
+    # 13. Invalid Lagna
+    p13, _, _ = make_chart([
+        {"name": "Mars", "house": 1, "sign": "Mesha"},
+    ], lagna="InvalidLagna")
+    assert find_yoga(calculate_yogas(p13, "InvalidLagna", {}), "Parvata Yoga")["present"] is False
+
+    # 14. Invalid planetary sign or house
+    p14, _, _ = make_chart([
+        {"name": "Mars", "house": 0, "sign": ""},
+    ], lagna="Mesha")
+    assert find_yoga(calculate_yogas(p14, "Mesha", {}), "Parvata Yoga")["present"] is False

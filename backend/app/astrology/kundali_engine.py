@@ -245,7 +245,11 @@ from datetime import datetime, timedelta
 # SETTINGS
 # ==============================
 
-EPHE_PATH = '.'
+try:
+    from shared.ephemeris.wrapper import get_active_ephe_path
+    EPHE_PATH = get_active_ephe_path()
+except Exception:
+    EPHE_PATH = '.'
 IST_HOURS = 5
 IST_MINUTES = 30
 
@@ -506,7 +510,11 @@ from datetime import datetime, timedelta
 # ==============================
 # SETTINGS
 # ==============================
-EPHE_PATH   = '.'
+try:
+    from shared.ephemeris.wrapper import get_active_ephe_path
+    EPHE_PATH = get_active_ephe_path()
+except Exception:
+    EPHE_PATH   = '.'
 IST_HOURS   = 5
 IST_MINUTES = 30
 NAK_DIV     = 360.0 / 27.0   # exact: 13.333333...
@@ -993,6 +1001,12 @@ def calculate_kundali(year, month, day, hour, minute, lat, lon):
             nav_idx = RASHI_NAMES.index(nav)
             d9_h = ((nav_idx - d9_lagna_idx) % 12) + 1
             d9_houses[d9_h].append(p["name"])
+
+    # Combustion calculation
+    from shared.veda.combustion import check_combustion
+    sun_entry = next(p for p in planet_data if p["name"] == "Sun")
+    for p in planet_data:
+        p["is_combust"] = check_combustion(p["name"], p, sun_entry).is_combust
 
     # Scores, Yogas, Doshas
     planets_out = [{k:v for k,v in p.items() if k!="_raw_lon"} for p in planet_data]

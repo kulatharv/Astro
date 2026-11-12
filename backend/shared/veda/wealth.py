@@ -23,7 +23,7 @@ from .zodiac import SIGNS_SK, SIGN_LORDS
 from .strength import EXALTATION, DEBILITATION, OWN_SIGNS
 from .lordship import get_house_lord
 from .neech_bhanga import is_neech_bhanga
-from .combustion import is_combust
+from .combustion import is_combust, check_combustion, calculate_angular_separation, extract_longitude
 from .aspects import calculate_vedic_aspects
 from .yoga_catalog import evaluate_yoga_catalog, house_dist
 
@@ -70,7 +70,7 @@ class WealthRule:
     profile: str
     chart_frame: str
     predicate: Callable[[dict, dict], tuple[bool, str, list[str]]]
-    ordered_exceptions: list[Callable[[dict, dict], tuple[bool, str]]] = field(default_factory=list)
+    ordered_exceptions: list[Callable[[dict, dict], tuple[Optional[bool], str]]] = field(default_factory=list)
     dedupe_key: Optional[str] = None
     effect: str = "SUPPORTS"  # SUPPORTS, OBSTRUCTS, CONDITIONAL
     birth_time_sensitive: bool = False
@@ -234,16 +234,25 @@ def _exc_debilitated_no_nb(ctx: dict, pmap: dict, planet: str) -> tuple[bool, st
             return True, f"{planet} is debilitated without Neecha Bhanga cancellation"
     return False, ""
 
-def _exc_combust(ctx: dict, pmap: dict, planet: str, orb: float = 3.0) -> tuple[bool, str]:
+def _exc_combust(ctx: dict, pmap: dict, planet: str, orb: float = 3.0) -> tuple[Optional[bool], str]:
+    if not planet:
+        return None, "Target planet not specified; combustion status is unknown"
     if planet in ("Rahu", "Ketu", "Sun"):
-        return False, ""
-    sun_deg = degree_of(pmap, "Sun")
-    sun_s = sign_of(pmap, "Sun")
-    p_deg = degree_of(pmap, "Planet")
-    p_s = sign_of(pmap, planet)
-    if sun_s == p_s and abs(sun_deg - degree_of(pmap, planet)) <= orb:
+        return False, f"{planet} is not subject to planetary combustion"
+    sun_data = pmap.get("Sun")
+    pdata = pmap.get(planet)
+    if not sun_data or not pdata:
+        missing_target = "Sun" if not sun_data else planet
+        return None, f"Missing planetary data for {missing_target}; combustion status is unknown"
+    sun_lon = extract_longitude(sun_data)
+    p_lon = extract_longitude(pdata)
+    if sun_lon is None or p_lon is None:
+        missing_target = "Sun" if sun_lon is None else planet
+        return None, f"Missing or invalid longitude coordinates for {missing_target}; combustion status is unknown"
+    sep = calculate_angular_separation(sun_lon, p_lon)
+    if sep <= orb:
         return True, f"{planet} is deeply combust by Sun within {orb}°"
-    return False, ""
+    return False, f"{planet} is free from deep combustion at {sep:.4f}° from Sun (threshold {orb}°)"
 
 
 def _pred_h2_lord_own_exalted(ctx: dict, pmap: dict) -> tuple[bool, str, list[str]]:
@@ -609,7 +618,7 @@ def _pred_karaka_jupiter_dignity(ctx: dict, pmap: dict) -> tuple[bool, str, list
         return True, f"Naisargika Dhana Karaka Jupiter placed auspiciously in H{h_jup} in {s_jup}", ["Jupiter"]
     return False, "", []
 
-def _exc_jupiter_combust(ctx: dict, pmap: dict) -> tuple[bool, str]:
+def _exc_jupiter_combust(ctx: dict, pmap: dict) -> tuple[Optional[bool], str]:
     return _exc_combust(ctx, pmap, "Jupiter", orb=11.0)
 
 
@@ -1164,6 +1173,7 @@ def evaluate_wealth_rules(ctx: dict, profile: str = "parashari_classical") -> di
     matched_rules = []
     rejected_rules = []
     cancelled_rules = []
+    unverified_exceptions = []
 
     # Initialize dimension evidence ledgers
     dim_ledgers: dict[str, dict] = {
@@ -1189,12 +1199,18 @@ def evaluate_wealth_rules(ctx: dict, profile: str = "parashari_classical") -> di
         # Check ordered exceptions
         cancelled = False
         cancel_reason = ""
+        unverified_rule_exceptions = []
         for exc in rule.ordered_exceptions:
             c_fired, c_reason = exc(ctx, pmap)
-            if c_fired:
+            if c_fired is True:
                 cancelled = True
                 cancel_reason = c_reason
                 break
+            elif c_fired is None:
+                unverified_rule_exceptions.append({
+                    "rule_id": rule.rule_id,
+                    "reason": c_reason,
+                })
 
         if cancelled:
             cancelled_rules.append({
@@ -1202,6 +1218,10 @@ def evaluate_wealth_rules(ctx: dict, profile: str = "parashari_classical") -> di
                 "reason": cancel_reason,
             })
             continue
+
+        if unverified_rule_exceptions:
+            unverified_exceptions.extend(unverified_rule_exceptions)
+            ctx.setdefault("unverified_exceptions", []).extend(unverified_rule_exceptions)
 
         # Matched rule
         rule_record = {
@@ -1215,6 +1235,8 @@ def evaluate_wealth_rules(ctx: dict, profile: str = "parashari_classical") -> di
             "confidence": rule.confidence,
             "dimensions": rule.dimensions,
         }
+        if unverified_rule_exceptions:
+            rule_record["unverified_exceptions"] = [e["reason"] for e in unverified_rule_exceptions]
         matched_rules.append(rule_record)
 
         # Distribute into dimension ledgers
@@ -1324,6 +1346,7 @@ def evaluate_wealth_rules(ctx: dict, profile: str = "parashari_classical") -> di
         "matched_rules": matched_rules,
         "rejected_rules": rejected_rules,
         "cancelled_rules": cancelled_rules,
+        "unverified_exceptions": unverified_exceptions,
         "dhana_yogas_active": dhana_yogas_active,
         "karaka_status": karaka_status,
         "safety_disclaimer": SAFETY_DISCLAIMER,

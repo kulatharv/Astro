@@ -9,7 +9,11 @@ import swisseph as swe
 from datetime import datetime, timezone
 from math import floor
 
-swe.set_ephe_path('.')
+try:
+    from shared.ephemeris.wrapper import get_active_ephe_path
+    swe.set_ephe_path(get_active_ephe_path())
+except Exception:
+    swe.set_ephe_path('.')
 swe.set_sid_mode(swe.SIDM_LAHIRI)
 
 # ═══════════════════════════════════════════════════
@@ -162,10 +166,15 @@ def _build_chart_context(chart: dict) -> dict:
             "sign":     sign,
             "house":    house,
             "degree": parse_degree(p.get("degree",0)),
+            "degree_decimal": p.get("degree_decimal", parse_degree(p.get("degree",0))),
             "retrograde": bool(p.get("retrograde",False)),
             "nakshatra":  p.get("nakshatra",""),
             "strength": strength_label,
             "str_score":strength_score,
+            "_raw_lon": p.get("_raw_lon", p.get("longitude")),
+            "longitude": p.get("longitude", p.get("_raw_lon")),
+            "is_combust": p.get("is_combust", p.get("combust")),
+            "combust": p.get("combust", p.get("is_combust")),
         }
 
     # Ketu = opposite Rahu
@@ -176,8 +185,21 @@ def _build_chart_context(chart: dict) -> dict:
         ketu_sign = RASHI[(rahu_sign_idx + 6) % 12]
         planet_map["Ketu"] = {
             "sign": ketu_sign, "house": ketu_h, "degree": planet_map["Rahu"]["degree"],
+            "degree_decimal": planet_map["Rahu"].get("degree_decimal", planet_map["Rahu"]["degree"]),
             "retrograde": True, "nakshatra": "", "strength": "Neutral", "str_score": 0,
+            "_raw_lon": ((planet_map["Rahu"].get("_raw_lon", 0) + 180.0) % 360.0) if planet_map["Rahu"].get("_raw_lon") is not None else None,
+            "longitude": ((planet_map["Rahu"].get("longitude", 0) + 180.0) % 360.0) if planet_map["Rahu"].get("longitude") is not None else None,
+            "is_combust": False, "combust": False,
         }
+
+    # Evaluate combustion for all planets
+    sun_data = planet_map.get("Sun")
+    from shared.veda.combustion import check_combustion
+    for pname, pentry in planet_map.items():
+        if pentry.get("is_combust") is None:
+            c_res = check_combustion(pname, pentry, sun_data)
+            pentry["is_combust"] = c_res.is_combust
+            pentry["combust"] = c_res.is_combust
 
     # House lords
     house_lords = {h: _house_lord(lagna_idx, h) for h in range(1,13)}
@@ -1196,7 +1218,11 @@ Implements proper Vedic rules:
 import swisseph as swe
 from datetime import datetime, timezone
 
-swe.set_ephe_path('.')
+try:
+    from shared.ephemeris.wrapper import get_active_ephe_path
+    swe.set_ephe_path(get_active_ephe_path())
+except Exception:
+    swe.set_ephe_path('.')
 swe.set_sid_mode(swe.SIDM_LAHIRI)
 
 # ═══════════════════════════════════════════════════

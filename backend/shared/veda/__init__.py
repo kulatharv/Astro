@@ -15,7 +15,11 @@ from .doshas import (
 from .yogas import calculate_yogas, calculate_yogas_v2, detect_advanced_yogas
 from .yoga_catalog import YogaRule, CATALOG, evaluate_yoga_catalog, evaluate_yoga_rule
 from .dignity import PLANET_FRIENDS, MOOLATRIKONA, PLANET_ENEMIES, get_naisargika_dignity, get_positional_strength
-from .combustion import COMBUSTION_RANGES, is_combust
+from .combustion import (
+    COMBUSTION_LIMITS, COMBUSTION_RANGES, CombustionStatus,
+    CombustionResult, check_combustion, is_combust,
+    calculate_angular_separation, extract_longitude
+)
 from .neech_bhanga import is_neech_bhanga
 from .constants import PUBLIC_PATH_PREFIXES, USER_ROLE, ADMIN_ROLE, ZODIAC_SIGNS, RASHI_NAMES
 
@@ -149,7 +153,9 @@ __all__ = [
     # Dignity
     "PLANET_FRIENDS", "MOOLATRIKONA", "PLANET_ENEMIES", "get_naisargika_dignity", "get_positional_strength",
     # Combustion & Neecha Bhanga
-    "COMBUSTION_RANGES", "is_combust", "is_neech_bhanga",
+    "COMBUSTION_LIMITS", "COMBUSTION_RANGES", "CombustionStatus", "CombustionResult",
+    "check_combustion", "is_combust", "calculate_angular_separation", "extract_longitude",
+    "is_neech_bhanga",
     # Constants
     "PUBLIC_PATH_PREFIXES", "USER_ROLE", "ADMIN_ROLE", "ZODIAC_SIGNS", "RASHI_NAMES",
     # WP1 — Shadbala

@@ -57,6 +57,8 @@ async def process_job(job_id: str, max_retries: int = 3):
 
 async def run_worker():
     """Worker event loop pulling jobs from Redis queue with crash recovery."""
+    from shared.ephemeris.wrapper import init_ephemeris
+    init_ephemeris()
     logger.info("Narrative worker started listening for jobs...")
     last_recovery_check = time.time()
 

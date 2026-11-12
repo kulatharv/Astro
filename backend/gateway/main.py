@@ -95,11 +95,26 @@ class DefaultDenyAuthMiddleware(BaseHTTPMiddleware):
 async def lifespan(app: FastAPI):
     """Lifespan event handler for application startup and shutdown."""
     logger.info(f"Starting {settings.app_name} in {settings.environment} mode via Gateway...")
+
+    # 1. Ephemeris Runtime Initialization & Strict Policy Enforcement
+    from shared.ephemeris.wrapper import init_ephemeris
+    try:
+        ephe_diag = init_ephemeris()
+        logger.info(
+            f"Ephemeris runtime verified: mode={ephe_diag['runtime_mode']}, "
+            f"fallback={ephe_diag['is_moshier_fallback']}, strict={ephe_diag['strict_mode_active']}"
+        )
+    except Exception as e:
+        logger.critical(f"FATAL: Ephemeris runtime policy enforcement failed: {e}")
+        raise
+
+    # 2. Database Initialization
     try:
         init_db()
         logger.info("Database initialized successfully.")
     except Exception as e:
         logger.error(f"Database initialization error: {e}")
+
     yield
     logger.info("Application shutdown complete.")
 

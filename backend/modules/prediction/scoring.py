@@ -9,10 +9,11 @@ from shared.veda import (
     evaluate_mangal_dosha, evaluate_pitru_dosha,
     PLANET_FRIENDS, MOOLATRIKONA, PLANET_ENEMIES,
     get_naisargika_dignity, get_positional_strength,
-    is_combust, is_neech_bhanga
+    is_combust, check_combustion, is_neech_bhanga
 )
 
-swe.set_ephe_path('.')
+from shared.ephemeris.wrapper import get_active_ephe_path
+swe.set_ephe_path(get_active_ephe_path())
 swe.set_sid_mode(swe.SIDM_LAHIRI)
 
 RASHI = ["Mesha","Vrishabha","Mithuna","Karka","Simha","Kanya",
@@ -111,14 +112,23 @@ def _build_ctx(chart: dict) -> dict:
                 sign = p.get("sign", "Mesha")
                 house = int(p.get("house", _house_from(RASHI.index(sign) if sign in RASHI else 0, lagna_idx)))
                 strength_label, strength_score = _planet_strength(name, sign)
+                deg_val = parse_degree(p.get("degree", 0))
+                s_idx = RASHI.index(sign) if sign in RASHI else 0
+                calc_lon = (s_idx * 30.0 + (deg_val % 30.0)) % 360.0
+                lon_val = p.get("_raw_lon") if p.get("_raw_lon") is not None else (p.get("longitude") if p.get("longitude") is not None else calc_lon)
                 planet_map[name] = {
                     "sign": sign,
                     "house": house,
-                    "degree": parse_degree(p.get("degree", 0)),
+                    "degree": deg_val,
+                    "degree_decimal": p.get("degree_decimal", deg_val),
                     "retrograde": bool(p.get("retrograde", False)),
                     "nakshatra": p.get("nakshatra", ""),
                     "strength": strength_label,
                     "str_score": strength_score,
+                    "_raw_lon": lon_val,
+                    "longitude": lon_val,
+                    "is_combust": p.get("is_combust", p.get("combust")),
+                    "combust": p.get("combust", p.get("is_combust")),
                 }
     elif isinstance(planets, list):
         for p in planets:
@@ -127,14 +137,23 @@ def _build_ctx(chart: dict) -> dict:
                 sign = p.get("sign", "Mesha")
                 house = int(p.get("house", _house_from(RASHI.index(sign) if sign in RASHI else 0, lagna_idx)))
                 strength_label, strength_score = _planet_strength(name, sign)
+                deg_val = parse_degree(p.get("degree", 0))
+                s_idx = RASHI.index(sign) if sign in RASHI else 0
+                calc_lon = (s_idx * 30.0 + (deg_val % 30.0)) % 360.0
+                lon_val = p.get("_raw_lon") if p.get("_raw_lon") is not None else (p.get("longitude") if p.get("longitude") is not None else calc_lon)
                 planet_map[name] = {
                     "sign": sign,
                     "house": house,
-                    "degree": parse_degree(p.get("degree", 0)),
+                    "degree": deg_val,
+                    "degree_decimal": p.get("degree_decimal", deg_val),
                     "retrograde": bool(p.get("retrograde", False)),
                     "nakshatra": p.get("nakshatra", ""),
                     "strength": strength_label,
                     "str_score": strength_score,
+                    "_raw_lon": lon_val,
+                    "longitude": lon_val,
+                    "is_combust": p.get("is_combust", p.get("combust")),
+                    "combust": p.get("combust", p.get("is_combust")),
                 }
 
     if "Rahu" in planet_map and "Ketu" not in planet_map:
@@ -142,10 +161,25 @@ def _build_ctx(chart: dict) -> dict:
         ketu_h = ((rahu_h - 1 + 6) % 12) + 1
         rahu_sign_idx = RASHI.index(planet_map["Rahu"]["sign"]) if planet_map["Rahu"]["sign"] in RASHI else 0
         ketu_sign = RASHI[(rahu_sign_idx + 6) % 12]
+        rahu_raw = planet_map["Rahu"].get("_raw_lon")
+        ketu_raw = ((rahu_raw + 180.0) % 360.0) if rahu_raw is not None else None
         planet_map["Ketu"] = {
             "sign": ketu_sign, "house": ketu_h, "degree": planet_map["Rahu"]["degree"],
+            "degree_decimal": planet_map["Rahu"].get("degree_decimal", planet_map["Rahu"]["degree"]),
             "retrograde": True, "nakshatra": "", "strength": "Neutral", "str_score": 0,
+            "_raw_lon": ketu_raw, "longitude": ketu_raw,
+            "is_combust": False, "combust": False,
         }
+
+    # Evaluate and ensure verified combustion status for all planets
+    sun_data = planet_map.get("Sun")
+    for name, pentry in planet_map.items():
+        if pentry.get("is_combust") is None:
+            c_res = check_combustion(name, pentry, sun_data)
+            pentry["is_combust"] = c_res.is_combust
+            pentry["combust"] = c_res.is_combust
+            pentry["combustion_status"] = c_res.status.value
+            pentry["combustion_separation"] = c_res.separation
 
     house_lords = {h: _house_lord(lagna_idx, h) for h in range(1,13)}
     house_signs = {h: _house_sign(lagna_idx, h) for h in range(1,13)}

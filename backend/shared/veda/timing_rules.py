@@ -22,6 +22,7 @@ from .strength import EXALTATION, DEBILITATION, OWN_SIGNS
 from .lordship import get_house_lord, is_yogakaraka, is_functional_benefic, is_functional_malefic
 from .ashtakavarga import compute_sav, compute_bav
 from .vedha import check_transit_vedha
+from .combustion import is_combust
 
 TIMING_SAFETY_DISCLAIMER = (
     "AstroLogic AI provides non-deterministic cultural, philosophical, and astrological reflections only. "
@@ -192,8 +193,11 @@ def pred_time_dsh_05(ctx: dict, timing_ctx: dict) -> tuple[bool, str, list[str]]
     pdata = pm.get(md, {})
     sign = pdata.get("sign", "")
     is_deb = (sign == DEBILITATION.get(md, ""))
-    is_comb = pdata.get("is_combust", False)
-    if is_deb or is_comb:
+    is_comb = pdata.get("is_combust")
+    if is_comb is None:
+        sun_data = pm.get("Sun", {})
+        is_comb = is_combust(md, pdata, sun_data)
+    if is_deb or (is_comb is True):
         return True, f"Dasha lord {md} is {'debilitated in ' + sign if is_deb else 'combust'}, requiring greater patience.", [md]
     return False, "", []
 
