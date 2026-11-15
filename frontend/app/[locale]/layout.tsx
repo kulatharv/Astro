@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Cormorant_Garamond, Inter, Noto_Serif_Devanagari } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
@@ -95,6 +96,7 @@ export default async function LocaleLayout({
         translate="no"
         className="min-h-screen flex flex-col bg-[#FAF6F0] text-[#24120B] font-sans antialiased selection:bg-[#7A1612] selection:text-[#FAF6F0] notranslate"
       >
+        <Script src="https://accounts.google.com/gsi/client" strategy="afterInteractive" />
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
             <TelemetryProvider>

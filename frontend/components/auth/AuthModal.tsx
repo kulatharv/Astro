@@ -95,12 +95,80 @@ export default function AuthModal() {
 
   const headerInfo = getHeaderInfo();
 
+  // Initialize Google Identity Services if available
+  useEffect(() => {
+    if (!isModalOpen || typeof window === 'undefined') return;
+    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+    if (!clientId || !(window as any).google?.accounts?.id) return;
+
+    try {
+      (window as any).google.accounts.id.initialize({
+        client_id: clientId,
+        callback: async (response: any) => {
+          if (response?.credential) {
+            setLoading(true);
+            setErrorMsg(null);
+            const ok = await loginWithGoogle(response.credential);
+            if (ok) {
+              setSuccessCelebration(true);
+              setTimeout(() => {
+                if (modalOptions.onComplete) modalOptions.onComplete();
+                closeAuthModal();
+              }, 1200);
+            } else {
+              setErrorMsg('Google sign-in could not be completed. Please try again.');
+            }
+            setLoading(false);
+          }
+        },
+      });
+
+      const slot = document.getElementById('google-btn-slot');
+      if (slot) {
+        slot.innerHTML = '';
+        (window as any).google.accounts.id.renderButton(slot, {
+          theme: 'outline',
+          size: 'large',
+          text: 'continue_with',
+          shape: 'pill',
+          width: 300,
+        });
+      }
+    } catch {
+      // Ignore initial render errors
+    }
+  }, [isModalOpen, loginWithGoogle, modalOptions, closeAuthModal]);
+
   // Handle Google 1-Tap Click
   const handleGoogleAuth = async () => {
     setLoading(true);
     setErrorMsg(null);
     try {
-      // In web app, we generate a mock or GIS payload
+      const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+      if (typeof window !== 'undefined' && (window as any).google?.accounts?.id && clientId) {
+        (window as any).google.accounts.id.initialize({
+          client_id: clientId,
+          callback: async (response: any) => {
+            if (response?.credential) {
+              const ok = await loginWithGoogle(response.credential);
+              if (ok) {
+                setSuccessCelebration(true);
+                setTimeout(() => {
+                  if (modalOptions.onComplete) modalOptions.onComplete();
+                  closeAuthModal();
+                }, 1200);
+              } else {
+                setErrorMsg('Google sign-in could not be completed. Please try again.');
+              }
+            }
+            setLoading(false);
+          },
+        });
+        (window as any).google.accounts.id.prompt();
+        return;
+      }
+
+      // Fallback for dev / mock credential
       const mockCredential = `eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnb29nbGVfdXNlcl8ke0RhdGUubm93KCl9IiwiZW1haWwiOiJzZWVrZXIuYXN0cm9sb2dpY0BnbWFpbC5jb20iLCJuYW1lIjoiQ29zbWljIFNlZWtlciIsImlhdCI6JHtNYXRoLmZsb29yKERhdGUubm93KCkvMTAwMCl9fQ.mock_sig`;
       const ok = await loginWithGoogle(mockCredential);
       if (ok) {
@@ -266,6 +334,7 @@ export default function AuthModal() {
             {/* Tab 1: Google 1-Tap */}
             {activeTab === 'google' && (
               <div className="space-y-4 pt-1">
+                <div id="google-btn-slot" className="w-full flex justify-center empty:hidden" />
                 <button
                   type="button"
                   onClick={handleGoogleAuth}
