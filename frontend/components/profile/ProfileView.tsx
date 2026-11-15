@@ -444,13 +444,28 @@ export default function ProfileView() {
       <div className="relative">
         <div className="flex border-b border-[#C5A059]/30 gap-1.5 sm:gap-4 overflow-x-auto pb-px scrollbar-none">
           {[
-            { key: 'cosmic', label: 'Birth Details & Badges', icon: Compass },
-            { key: 'family', label: `Family & Client Vault (${savedCharts.length})`, icon: Users },
-            { key: 'whatsapp', label: 'Daily WhatsApp Forecast', icon: MessageSquare },
-            { key: 'account', label: 'Account & Preferences', icon: ShieldCheck },
+            { key: 'cosmic', label: 'Birth Details & Badges', icon: Compass, disabled: false },
+            { key: 'family', label: `Family & Client Vault (${savedCharts.length})`, icon: Users, disabled: false },
+            { key: 'whatsapp', label: 'Daily WhatsApp Forecast', icon: MessageSquare, disabled: true },
+            { key: 'account', label: 'Account & Preferences', icon: ShieldCheck, disabled: false },
           ].map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.key;
+            if (tab.disabled) {
+              return (
+                <button
+                  key={tab.key}
+                  type="button"
+                  disabled
+                  className="min-h-[44px] flex items-center gap-1.5 px-3.5 sm:px-4 py-3 text-xs sm:text-sm font-semibold border-b-2 border-transparent text-[#24120B]/40 opacity-50 cursor-not-allowed whitespace-nowrap select-none"
+                  title="WhatsApp Forecast is coming soon"
+                >
+                  <Icon className="w-4 h-4 shrink-0 text-neutral-400" />
+                  <span>{tab.label}</span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-neutral-200 text-neutral-600 font-semibold uppercase tracking-wider">Soon</span>
+                </button>
+              );
+            }
             return (
               <button
                 key={tab.key}

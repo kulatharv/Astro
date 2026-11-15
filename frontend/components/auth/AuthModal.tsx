@@ -110,7 +110,7 @@ export default function AuthModal() {
           closeAuthModal();
         }, 1200);
       } else {
-        setErrorMsg('Google sign-in could not be completed. Please try WhatsApp OTP.');
+        setErrorMsg('Google sign-in could not be completed. Please try again.');
       }
     } catch (e: any) {
       setErrorMsg(e?.message || 'Authentication error');
@@ -253,18 +253,13 @@ export default function AuthModal() {
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  setActiveTab('whatsapp');
-                  setErrorMsg(null);
-                }}
-                className={`py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
-                  activeTab === 'whatsapp'
-                    ? 'bg-[#FAF6F0] text-[#7A1612] shadow-xs font-bold border border-[#C5A059]/30'
-                    : 'text-[#24120B]/70 hover:text-[#7A1612]'
-                }`}
+                disabled
+                className="py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 opacity-50 cursor-not-allowed text-[#24120B]/40 bg-neutral-200/40 select-none"
+                title="WhatsApp OTP authentication is coming soon"
               >
-                <MessageSquare className="w-3.5 h-3.5 text-[#1B4D3E]" />
+                <MessageSquare className="w-3.5 h-3.5 text-neutral-400" />
                 <span>WhatsApp OTP</span>
+                <span className="text-[9px] px-1.5 py-0.5 rounded bg-neutral-200 text-neutral-600 font-semibold uppercase tracking-wider">Soon</span>
               </button>
             </div>
 
