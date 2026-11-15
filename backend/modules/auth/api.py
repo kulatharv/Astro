@@ -356,69 +356,81 @@ def api_email_auth(request: Request, data: EmailAuthRequest, db: Session = Depen
     - If user exists, validates password and signs in.
     - If user does not exist, automatically registers new user and signs in.
     """
-    from app.services.auth_service import auth_service
-    from app.services.user_service import user_service
-    from modules.auth.repository import auth_repository
-    from modules.auth.security import verify_password
+    try:
+        from app.services.auth_service import auth_service
+        from app.services.user_service import user_service
+        from modules.auth.repository import auth_repository
+        from modules.auth.security import verify_password
 
-    clean_email = data.email.strip().lower()
-    if not clean_email or "@" not in clean_email or "." not in clean_email.split("@")[-1]:
-        raise HTTPException(status_code=400, detail="Please enter a valid email address.")
+        clean_email = data.email.strip().lower()
+        if not clean_email or "@" not in clean_email or "." not in clean_email.split("@")[-1]:
+            raise HTTPException(status_code=400, detail="Please enter a valid email address.")
 
-    if len(data.password) < 6:
-        raise HTTPException(status_code=400, detail="Password must be at least 6 characters long.")
+        if len(data.password) < 6:
+            raise HTTPException(status_code=400, detail="Password must be at least 6 characters long.")
 
-    existing_user = auth_repository.get_by_email(db, clean_email)
-    if existing_user:
-        if not existing_user.password_hash or not verify_password(data.password, existing_user.password_hash):
-            raise HTTPException(status_code=401, detail="Incorrect password for this email address.")
-        user = existing_user
-        auth_repository.update_last_login(db, user)
-        action = "email_login"
-    else:
-        derived_name = (
-            data.name.strip()
-            if data.name and data.name.strip()
-            else clean_email.split("@")[0].replace(".", " ").capitalize()
-        )
-        if len(derived_name) < 2:
-            derived_name = "Cosmic Seeker"
-        reg_data = UserRegister(name=derived_name, email=clean_email, password=data.password, phone="")
-        user, err = auth_engine.register_user(db, reg_data)
-        if err:
-            raise HTTPException(status_code=400, detail=err)
-        action = "email_signup"
+        existing_user = auth_repository.get_by_email(db, clean_email)
+        if existing_user:
+            if not existing_user.password_hash or not verify_password(data.password, existing_user.password_hash):
+                raise HTTPException(status_code=401, detail="Incorrect password for this email address.")
+            user = existing_user
+            auth_repository.update_last_login(db, user)
+            action = "email_login"
+        else:
+            derived_name = (
+                data.name.strip()
+                if data.name and data.name.strip()
+                else clean_email.split("@")[0].replace(".", " ").capitalize()
+            )
+            if len(derived_name) < 2:
+                derived_name = "Cosmic Seeker"
+            reg_data = UserRegister(name=derived_name, email=clean_email, password=data.password, phone="")
+            user, err = auth_engine.register_user(db, reg_data)
+            if err:
+                raise HTTPException(status_code=400, detail=err)
+            action = "email_signup"
 
-    request.session["user_id"] = user.id
-    access_token = auth_service.create_jwt_token(user.id, email=user.email)
+        request.session["user_id"] = user.id
+        access_token = auth_service.create_jwt_token(user.id, email=user.email)
 
-    auth_engine.log_activity(
-        db,
-        action=action,
-        user_id=user.id,
-        details=f"User authenticated via {action}",
-        ip_address=request.client.host if request.client else None,
-        user_agent=request.headers.get("user-agent"),
-    )
+        try:
+            auth_engine.log_activity(
+                db,
+                action=action,
+                user_id=user.id,
+                details=f"User authenticated via {action}",
+                ip_address=request.client.host if request.client else None,
+                user_agent=request.headers.get("user-agent"),
+            )
+        except Exception:
+            pass
 
-    badges = user_service.calculate_cosmic_badges(user.profile) if user.profile else None
+        badges = None
+        try:
+            badges = user_service.calculate_cosmic_badges(user.profile) if user.profile else None
+        except Exception:
+            pass
 
-    return {
-        "status": "success",
-        "action": action,
-        "access_token": access_token,
-        "user": {
-            "id": user.id,
-            "name": user.name,
-            "email": user.email,
-            "phone": user.phone,
-            "auth_provider": "email",
-            "preferred_language": user.preferred_language or "en",
-            "whatsapp_opt_in": user.profile.whatsapp_opt_in if user.profile else False,
-            "whatsapp_number": user.profile.whatsapp_number if user.profile else None,
-            "cosmic_badges": badges,
-        },
-    }
+        return {
+            "status": "success",
+            "action": action,
+            "access_token": access_token,
+            "user": {
+                "id": user.id,
+                "name": user.name,
+                "email": user.email,
+                "phone": user.phone,
+                "auth_provider": "email",
+                "preferred_language": user.preferred_language or "en",
+                "whatsapp_opt_in": user.profile.whatsapp_opt_in if user.profile else False,
+                "whatsapp_number": user.profile.whatsapp_number if user.profile else None,
+                "cosmic_badges": badges,
+            },
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Authentication error: {str(e)}")
 
 
 @auth_router.post("/api/auth/signup", status_code=201)

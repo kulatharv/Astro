@@ -14,7 +14,15 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify(body),
     });
 
-    const data = await res.json();
+    const contentType = res.headers.get('content-type') || '';
+    let data: any;
+    if (contentType.includes('application/json')) {
+      data = await res.json();
+    } else {
+      const text = await res.text();
+      data = { detail: text || 'Server response was non-JSON' };
+    }
+
     const nextResponse = NextResponse.json(data, { status: res.status });
 
     // Forward set-cookie headers (session / refresh token)

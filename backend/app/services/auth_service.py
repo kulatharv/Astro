@@ -2,6 +2,7 @@
 Authentication Service: Google One-Tap, WhatsApp Passwordless OTP, and Guest-to-User State Promotion.
 """
 
+import base64
 import hashlib
 import hmac
 import json
@@ -11,7 +12,11 @@ import time
 from datetime import datetime, timedelta
 from typing import Optional, Tuple
 
-import jwt
+try:
+    import jwt
+except ImportError:
+    jwt = None
+
 from sqlalchemy.orm import Session
 
 from shared.config.settings import settings
@@ -46,12 +51,37 @@ class AuthService:
             "iat": int(time.time()),
             "exp": int(time.time()) + ACCESS_TOKEN_EXPIRE_SECONDS,
         }
-        return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
+        if jwt is not None:
+            return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
+
+        # Standard-library signed token fallback
+        header = base64.urlsafe_b64encode(json.dumps({"alg": "HS256", "typ": "JWT"}).encode()).decode().rstrip("=")
+        body = base64.urlsafe_b64encode(json.dumps(payload).encode()).decode().rstrip("=")
+        sig = base64.urlsafe_b64encode(hmac.new(JWT_SECRET.encode(), f"{header}.{body}".encode(), hashlib.sha256).digest()).decode().rstrip("=")
+        return f"{header}.{body}.{sig}"
 
     def decode_jwt_token(self, token: str) -> Optional[dict]:
         """Decodes and validates a JWT token."""
         try:
-            return jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+            if jwt is not None:
+                return jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+
+            # Standard-library verification fallback
+            parts = token.split(".")
+            if len(parts) != 3:
+                return None
+            header_b64, body_b64, sig_b64 = parts
+            expected_sig = base64.urlsafe_b64encode(hmac.new(JWT_SECRET.encode(), f"{header_b64}.{body_b64}".encode(), hashlib.sha256).digest()).decode().rstrip("=")
+            if not hmac.compare_digest(sig_b64, expected_sig):
+                return None
+
+            pad = 4 - len(body_b64) % 4
+            if pad < 4:
+                body_b64 += "=" * pad
+            payload = json.loads(base64.urlsafe_b64decode(body_b64).decode())
+            if payload.get("exp") and time.time() > payload["exp"]:
+                return None
+            return payload
         except Exception as e:
             logger.warning(f"Failed to decode JWT token: {e}")
             return None
@@ -67,10 +97,20 @@ class AuthService:
 
         # 1. Decode token payload (with graceful offline/dev handling)
         try:
-            # First attempt standard unverified payload inspection for fast extraction
-            google_payload = jwt.decode(token, options={"verify_signature": False})
+            if jwt is not None:
+                google_payload = jwt.decode(token, options={"verify_signature": False})
+            else:
+                parts = token.split(".")
+                if len(parts) >= 2:
+                    p = parts[1]
+                    pad = 4 - len(p) % 4
+                    if pad < 4:
+                        p += "=" * pad
+                    google_payload = json.loads(base64.urlsafe_b64decode(p).decode())
         except Exception:
-            # Fallback for dev / mock tokens
+            pass
+
+        if not google_payload or not google_payload.get("sub"):
             google_payload = {
                 "sub": f"mock_google_{secrets.token_hex(4)}",
                 "email": "seeker@astrologic.ai",
