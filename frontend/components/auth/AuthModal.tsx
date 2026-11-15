@@ -11,6 +11,9 @@ import {
   AlertCircle,
   MessageSquare,
   Lock,
+  Mail,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 import { useAuth } from './AuthContext';
 
@@ -20,11 +23,17 @@ export default function AuthModal() {
     modalOptions,
     closeAuthModal,
     loginWithGoogle,
+    loginWithEmail,
     sendWhatsAppOtp,
     verifyWhatsAppOtp,
   } = useAuth();
 
-  const [activeTab, setActiveTab] = useState<'google' | 'whatsapp'>('google');
+  const [activeTab, setActiveTab] = useState<'standard' | 'whatsapp'>('standard');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [emailLoading, setEmailLoading] = useState(false);
+
   const [phone, setPhone] = useState('+91');
   const [otpCode, setOtpCode] = useState('');
   const [otpSent, setOtpSent] = useState(false);
@@ -49,6 +58,10 @@ export default function AuthModal() {
       setErrorMsg(null);
       setSuccessCelebration(false);
       setLoading(false);
+      setEmailLoading(false);
+      setEmail('');
+      setPassword('');
+      setShowPassword(false);
       setOtpSent(false);
       setOtpCode('');
       setDevOtpHint(null);
@@ -185,6 +198,39 @@ export default function AuthModal() {
     }
   };
 
+  // Handle Email & Password Sign In / Auto-Signup
+  const handleEmailAuth = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail || !cleanEmail.includes('@') || !cleanEmail.includes('.')) {
+      setErrorMsg('Please enter a valid email address.');
+      return;
+    }
+    if (!password || password.length < 6) {
+      setErrorMsg('Password must be at least 6 characters long.');
+      return;
+    }
+
+    setEmailLoading(true);
+    setErrorMsg(null);
+    try {
+      const res = await loginWithEmail(cleanEmail, password);
+      if (res.success) {
+        setSuccessCelebration(true);
+        setTimeout(() => {
+          if (modalOptions.onComplete) modalOptions.onComplete();
+          closeAuthModal();
+        }, 1200);
+      } else {
+        setErrorMsg(res.message || 'Authentication failed. Please check your credentials.');
+      }
+    } catch (e: any) {
+      setErrorMsg(e?.message || 'Authentication error');
+    } finally {
+      setEmailLoading(false);
+    }
+  };
+
   // Handle Send WhatsApp OTP
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -303,165 +349,130 @@ export default function AuthModal() {
               </div>
             )}
 
-            {/* Tab Switcher */}
-            <div className="grid grid-cols-2 p-1 bg-[#F5EFE6] rounded-xl border border-[#C5A059]/25 text-xs font-semibold">
+            {/* 1. Google 1-Tap Auth Button */}
+            <div className="space-y-3">
+              <div id="google-btn-slot" className="w-full flex justify-center empty:hidden" />
               <button
                 type="button"
-                onClick={() => {
-                  setActiveTab('google');
-                  setErrorMsg(null);
-                }}
-                className={`py-2 rounded-lg transition-all ${
-                  activeTab === 'google'
-                    ? 'bg-[#FAF6F0] text-[#7A1612] shadow-xs font-bold border border-[#C5A059]/30'
-                    : 'text-[#24120B]/70 hover:text-[#7A1612]'
-                }`}
+                onClick={handleGoogleAuth}
+                disabled={loading || emailLoading}
+                className="w-full flex items-center justify-center gap-3 px-4 py-3 text-sm font-semibold text-[#24120B] bg-white hover:bg-neutral-50 rounded-xl border border-[#C5A059]/40 shadow-xs hover:shadow-md transition-all cursor-pointer group disabled:opacity-50"
               >
-                1-Tap Google
-              </button>
-              <button
-                type="button"
-                disabled
-                className="py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 opacity-50 cursor-not-allowed text-[#24120B]/40 bg-neutral-200/40 select-none"
-                title="WhatsApp OTP authentication is coming soon"
-              >
-                <MessageSquare className="w-3.5 h-3.5 text-neutral-400" />
-                <span>WhatsApp OTP</span>
-                <span className="text-[9px] px-1.5 py-0.5 rounded bg-neutral-200 text-neutral-600 font-semibold uppercase tracking-wider">Soon</span>
+                <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                  <path
+                    fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                  />
+                </svg>
+                <span>{loading ? 'Authenticating with Google...' : 'Continue with Google (1-Tap)'}</span>
               </button>
             </div>
 
-            {/* Tab 1: Google 1-Tap */}
-            {activeTab === 'google' && (
-              <div className="space-y-4 pt-1">
-                <div id="google-btn-slot" className="w-full flex justify-center empty:hidden" />
-                <button
-                  type="button"
-                  onClick={handleGoogleAuth}
-                  disabled={loading}
-                  className="w-full flex items-center justify-center gap-3 px-4 py-3 text-sm font-semibold text-[#24120B] bg-white hover:bg-neutral-50 rounded-xl border border-[#C5A059]/40 shadow-xs hover:shadow-md transition-all cursor-pointer group"
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24">
-                    <path
-                      fill="#4285F4"
-                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                    />
-                    <path
-                      fill="#34A853"
-                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                    />
-                    <path
-                      fill="#FBBC05"
-                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
-                    />
-                    <path
-                      fill="#EA4335"
-                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
-                    />
-                  </svg>
-                  <span>{loading ? 'Authenticating...' : 'Continue with Google (1-Tap)'}</span>
-                </button>
+            {/* 2. Visual Divider: ─── or with email ─── */}
+            <div className="relative flex items-center justify-center my-1">
+              <div className="grow border-t border-[#C5A059]/30" />
+              <span className="px-3 text-[11px] font-semibold text-[#24120B]/60 uppercase tracking-wider bg-[#FAF6F0]">
+                or with email
+              </span>
+              <div className="grow border-t border-[#C5A059]/30" />
+            </div>
 
-                <p className="text-[11px] text-center text-[#24120B]/60">
-                  ⚡ 1 Click · Zero passwords · No manual typing required.
-                </p>
+            {/* 3. Manual Email & Password Form */}
+            <form onSubmit={handleEmailAuth} className="space-y-3.5">
+              <div>
+                <label htmlFor="auth-email-input" className="block text-xs font-semibold text-[#7A1612] mb-1 cursor-pointer">
+                  Email Address
+                </label>
+                <div className="relative">
+                  <Mail className="w-4 h-4 absolute left-3 top-3 text-[#C5A059]" />
+                  <input
+                    id="auth-email-input"
+                    aria-label="Email Address"
+                    type="email"
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="name@example.com"
+                    required
+                    className="w-full pl-9 pr-3 py-2.5 text-sm bg-white rounded-xl border border-[#C5A059]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1612] focus-visible:border-[#7A1612] text-[#24120B] placeholder-[#24120B]/40"
+                  />
+                </div>
               </div>
-            )}
 
-            {/* Tab 2: WhatsApp OTP */}
-            {activeTab === 'whatsapp' && (
-              <div className="space-y-4 pt-1">
-                {!otpSent ? (
-                  <form onSubmit={handleSendOtp} className="space-y-3">
-                    <div>
-                      <label htmlFor="auth-whatsapp-phone" className="block text-xs font-semibold text-[#7A1612] mb-1 cursor-pointer">
-                        WhatsApp Mobile Number
-                      </label>
-                      <div className="relative">
-                        <Phone className="w-4 h-4 absolute left-3 top-3 text-[#A85A1E]" />
-                        <input
-                          id="auth-whatsapp-phone"
-                          type="tel"
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          placeholder="+91 98765 43210"
-                          className="w-full pl-9 pr-3 py-2.5 text-sm bg-white rounded-xl border border-[#C5A059]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1612] focus-visible:border-[#7A1612] text-[#24120B]"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-xl text-[#FAF6F0] bg-linear-to-r from-[#7A1612] to-[#A85A1E] hover:brightness-105 border border-[#C5A059]/40 shadow-xs cursor-pointer transition-all"
-                    >
-                      <MessageSquare className="w-3.5 h-3.5 text-[#F5E1BE]" />
-                      <span>{loading ? 'Sending Code...' : 'Send WhatsApp Code'}</span>
-                    </button>
-                  </form>
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <label htmlFor="auth-password-input" className="text-xs font-semibold text-[#7A1612] cursor-pointer">
+                    Password
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="text-[11px] text-[#A85A1E] hover:underline cursor-pointer"
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  >
+                    {showPassword ? 'Hide' : 'Show'}
+                  </button>
+                </div>
+                <div className="relative">
+                  <Lock className="w-4 h-4 absolute left-3 top-3 text-[#C5A059]" />
+                  <input
+                    id="auth-password-input"
+                    aria-label="Password"
+                    type={showPassword ? 'text' : 'password'}
+                    autoComplete="current-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter password (min. 6 characters)"
+                    required
+                    minLength={6}
+                    className="w-full pl-9 pr-10 py-2.5 text-sm bg-white rounded-xl border border-[#C5A059]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1612] focus-visible:border-[#7A1612] text-[#24120B] placeholder-[#24120B]/40 font-mono"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={emailLoading || loading}
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold rounded-xl text-[#FAF6F0] bg-linear-to-r from-[#7A1612] via-[#8E1C17] to-[#7A1612] hover:brightness-105 border border-[#C5A059]/40 shadow-xs hover:shadow-md cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {emailLoading ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-[#FAF6F0] border-t-transparent rounded-full animate-spin" />
+                    <span>Authenticating...</span>
+                  </>
                 ) : (
-                  <form onSubmit={handleVerifyOtp} className="space-y-3">
-                    <div>
-                      <div className="flex items-center justify-between mb-1">
-                        <label htmlFor="auth-whatsapp-otp" className="text-xs font-semibold text-[#7A1612] cursor-pointer">
-                          Enter 6-Digit WhatsApp Code
-                        </label>
-                        <button
-                          type="button"
-                          onClick={() => setOtpSent(false)}
-                          className="text-[10px] text-[#A85A1E] hover:underline"
-                        >
-                          Change Number
-                        </button>
-                      </div>
-                      <input
-                        id="auth-whatsapp-otp"
-                        type="text"
-                        inputMode="numeric"
-                        maxLength={6}
-                        value={otpCode}
-                        onChange={(e) => setOtpCode(e.target.value)}
-                        placeholder="123456"
-                        autoFocus
-                        className="w-full text-center tracking-widest font-mono text-xl py-2.5 bg-white rounded-xl border border-[#C5A059]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1612] focus-visible:border-[#7A1612] text-[#24120B]"
-                        required
-                      />
-                    </div>
-
-                    {devOtpHint && (
-                      <div className="p-2 bg-[#F5EFE6] rounded-lg border border-[#C5A059]/30 text-[11px] text-center text-[#7A1612] font-mono">
-                        🛠️ Dev Mode Code: <b>{devOtpHint}</b> (Auto-Filled)
-                      </div>
-                    )}
-
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-xl text-[#FAF6F0] bg-linear-to-r from-[#1B4D3E] to-[#7A1612] hover:brightness-105 border border-[#C5A059]/40 shadow-xs cursor-pointer transition-all"
-                    >
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#F5E1BE]" />
-                      <span>{loading ? 'Verifying...' : 'Verify & Claim My Chart'}</span>
-                    </button>
-
-                    <div className="text-center pt-1">
-                      {countdown > 0 ? (
-                        <span className="text-[11px] text-[#24120B]/60">
-                          Resend code in {countdown}s
-                        </span>
-                      ) : (
-                        <button
-                          type="button"
-                          onClick={handleSendOtp}
-                          className="text-[11px] font-semibold text-[#7A1612] hover:underline"
-                        >
-                          Resend Code via WhatsApp
-                        </button>
-                      )}
-                    </div>
-                  </form>
+                  <>
+                    <span>Sign In / Create Account</span>
+                    <ArrowRight className="w-4 h-4 text-[#F5E1BE]" />
+                  </>
                 )}
-              </div>
-            )}
+              </button>
+
+              <p className="text-[10px] text-center text-[#24120B]/55 leading-tight pt-0.5">
+                🔒 Existing users sign in automatically. New accounts are created instantly.
+              </p>
+            </form>
+
+            {/* Subtle WhatsApp Footnote */}
+            <div className="pt-2 border-t border-[#C5A059]/20 flex items-center justify-center gap-1.5 text-[11px] text-[#24120B]/40 select-none">
+              <MessageSquare className="w-3.5 h-3.5 text-neutral-400" />
+              <span>WhatsApp OTP Login</span>
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-neutral-200 text-neutral-600 font-semibold uppercase tracking-wider">
+                Soon
+              </span>
+            </div>
 
             {/* Privacy & Trust Statement */}
             <div className="pt-2 border-t border-[#C5A059]/20 flex items-center justify-center gap-2 text-[10px] text-[#24120B]/60">

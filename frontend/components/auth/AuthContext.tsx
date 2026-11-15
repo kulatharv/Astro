@@ -41,6 +41,7 @@ interface AuthContextType {
   openAuthModal: (options?: OpenModalOptions) => void;
   closeAuthModal: () => void;
   loginWithGoogle: (credential: string) => Promise<boolean>;
+  loginWithEmail: (email: string, password: string, name?: string) => Promise<{ success: boolean; message?: string }>;
   sendWhatsAppOtp: (phoneNumber: string) => Promise<{ success: boolean; message: string; devOtp?: string }>;
   verifyWhatsAppOtp: (phoneNumber: string, otpCode: string) => Promise<boolean>;
   logout: () => Promise<void>;
@@ -196,6 +197,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     [claimPendingChart]
   );
 
+  // 3.5 Email & Password Login / Auto-Signup
+  const loginWithEmail = useCallback(
+    async (email: string, password: string, name?: string): Promise<{ success: boolean; message?: string }> => {
+      try {
+        const res = await fetch('/api/auth/email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, name }),
+        });
+
+        const data = await res.json();
+        if (res.ok && data.status === 'success' && data.user) {
+          setUser(data.user);
+          setToken(data.access_token);
+          if (typeof window !== 'undefined') {
+            localStorage.setItem(STORAGE_KEY_TOKEN, data.access_token);
+          }
+          await claimPendingChart();
+          return { success: true };
+        }
+        return {
+          success: false,
+          message: data.detail || data.message || 'Authentication failed. Please check your credentials.',
+        };
+      } catch (err: any) {
+        return {
+          success: false,
+          message: err?.message || 'Network error during authentication.',
+        };
+      }
+    },
+    [claimPendingChart]
+  );
+
   // 4. WhatsApp Send OTP
   const sendWhatsAppOtp = useCallback(
     async (phoneNumber: string): Promise<{ success: boolean; message: string; devOtp?: string }> => {
@@ -279,6 +314,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         openAuthModal,
         closeAuthModal,
         loginWithGoogle,
+        loginWithEmail,
         sendWhatsAppOtp,
         verifyWhatsAppOtp,
         logout,
