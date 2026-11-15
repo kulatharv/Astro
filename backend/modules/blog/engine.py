@@ -23,3 +23,26 @@ class BlogEngine:
     def create_post(self, data: BlogPostCreate) -> BlogPostResponse:
         post = self.repo.create_post(data)
         return BlogPostResponse.model_validate(post)
+
+    def get_post_by_id(self, post_id: int) -> BlogPostResponse:
+        post = self.repo.get_by_id(post_id)
+        if not post:
+            raise NotFoundError(f"Blog post with ID {post_id} not found.")
+        return BlogPostResponse.model_validate(post)
+
+    def list_all_posts(self, limit: int = 100, offset: int = 0) -> list[BlogPostResponse]:
+        posts = self.repo.list_all_posts(limit=limit, offset=offset)
+        return [BlogPostResponse.model_validate(p) for p in posts]
+
+    def update_post(self, post_id: int, data: BlogPostCreate) -> BlogPostResponse:
+        post = self.repo.update_post(post_id, data)
+        if not post:
+            raise NotFoundError(f"Blog post with ID {post_id} not found.")
+        return BlogPostResponse.model_validate(post)
+
+    def delete_post(self, post_id: int) -> bool:
+        success = self.repo.delete_post(post_id)
+        if not success:
+            raise NotFoundError(f"Blog post with ID {post_id} not found.")
+        return True
+

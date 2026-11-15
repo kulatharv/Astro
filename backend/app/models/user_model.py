@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text
+from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String, Text, Boolean
 from sqlalchemy.orm import relationship
 from app.database import Base
 
@@ -41,12 +41,24 @@ class UserProfile(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, unique=True, index=True)
-    phone = Column(String(32))
-    birth_date = Column(String(20))
-    birth_time = Column(String(20))
-    birth_city = Column(String(120))
-    zodiac_sign = Column(String(40))
-    notes = Column(Text)
+    phone = Column(String(32), nullable=True)
+    birth_date = Column(String(20), nullable=True)
+    birth_time = Column(String(20), nullable=True)
+    birth_city = Column(String(120), nullable=True)
+    latitude = Column(Float, nullable=True)
+    longitude = Column(Float, nullable=True)
+    timezone_offset = Column(Float, default=5.5)
+    tz_name = Column(String(64), default="Asia/Kolkata")
+    birth_uncertainty = Column(String(20), default="exact")  # exact, approximate, uncertain
+    zodiac_sign = Column(String(40), nullable=True)
+    notes = Column(Text, nullable=True)
+    
+    # Daily WhatsApp briefing preferences
+    whatsapp_number = Column(String(32), nullable=True)
+    whatsapp_opt_in = Column(Boolean, default=False)
+    whatsapp_time = Column(String(10), default="07:00")
+    whatsapp_language = Column(String(10), default="en")
+
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     user = relationship("User", back_populates="profile")

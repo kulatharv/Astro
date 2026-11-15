@@ -30,7 +30,11 @@ import {
   Check,
   X,
   Globe,
+  Lock,
 } from 'lucide-react';
+import { useAuth } from '@/components/auth/AuthContext';
+import GhostSessionBanner from '@/components/auth/GhostSessionBanner';
+import { getCachedDeviceFingerprint } from '@/lib/telemetry';
 
 import {
   DOMAINS_LIST,
@@ -41,6 +45,7 @@ import {
   openPrintablePredictionReport,
   type ReportLanguage,
 } from './predictionReportGenerator';
+import LifeDomainsRadar from './LifeDomainsRadar';
 
 const ICON_MAP: Record<string, any> = {
   Heart,
@@ -65,6 +70,7 @@ function scoreColor(s: number): string {
 export default function PredictionModule() {
   const locale = useLocale();
   const t = PREDICTION_TRANSLATIONS[locale] || PREDICTION_TRANSLATIONS.en;
+  const { isAuthenticated, openAuthModal, setPendingGuestChart } = useAuth();
 
   // Form State
   const [fullName, setFullName] = useState('Atharv');
@@ -171,6 +177,33 @@ export default function PredictionModule() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.detail || data.message || 'Domain analysis failed');
       setDomainsData(data);
+      const personName = fullName.trim() || 'Native';
+      setPendingGuestChart({
+        name: personName,
+        dob,
+        tob,
+        city: city.trim(),
+      });
+
+      // Background Zero-Data-Loss Ghost Session Preservation
+      if (!isAuthenticated) {
+        const df = getCachedDeviceFingerprint();
+        if (df && df !== 'df_pending') {
+          fetch('/api/auth/guest-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              device_fingerprint: df,
+              chart_type: 'prediction',
+              person_name: personName,
+              birth_date: dob,
+              birth_time: tob,
+              birth_place: city.trim(),
+              chart_payload: data,
+            }),
+          }).catch(() => {});
+        }
+      }
     } catch (err: any) {
       setErrorMsg(err.message || 'Error communicating with planetary prediction engine.');
     } finally {
@@ -239,6 +272,14 @@ export default function PredictionModule() {
   const remedies = activeDomainData?.remedies || {};
   const prList = remedies.planet_remedies || [];
 
+  const handleRestoreFromGhost = (payload: any, meta: { name: string; dob: string; tob: string; city: string }) => {
+    setFullName(meta.name);
+    setDob(meta.dob);
+    setTob(meta.tob);
+    setCity(meta.city);
+    setDomainsData(payload);
+  };
+
   return (
     <div className="pt-6 sm:pt-10 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10">
       {/* ── Page Header & Ornamental Eyebrow ── */}
@@ -260,6 +301,9 @@ export default function PredictionModule() {
           {t.subtitle}
         </p>
       </div>
+
+      {/* ── Ghost Session Recovery Banner ── */}
+      <GhostSessionBanner onRestore={handleRestoreFromGhost} />
 
       {/* ── Form Input Section Card (Matches Exact Refined UI) ── */}
       <div className="sacred-card p-6 sm:p-8 border border-[#F9DAB5] shadow-xs bg-[#FDF5E6] rounded-2xl">
@@ -294,70 +338,74 @@ export default function PredictionModule() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5">
             {/* Full Name */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-[#421A10]">
+              <label htmlFor="pred-fullName" className="block text-xs font-semibold text-[#421A10] cursor-pointer">
                 {t.fullNameLabel}
               </label>
               <div className="relative">
                 <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C46B1E]" />
                 <input
+                  id="pred-fullName"
                   type="text"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder={t.fullNamePlaceholder}
-                  className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl bg-[#FCEBD2] border border-[#F9DAB5] text-[#421A10] placeholder-[#421A10]/40 focus:outline-none focus:ring-2 focus:ring-[#821C17]/30 transition-all"
+                  className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl bg-[#FCEBD2] border border-[#F9DAB5] text-[#421A10] placeholder-[#421A10]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#821C17] focus-visible:border-[#821C17] transition-all"
                 />
               </div>
             </div>
 
             {/* Date of Birth */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-[#421A10]">
+              <label htmlFor="pred-dob" className="block text-xs font-semibold text-[#421A10] cursor-pointer">
                 {t.dobLabel}
               </label>
               <div className="relative">
                 <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C46B1E]" />
                 <input
+                  id="pred-dob"
                   type="date"
                   value={dob}
                   onChange={(e) => setDob(e.target.value)}
                   required
-                  className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl bg-[#FCEBD2] border border-[#F9DAB5] text-[#421A10] focus:outline-none focus:ring-2 focus:ring-[#821C17]/30 transition-all cursor-pointer"
+                  className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl bg-[#FCEBD2] border border-[#F9DAB5] text-[#421A10] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#821C17] focus-visible:border-[#821C17] transition-all cursor-pointer"
                 />
               </div>
             </div>
 
             {/* Time of Birth */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-[#421A10]">
+              <label htmlFor="pred-tob" className="block text-xs font-semibold text-[#421A10] cursor-pointer">
                 {t.tobLabel}
               </label>
               <div className="relative">
                 <Clock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C46B1E]" />
                 <input
+                  id="pred-tob"
                   type="time"
                   value={tob}
                   onChange={(e) => setTob(e.target.value)}
                   required
-                  className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl bg-[#FCEBD2] border border-[#F9DAB5] text-[#421A10] focus:outline-none focus:ring-2 focus:ring-[#821C17]/30 transition-all cursor-pointer"
+                  className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl bg-[#FCEBD2] border border-[#F9DAB5] text-[#421A10] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#821C17] focus-visible:border-[#821C17] transition-all cursor-pointer"
                 />
               </div>
             </div>
 
             {/* Birth City Autocomplete */}
             <div className="space-y-1.5 relative">
-              <label className="block text-xs font-semibold text-[#421A10]">
+              <label htmlFor="pred-city" className="block text-xs font-semibold text-[#421A10] cursor-pointer">
                 {t.cityLabel}
               </label>
               <div className="relative">
                 <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C46B1E]" />
                 <input
+                  id="pred-city"
                   type="text"
                   value={city}
                   onChange={handleCityChange}
                   onFocus={() => city.trim().length >= 2 && setShowSuggestions(true)}
                   placeholder={t.cityPlaceholder}
                   required
-                  className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl bg-[#FCEBD2] border border-[#F9DAB5] text-[#421A10] placeholder-[#421A10]/40 focus:outline-none focus:ring-2 focus:ring-[#821C17]/30 transition-all"
+                  className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl bg-[#FCEBD2] border border-[#F9DAB5] text-[#421A10] placeholder-[#421A10]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#821C17] focus-visible:border-[#821C17] transition-all"
                 />
               </div>
               {/* Dropdown Suggestions */}
@@ -456,6 +504,14 @@ export default function PredictionModule() {
             </button>
           </div>
 
+          {/* ── 10 Domains Gyroscopic Radar Mandala ── */}
+          <LifeDomainsRadar
+            domainsData={domainsData}
+            activeDomainKey={activeDomainKey}
+            onSelectDomain={(key) => setActiveDomainKey(key)}
+            locale={locale}
+          />
+
           {/* ── 10 Domains Overview Grid ── */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
@@ -552,7 +608,51 @@ export default function PredictionModule() {
           </div>
 
           {/* ── Domain Detail Panel (Split Layout from prediction.html) ── */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+          {!isAuthenticated && activeDomainKey !== 'career' ? (
+            <div className="relative rounded-2xl overflow-hidden border border-[#C5A059]/40 bg-[#FAF6F0] p-6 sm:p-12 shadow-sm text-center">
+              {/* Blurred teaser backdrop */}
+              <div className="filter blur-md select-none pointer-events-none opacity-25 space-y-4 max-w-lg mx-auto">
+                <div className="h-6 bg-[#7A1612] rounded w-3/4 mx-auto" />
+                <div className="h-4 bg-[#C5A059] rounded w-full" />
+                <div className="h-4 bg-[#24120B] rounded w-5/6 mx-auto" />
+                <div className="grid grid-cols-2 gap-4 pt-4">
+                  <div className="h-24 bg-[#F5EFE6] rounded-xl border border-[#C5A059]/30" />
+                  <div className="h-24 bg-[#F5EFE6] rounded-xl border border-[#C5A059]/30" />
+                </div>
+              </div>
+
+              {/* Locked Overlay */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-linear-to-b from-[#FAF6F0]/60 via-[#FAF6F0]/95 to-[#FAF6F0] space-y-4">
+                <div className="w-14 h-14 rounded-full bg-[#7A1612]/10 border border-[#7A1612]/30 flex items-center justify-center text-[#7A1612] shadow-sm">
+                  <Lock className="w-6 h-6 text-[#7A1612]" />
+                </div>
+                <div className="space-y-1.5 max-w-md">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#A85A1E] font-bold">
+                    PREDICTION DOSSIER · FREE 1-TAP CLAIM
+                  </span>
+                  <h4 className="font-serif text-xl sm:text-2xl font-bold text-[#7A1612]">
+                    Unlock In-Depth {activeDomainMeta.enName} Timing & Remedies
+                  </h4>
+                  <p className="text-xs text-[#24120B]/75 leading-relaxed">
+                    Career domain is 100% free. Sign in free with 1 click to reveal detailed Mahadasha influence, marriage milestones, wealth yogas, and personalized Vedic remedies for all 10 life domains.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => openAuthModal({ reason: 'predictions_unlock' })}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-[#7A1612] via-[#A85A1E] to-[#7A1612] text-[#FAF6F0] text-xs font-bold uppercase tracking-wider shadow-md hover:brightness-105 cursor-pointer transition-all hover:scale-105"
+                >
+                  <Sparkles className="w-4 h-4 text-[#F5E1BE]" />
+                  <span>Unlock All 10 Domains Free (1-Tap)</span>
+                </button>
+                <div className="flex items-center gap-2 text-[10px] text-[#24120B]/60 pt-1">
+                  <ShieldAlert className="w-3.5 h-3.5 text-[#1B4D3E]" />
+                  <span>100% Private · Zero Passwords · Instant In-Place Reveal</span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
             {/* Left 2 Cols: Main Evaluation & Indicators */}
             <div className="lg:col-span-2 space-y-6">
               {/* Domain Header Card */}
@@ -804,6 +904,7 @@ export default function PredictionModule() {
               </div>
             </div>
           </div>
+        )}
 
           {/* ── Astro AI Assistant Chat ── */}
           <div className="sacred-card p-6 bg-[#FDF5E6] border border-[#F9DAB5] rounded-2xl space-y-4">
@@ -869,12 +970,14 @@ export default function PredictionModule() {
             {/* Input Bar */}
             <div className="flex gap-2">
               <input
+                id="pred-chat-input"
+                aria-label={t.chatPlaceholder}
                 type="text"
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendChat()}
                 placeholder={t.chatPlaceholder}
-                className="flex-1 px-4 py-2.5 text-xs rounded-xl bg-[#FCEBD2] border border-[#F9DAB5] text-[#421A10] placeholder-[#421A10]/40 focus:outline-none focus:ring-2 focus:ring-[#821C17]/40"
+                className="flex-1 px-4 py-2.5 text-xs rounded-xl bg-[#FCEBD2] border border-[#F9DAB5] text-[#421A10] placeholder-[#421A10]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#821C17]"
               />
               <button
                 type="button"

@@ -1,0 +1,5883 @@
+{
+  "summary": {
+    "total_extracted_marathi_strings": 1293,
+    "modules_audited": [
+      "core_messages_mr_json",
+      "component_kundali",
+      "component_prediction",
+      "component_panchang",
+      "component_horoscope",
+      "component_blog"
+    ]
+  },
+  "modules": {
+    "core_messages_mr_json": [
+      {
+        "key": "navigation.brand",
+        "text": "ॲस्ट्रोलॉजिक",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.brandSub",
+        "text": "वैदिक ज्ञान व खगोलीय विश्लेषण",
+        "char_count": 29,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.home",
+        "text": "होम",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.services",
+        "text": "सेवा",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.kundali",
+        "text": "कुंडली",
+        "char_count": 6,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.predictions",
+        "text": "जीवन दृष्टिकोन",
+        "char_count": 14,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.horoscope",
+        "text": "दैनिक राशीभविष्य",
+        "char_count": 16,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.blogs",
+        "text": "वैदिक लेख",
+        "char_count": 9,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.panchang",
+        "text": "पंचांग",
+        "char_count": 6,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.profile",
+        "text": "प्रोफाइल",
+        "char_count": 8,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.knowledge",
+        "text": "वैदिक ज्ञान",
+        "char_count": 11,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.observatory",
+        "text": "खगोलीय वेधशाळा",
+        "char_count": 14,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.generateKundali",
+        "text": "माझी कुंडली तपासा",
+        "char_count": 17,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.language",
+        "text": "भाषा",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.openMenu",
+        "text": "मेनू उघडा",
+        "char_count": 9,
+        "is_devanagari": true
+      },
+      {
+        "key": "navigation.closeMenu",
+        "text": "मेनू बंद करा",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.eyebrow",
+        "text": "वैदिक प्रज्ञा · आधुनिक दृष्टी",
+        "char_count": 29,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.titleMain",
+        "text": "विश्वाचा गूढ अर्थ,",
+        "char_count": 18,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.titleItalic",
+        "text": "तुमच्या निकट.",
+        "char_count": 13,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.titlePrefix",
+        "text": "विश्वाचा गूढ अर्थ,",
+        "char_count": 18,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.titleHighlight",
+        "text": "तुमच्या निकट.",
+        "char_count": 13,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.titleSuffix",
+        "text": "",
+        "char_count": 0,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.description",
+        "text": "आपली जन्मकुंडली जाणून घ्या, पंचांगाच्या लयीशी समरस व्हा आणि ज्योतिषशास्त्राची रहस्ये अनुभवा — एका शांत, विचारपूर्वक घडवलेल्या विश्वात.",
+        "char_count": 134,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.ctaKundali",
+        "text": "माझी जन्मकुंडली बनवा ↗",
+        "char_count": 22,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.ctaPanchang",
+        "text": "आजचे पंचांग पहा ↓",
+        "char_count": 17,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.trustStatement",
+        "text": "प्राचीन मूळ. स्पष्ट विवेचन. एक समग्र अनुभव.",
+        "char_count": 43,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.captionNotice",
+        "text": "सांकेतिक खगोलीय कलाकृती · थेट प्रत्यक्ष आकाशाचा तक्ता नाही",
+        "char_count": 58,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.card1Eyebrow",
+        "text": "ग्रह अन्वेषण",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.card2Eyebrow",
+        "text": "सुरुवातीचा बिंदू",
+        "char_count": 16,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.card2Title",
+        "text": "जन्म कुंडली",
+        "char_count": 11,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.card2Desc",
+        "text": "चक्र · भाव · दशा",
+        "char_count": 16,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planetsShort.surya",
+        "text": "प्राणशक्ती · तेज",
+        "char_count": 16,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planetsShort.chandra",
+        "text": "मन · अंतर्ज्ञान",
+        "char_count": 15,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planetsShort.mangala",
+        "text": "ऊर्जा · पराक्रम",
+        "char_count": 15,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planetsShort.budha",
+        "text": "बुद्धिमत्ता · संवाद",
+        "char_count": 19,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planetsShort.guru",
+        "text": "ज्ञान · धर्म",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planetsShort.shukra",
+        "text": "कला · सौंदर्य",
+        "char_count": 13,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planetsShort.shani",
+        "text": "शिस्त · संयम",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planetsShort.rahu",
+        "text": "महत्त्वाकांक्षा · शोध",
+        "char_count": 21,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planetsShort.ketu",
+        "text": "मुक्ती · आत्मज्ञान",
+        "char_count": 18,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.methodology",
+        "text": "स्विस एफिमेरिस · लहिरी अयनांश · शास्त्रीय पराशर ज्योतिष",
+        "char_count": 55,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.metrics.grahas.val",
+        "text": "9",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.metrics.grahas.label",
+        "text": "नवग्रह",
+        "char_count": 6,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.metrics.grahas.sub",
+        "text": "दैवी प्रभाव",
+        "char_count": 11,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.metrics.nakshatras.val",
+        "text": "27",
+        "char_count": 2,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.metrics.nakshatras.label",
+        "text": "नक्षत्र",
+        "char_count": 7,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.metrics.nakshatras.sub",
+        "text": "चंद्र मंडळ",
+        "char_count": 10,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.metrics.rashis.val",
+        "text": "12",
+        "char_count": 2,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.metrics.rashis.label",
+        "text": "राशी",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.metrics.rashis.sub",
+        "text": "सौर मंडळ",
+        "char_count": 8,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.metrics.vargas.val",
+        "text": "D1–D12",
+        "char_count": 6,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.metrics.vargas.label",
+        "text": "वर्ग कुंडल्या",
+        "char_count": 13,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.metrics.vargas.sub",
+        "text": "षोडशवर्ग",
+        "char_count": 8,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.controls.view3D",
+        "text": "3D",
+        "char_count": 2,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.controls.view2D",
+        "text": "2D",
+        "char_count": 2,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.controls.autoRotate",
+        "text": "गोलक फिरवा",
+        "char_count": 10,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.controls.pauseRotate",
+        "text": "फिरवणे थांबवा",
+        "char_count": 13,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.controls.resumeRotate",
+        "text": "पुन्हा फिरवा",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.controls.resetView",
+        "text": "दृष्टी रीसेट करा",
+        "char_count": 16,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.controls.dragPrompt",
+        "text": "फिरवण्यासाठी ड्रॅग करा · ग्रह किंवा राशीवर क्लिक करा",
+        "char_count": 52,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.controls.touchPrompt",
+        "text": "गोलक फिरवण्यासाठी स्पर्श करा",
+        "char_count": 28,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.controls.inspectHint",
+        "text": "माहितीसाठी खालील कोणत्याही ग्रहावर किंवा राशीवर क्लिक करा",
+        "char_count": 57,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.controls.modelNotice",
+        "text": "सांकेतिक खगोलीय गोलक · शास्त्रीय निरयण प्रक्षेपण",
+        "char_count": 48,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.controls.selectedBody",
+        "text": "निवडलेला खगोलीय घटक",
+        "char_count": 19,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.controls.selectedSign",
+        "text": "निवडलेली रास",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.controls.clearSelection",
+        "text": "साफ करा",
+        "char_count": 7,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.controls.lord",
+        "text": "स्वामी",
+        "char_count": 6,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.controls.element",
+        "text": "तत्त्व",
+        "char_count": 6,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.surya.name",
+        "text": "सूर्य",
+        "char_count": 5,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.surya.english",
+        "text": "Sun",
+        "char_count": 3,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.surya.sanskrit",
+        "text": "सूर्य",
+        "char_count": 5,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.surya.glyph",
+        "text": "☉",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.surya.role",
+        "text": "आत्मकारक",
+        "char_count": 8,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.surya.significance",
+        "text": "वैदिक ज्योतिषात आत्मा, प्राणशक्ती, तेज, अधिकार आणि आत्मविश्वासाचे दैवी प्रतीक.",
+        "char_count": 78,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.chandra.name",
+        "text": "चन्द्र",
+        "char_count": 6,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.chandra.english",
+        "text": "Moon",
+        "char_count": 4,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.chandra.sanskrit",
+        "text": "चन्द्र",
+        "char_count": 6,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.chandra.glyph",
+        "text": "☽",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.chandra.role",
+        "text": "मनःकारक",
+        "char_count": 7,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.chandra.significance",
+        "text": "मन, भावना, आंतरिक शांती, अंतःस्फूर्ती आणि मातृस्नेहाचे स्वामी.",
+        "char_count": 62,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.mangala.name",
+        "text": "मंगळ",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.mangala.english",
+        "text": "Mars",
+        "char_count": 4,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.mangala.sanskrit",
+        "text": "मंगल",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.mangala.glyph",
+        "text": "♂",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.mangala.role",
+        "text": "भ्रातृकारक",
+        "char_count": 10,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.mangala.significance",
+        "text": "ऊर्जा, पराक्रम, धैर्य, साहसी कृती आणि शारीरिक सामर्थ्याचे कारक.",
+        "char_count": 63,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.budha.name",
+        "text": "बुध",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.budha.english",
+        "text": "Mercury",
+        "char_count": 7,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.budha.sanskrit",
+        "text": "बुध",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.budha.glyph",
+        "text": "☿",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.budha.role",
+        "text": "मातृकारक / विद्या",
+        "char_count": 17,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.budha.significance",
+        "text": "बुद्धिमत्ता, संभाषण कौशल्य, व्यापार, तर्कशास्त्र आणि विश्लेषणाचे स्वामी.",
+        "char_count": 72,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.guru.name",
+        "text": "बृहस्पती (गुरु)",
+        "char_count": 15,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.guru.english",
+        "text": "Jupiter",
+        "char_count": 7,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.guru.sanskrit",
+        "text": "गुरु",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.guru.glyph",
+        "text": "♃",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.guru.role",
+        "text": "पुत्रकारक / धर्म",
+        "char_count": 16,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.guru.significance",
+        "text": "सर्वोच्च ज्ञान, धर्म, ईश्वरी कृपा, संतती आणि समृद्धीचे अधिष्ठाता.",
+        "char_count": 65,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.shukra.name",
+        "text": "शुक्र",
+        "char_count": 5,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.shukra.english",
+        "text": "Venus",
+        "char_count": 5,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.shukra.sanskrit",
+        "text": "शुक्र",
+        "char_count": 5,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.shukra.glyph",
+        "text": "♀",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.shukra.role",
+        "text": "दारकारक",
+        "char_count": 7,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.shukra.significance",
+        "text": "कला, सौंदर्य, प्रेम, दांपत्य सुख आणि ऐश्वर्याचे कारक ग्रह.",
+        "char_count": 58,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.shani.name",
+        "text": "शनी",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.shani.english",
+        "text": "Saturn",
+        "char_count": 6,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.shani.sanskrit",
+        "text": "शनि",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.shani.glyph",
+        "text": "♄",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.shani.role",
+        "text": "आयुष्कारक",
+        "char_count": 9,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.shani.significance",
+        "text": "कर्म, न्याय, शिस्त, चिकाटी, संयम आणि दीर्घायुष्याचे नियंता.",
+        "char_count": 59,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.rahu.name",
+        "text": "राहू",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.rahu.english",
+        "text": "North Node",
+        "char_count": 10,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.rahu.sanskrit",
+        "text": "राहु",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.rahu.glyph",
+        "text": "☊",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.rahu.role",
+        "text": "छायाग्रह",
+        "char_count": 8,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.rahu.significance",
+        "text": "भौतिक महत्त्वाकांक्षा, माया, नवकल्पना आणि अनपेक्षित बदलांचे कारक.",
+        "char_count": 65,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.ketu.name",
+        "text": "केतू",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.ketu.english",
+        "text": "South Node",
+        "char_count": 10,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.ketu.sanskrit",
+        "text": "केतु",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.ketu.glyph",
+        "text": "☋",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.planets.ketu.role",
+        "text": "मोक्षकारक",
+        "char_count": 9,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.planets.ketu.significance",
+        "text": "आध्यात्मिक मुक्ती, वैराग्य, अंतर्ज्ञान आणि मोक्षाचे मार्गदर्शक.",
+        "char_count": 63,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.mesha.sanskrit",
+        "text": "मेष",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.mesha.name",
+        "text": "मेष",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.mesha.english",
+        "text": "Aries",
+        "char_count": 5,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.mesha.glyph",
+        "text": "♈",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.mesha.lord",
+        "text": "मंगळ",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.mesha.element",
+        "text": "अग्नी तत्त्व",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.vrishabha.sanskrit",
+        "text": "वृषभ",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.vrishabha.name",
+        "text": "वृषभ",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.vrishabha.english",
+        "text": "Taurus",
+        "char_count": 6,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.vrishabha.glyph",
+        "text": "♉",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.vrishabha.lord",
+        "text": "शुक्र",
+        "char_count": 5,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.vrishabha.element",
+        "text": "पृथ्वी तत्त्व",
+        "char_count": 13,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.mithuna.sanskrit",
+        "text": "मिथुन",
+        "char_count": 5,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.mithuna.name",
+        "text": "मिथुन",
+        "char_count": 5,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.mithuna.english",
+        "text": "Gemini",
+        "char_count": 6,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.mithuna.glyph",
+        "text": "♊",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.mithuna.lord",
+        "text": "बुध",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.mithuna.element",
+        "text": "वायू तत्त्व",
+        "char_count": 11,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.karka.sanskrit",
+        "text": "कर्क",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.karka.name",
+        "text": "कर्क",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.karka.english",
+        "text": "Cancer",
+        "char_count": 6,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.karka.glyph",
+        "text": "♋",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.karka.lord",
+        "text": "चन्द्र",
+        "char_count": 6,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.karka.element",
+        "text": "जल तत्त्व",
+        "char_count": 9,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.simha.sanskrit",
+        "text": "सिंह",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.simha.name",
+        "text": "सिंह",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.simha.english",
+        "text": "Leo",
+        "char_count": 3,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.simha.glyph",
+        "text": "♌",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.simha.lord",
+        "text": "सूर्य",
+        "char_count": 5,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.simha.element",
+        "text": "अग्नी तत्त्व",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.kanya.sanskrit",
+        "text": "कन्या",
+        "char_count": 5,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.kanya.name",
+        "text": "कन्या",
+        "char_count": 5,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.kanya.english",
+        "text": "Virgo",
+        "char_count": 5,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.kanya.glyph",
+        "text": "♍",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.kanya.lord",
+        "text": "बुध",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.kanya.element",
+        "text": "पृथ्वी तत्त्व",
+        "char_count": 13,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.tula.sanskrit",
+        "text": "तुला",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.tula.name",
+        "text": "तुला",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.tula.english",
+        "text": "Libra",
+        "char_count": 5,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.tula.glyph",
+        "text": "♎",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.tula.lord",
+        "text": "शुक्र",
+        "char_count": 5,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.tula.element",
+        "text": "वायू तत्त्व",
+        "char_count": 11,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.vrishchika.sanskrit",
+        "text": "वृश्चिक",
+        "char_count": 7,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.vrishchika.name",
+        "text": "वृश्चिक",
+        "char_count": 7,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.vrishchika.english",
+        "text": "Scorpio",
+        "char_count": 7,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.vrishchika.glyph",
+        "text": "♏",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.vrishchika.lord",
+        "text": "मंगळ",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.vrishchika.element",
+        "text": "जल तत्त्व",
+        "char_count": 9,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.dhanu.sanskrit",
+        "text": "धनु",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.dhanu.name",
+        "text": "धनु",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.dhanu.english",
+        "text": "Sagittarius",
+        "char_count": 11,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.dhanu.glyph",
+        "text": "♐",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.dhanu.lord",
+        "text": "गुरु",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.dhanu.element",
+        "text": "अग्नी तत्त्व",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.makara.sanskrit",
+        "text": "मकर",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.makara.name",
+        "text": "मकर",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.makara.english",
+        "text": "Capricorn",
+        "char_count": 9,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.makara.glyph",
+        "text": "♑",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.makara.lord",
+        "text": "शनी",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.makara.element",
+        "text": "पृथ्वी तत्त्व",
+        "char_count": 13,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.kumbha.sanskrit",
+        "text": "कुम्भ",
+        "char_count": 5,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.kumbha.name",
+        "text": "कुम्भ",
+        "char_count": 5,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.kumbha.english",
+        "text": "Aquarius",
+        "char_count": 8,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.kumbha.glyph",
+        "text": "♒",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.kumbha.lord",
+        "text": "शनी",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.kumbha.element",
+        "text": "वायू तत्त्व",
+        "char_count": 11,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.meena.sanskrit",
+        "text": "मीन",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.meena.name",
+        "text": "मीन",
+        "char_count": 3,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.meena.english",
+        "text": "Pisces",
+        "char_count": 6,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.meena.glyph",
+        "text": "♓",
+        "char_count": 1,
+        "is_devanagari": false
+      },
+      {
+        "key": "hero.rashis.meena.lord",
+        "text": "गुरु",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "hero.rashis.meena.element",
+        "text": "जल तत्त्व",
+        "char_count": 9,
+        "is_devanagari": true
+      },
+      {
+        "key": "intro.eyebrow",
+        "text": "प्राचीन परंपरा आणि आधुनिक गणितीय अचूकता",
+        "char_count": 39,
+        "is_devanagari": true
+      },
+      {
+        "key": "intro.title",
+        "text": "वैदिक ऋषींचे ज्ञान आणि आधुनिक खगोलशास्त्राचा समन्वय",
+        "char_count": 51,
+        "is_devanagari": true
+      },
+      {
+        "key": "intro.description",
+        "text": "ॲस्ट्रोलॉजिक अशा अभ्यासकांसाठी आणि साधकांसाठी बनवले आहे ज्यांना जीवनाची खरी दिशा हवी आहे. केवळ वरवरच्या भविष्यकथनाऐवजी आमची गणिते महर्षी पराशर परंपरा, शुद्ध लहिरी अयनांश आणि प्रत्यक्ष ग्रहांच्या स्थितीवर आधारलेली आहेत.",
+        "char_count": 218,
+        "is_devanagari": true
+      },
+      {
+        "key": "intro.pillar1Title",
+        "text": "शास्त्रीय ग्रंथांचा आधार",
+        "char_count": 24,
+        "is_devanagari": true
+      },
+      {
+        "key": "intro.pillar1Desc",
+        "text": "बृहत् पराशर होरा शास्त्र, जैमिनी सूत्रे आणि फलित ज्योतिषाच्या नियमांवर आधारित षड्बल व अष्टकवर्ग प्रणाली.",
+        "char_count": 104,
+        "is_devanagari": true
+      },
+      {
+        "key": "intro.pillar2Title",
+        "text": "खगोलीय सत्यता",
+        "char_count": 13,
+        "is_devanagari": true
+      },
+      {
+        "key": "intro.pillar2Desc",
+        "text": "स्विस एफिमेरिसद्वारे अचूक मोजलेले ग्रह अंश, सूक्ष्म लग्न बिंदू आणि भाव संधींची खात्रीशीर मांडणी.",
+        "char_count": 96,
+        "is_devanagari": true
+      },
+      {
+        "key": "intro.pillar3Title",
+        "text": "नैतिक व सकारात्मक मार्गदर्शन",
+        "char_count": 28,
+        "is_devanagari": true
+      },
+      {
+        "key": "intro.pillar3Desc",
+        "text": "अंधश्रद्धेला नकार देऊन पुरुषार्थ, कर्म सिद्धांत आणि सात्त्विक उपायांच्या माध्यमातून योग्य निर्णय घेण्याची क्षमता.",
+        "char_count": 113,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.eyebrow",
+        "text": "सर्वसमावेशक ज्योतिषीय सेवा",
+        "char_count": 26,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.title",
+        "text": "पवित्र ज्योतिषीय सेवा",
+        "char_count": 21,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.subtitle",
+        "text": "मागील कर्मांचे फळ, वर्तमान ग्रहांचे गोचर आणि भविष्यातील संधी अचूकपणे उलगडणारे प्रामाणिक मॉड्यूल्स.",
+        "char_count": 98,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.kundaliTitle",
+        "text": "जन्मकुंडली (लग्न आणि नवमांश)",
+        "char_count": 28,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.kundaliDesc",
+        "text": "संपूर्ण लग्न (D1), नवमांश (D9) आणि सर्व षोडशवर्ग, ग्रहांची उच्च-नीच स्थिती व षड्बल सामर्थ्य.",
+        "char_count": 92,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.predictionsTitle",
+        "text": "10 क्षेत्रांचे सखोल जीवन भविष्य",
+        "char_count": 31,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.predictionsDesc",
+        "text": "करिअर, धन, विवाह, आरोग्य, संतती आणि आध्यात्मिक प्रगतीचे दशा कालखंडासह सविस्तर विश्लेषण.",
+        "char_count": 87,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.panchangTitle",
+        "text": "दैनिक पंचांग व शुभ मुहूर्त",
+        "char_count": 26,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.panchangDesc",
+        "text": "तिथी, वार, नक्षत्र, योग, करण, राहुकाळ आणि चौघडियांचे अचूक रिअल-टाइम खगोलीय गणित.",
+        "char_count": 80,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.transitsTitle",
+        "text": "ग्रह गोचर (संवत्सर भ्रमण)",
+        "char_count": 25,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.transitsDesc",
+        "text": "गुरु, शनी, राहू-केतू आणि सूर्याच्या भ्रमणाचा तुमच्या चंद्र राशीवर व लग्नावर होणारा प्रभाव आणि साडेसाती विचार.",
+        "char_count": 109,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.dashaTitle",
+        "text": "विंशोत्तरी दशा कालक्रम",
+        "char_count": 22,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.dashaDesc",
+        "text": "महादशा, अंतर्दशा आणि प्रत्यंतर्दशा यांचे कालक्रम जे जीवनातील कर्मांच्या फलोदयाचा काळ दाखवतात.",
+        "char_count": 93,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.consultationsTitle",
+        "text": "विद्वान ज्योतिषी सल्ला",
+        "char_count": 22,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.consultationsDesc",
+        "text": "अनुभवी वैदिक ज्योतिषांकडून वैयक्तिक कुंडली मार्गदर्शन आणि मानवीय संवेदनशीलतेने परिपूर्ण सल्ला.",
+        "char_count": 94,
+        "is_devanagari": true
+      },
+      {
+        "key": "services.exploreService",
+        "text": "अधिक जाणून घ्या",
+        "char_count": 15,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.eyebrow",
+        "text": "कर्माचा दिव्य नकाशा",
+        "char_count": 19,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.title",
+        "text": "इंटरॅक्टिव्ह दृश्य आणि गणितीय कुंडली इंजिन",
+        "char_count": 42,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.subtitle",
+        "text": "उत्तर भारतीय (चौकोनी हिरा) आणि दक्षिण भारतीय शैलीत तत्काळ लग्न, भाव चलित आणि वर्ग कुंडली तयार करा.",
+        "char_count": 98,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.chartStyle",
+        "text": "कुंडली प्रकार",
+        "char_count": 13,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.northIndian",
+        "text": "उत्तर भारतीय",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.southIndian",
+        "text": "दक्षिण भारतीय",
+        "char_count": 13,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.ascendant",
+        "text": "लग्न (प्रथम भाव)",
+        "char_count": 16,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.moonSign",
+        "text": "चंद्र रास",
+        "char_count": 9,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.sunSign",
+        "text": "सूर्य रास",
+        "char_count": 9,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.nakshatra",
+        "text": "जन्म नक्षत्र",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.d1Title",
+        "text": "लग्न कुंडली (D-1)",
+        "char_count": 17,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.d9Title",
+        "text": "नवमांश चक्र (D-9)",
+        "char_count": 17,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.feature1",
+        "text": "अचूक अंश आणि कला निर्देशांक",
+        "char_count": 27,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.feature2",
+        "text": "उच्च, नीच आणि वक्री ग्रहांचे स्पष्ट दर्शन",
+        "char_count": 41,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.feature3",
+        "text": "D-1 ते D-60 संपूर्ण षोडशवर्ग प्रणाली",
+        "char_count": 36,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.feature4",
+        "text": "भाव चलित आणि संधी अंशांचे सखोल विश्लेषण",
+        "char_count": 39,
+        "is_devanagari": true
+      },
+      {
+        "key": "kundaliFeature.cta",
+        "text": "संपूर्ण जन्मकुंडली बनवा",
+        "char_count": 23,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.eyebrow",
+        "text": "बहुआयामी भविष्य दर्शन",
+        "char_count": 21,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.title",
+        "text": "10 प्रमुख जीवन क्षेत्रांचे सविस्तर भविष्य",
+        "char_count": 41,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.subtitle",
+        "text": "मानवी आयुष्यातील सर्व महत्त्वाच्या पैलूंवर शास्त्रीय ग्रहांच्या योगांचे आणि दशांचे अचूक प्रकटीकरण.",
+        "char_count": 98,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d1",
+        "text": "करिअर आणि व्यवसाय",
+        "char_count": 17,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d1House",
+        "text": "दशम भाव (कर्म भाव)",
+        "char_count": 18,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d1Desc",
+        "text": "व्यावसायिक यश, अधिकार, नेतृत्व क्षमता आणि कार्यक्षेत्रातील बदलांचे शुभ कालखंड.",
+        "char_count": 78,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d2",
+        "text": "विवाह आणि वैवाहिक जीवन",
+        "char_count": 22,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d2House",
+        "text": "सप्तम भाव (कलत्र भाव)",
+        "char_count": 21,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d2Desc",
+        "text": "जोडीदाराचा स्वभाव, कौटुंबिक सौख्य, विवाहाची वेळ आणि पत्रिका जुळवणी.",
+        "char_count": 67,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d3",
+        "text": "संपत्ती आणि आर्थिक समृद्धी",
+        "char_count": 26,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d3House",
+        "text": "द्वितीय व एकादश भाव (धन व लाभ)",
+        "char_count": 30,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d3Desc",
+        "text": "धनसंचय, उत्पन्नाचे मार्ग, गुंतवणुकीची सुरक्षितता आणि दीर्घकालीन आर्थिक स्थैर्य.",
+        "char_count": 79,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d4",
+        "text": "आरोग्य आणि जीवनशक्ती",
+        "char_count": 20,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d4House",
+        "text": "प्रथम व षष्ठ भाव (तनु व रोग)",
+        "char_count": 28,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d4Desc",
+        "text": "शारीरिक ऊर्जा, वात-पित्त-कफ त्रिदोष संतुलन आणि शरीराची काळजी घेण्याचे महत्त्वाचे काळ.",
+        "char_count": 85,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d5",
+        "text": "शिक्षण आणि बौद्धिक विकास",
+        "char_count": 24,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d5House",
+        "text": "चतुर्थ व पंचम भाव (विद्या व बुद्धी)",
+        "char_count": 35,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d5Desc",
+        "text": "शैक्षणिक यश, विश्लेषण क्षमता, सर्जनशीलता आणि उच्च शिक्षणातील यश.",
+        "char_count": 64,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d6",
+        "text": "संतती आणि कौटुंबिक सुख",
+        "char_count": 22,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d6House",
+        "text": "पंचम भाव (पुत्र भाव)",
+        "char_count": 20,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d6Desc",
+        "text": "संतती सौख्य, वंश वृद्धी, कौटुंबिक आनंद आणि बाल संगोपनाचे मार्गदर्शन.",
+        "char_count": 68,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d7",
+        "text": "घर, जमीन आणि वाहन सौख्य",
+        "char_count": 23,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d7House",
+        "text": "चतुर्थ भाव (मातृ व सुख भाव)",
+        "char_count": 27,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d7Desc",
+        "text": "स्वतःचे घर, स्थावर मालमत्ता, वाहन खरेदी आणि घरातील शांतता.",
+        "char_count": 58,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d8",
+        "text": "शत्रू, संकटे आणि वादविवाद",
+        "char_count": 25,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d8House",
+        "text": "षष्ठ व अष्टम भाव (शत्रू व रंध्र)",
+        "char_count": 32,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d8Desc",
+        "text": "अडचणींवर मात, कर्जमुक्ती, कायदेशीर बाबींमध्ये यश आणि सुरक्षितता.",
+        "char_count": 64,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d9",
+        "text": "प्रवास आणि परदेश गमन",
+        "char_count": 20,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d9House",
+        "text": "नवम व द्वादश भाव (भाग्य व व्यय)",
+        "char_count": 31,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d9Desc",
+        "text": "तीर्थयात्रा, परदेशात नोकरी, स्थलांतर आणि आंतरराष्ट्रीय संधी.",
+        "char_count": 60,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d10",
+        "text": "अध्यात्म आणि मोक्ष साधना",
+        "char_count": 24,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d10House",
+        "text": "नवम व द्वादश त्रिकोण भाव",
+        "char_count": 24,
+        "is_devanagari": true
+      },
+      {
+        "key": "predictions.d10Desc",
+        "text": "सद्गुरू कृपा, ध्यान साधना, आंतरिक शांती आणि मोक्षाचा मार्ग.",
+        "char_count": 59,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.eyebrow",
+        "text": "नवग्रह दिव्य परिवार",
+        "char_count": 19,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.title",
+        "text": "भाग्याचे नऊ खगोलीय दूत",
+        "char_count": 22,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.subtitle",
+        "text": "वैदिक तत्त्वज्ञानात प्रत्येक ग्रह आपल्या संचित कर्मांचे प्रतिबिंब दाखवणारा आरसा आहे.",
+        "char_count": 84,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.sun",
+        "text": "सूर्य देव",
+        "char_count": 9,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.sunRole",
+        "text": "आत्मा, जीवनशक्ती, प्रतिष्ठा आणि पिता",
+        "char_count": 36,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.moon",
+        "text": "चंद्र देव",
+        "char_count": 9,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.moonRole",
+        "text": "मन, भावना, अंतःप्रेरणा आणि माता",
+        "char_count": 31,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.mars",
+        "text": "मंगळ देव",
+        "char_count": 8,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.marsRole",
+        "text": "ऊर्जा, पराक्रम, धैर्य आणि बंधू",
+        "char_count": 30,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.mercury",
+        "text": "बुध देव",
+        "char_count": 7,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.mercuryRole",
+        "text": "बुद्धिमत्ता, वाणी, व्यापार आणि तर्कशास्त्र",
+        "char_count": 42,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.jupiter",
+        "text": "गुरु (बृहस्पती)",
+        "char_count": 15,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.jupiterRole",
+        "text": "ज्ञान, धर्म, संपत्ती, गुरुमंत्र आणि संतती",
+        "char_count": 41,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.venus",
+        "text": "शुक्र देव",
+        "char_count": 9,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.venusRole",
+        "text": "प्रेम, कला, सौंदर्य, दांपत्य आणि ऐश्वर्य",
+        "char_count": 40,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.saturn",
+        "text": "शनी देव",
+        "char_count": 7,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.saturnRole",
+        "text": "कर्म, शिस्त, न्याय, संयम आणि दीर्घायुष्य",
+        "char_count": 40,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.rahu",
+        "text": "राहू",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.rahuRole",
+        "text": "महत्त्वाकांक्षा, नवकल्पना, माया आणि अनपेक्षितता",
+        "char_count": 47,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.ketu",
+        "text": "केतू",
+        "char_count": 4,
+        "is_devanagari": true
+      },
+      {
+        "key": "planetary.ketuRole",
+        "text": "मोक्ष, वैराग्य, अध्यात्म आणि सूक्ष्म प्रज्ञा",
+        "char_count": 44,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.eyebrow",
+        "text": "दैनिक पवित्र पंचांग",
+        "char_count": 19,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.title",
+        "text": "पंचांग आणि शुभ मुहूर्त",
+        "char_count": 22,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.subtitle",
+        "text": "काळाचे पाच महत्त्वाचे घटक (पंच-अंग) जे मानवी कर्मांना निसर्गाच्या तालाशी जोडतात.",
+        "char_count": 80,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.tithi",
+        "text": "तिथी (चंद्र दिवस)",
+        "char_count": 17,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.vara",
+        "text": "वार (सौर दिवस)",
+        "char_count": 14,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.nakshatra",
+        "text": "नक्षत्र (चंद्र नक्षत्र)",
+        "char_count": 23,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.yoga",
+        "text": "योग (सूर्य-चंद्र समन्वय)",
+        "char_count": 24,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.karana",
+        "text": "करण (अर्धी तिथी)",
+        "char_count": 16,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.todayPanchang",
+        "text": "आजचे खगोलीय स्वरूप",
+        "char_count": 18,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.location",
+        "text": "स्थान: नवी दिल्ली / वाराणसी (IST)",
+        "char_count": 33,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.sunrise",
+        "text": "सूर्योदय",
+        "char_count": 8,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.sunset",
+        "text": "सूर्यास्त",
+        "char_count": 9,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.abhijit",
+        "text": "अभिजीत मुहूर्त (सर्वोत्तम शुभ वेळ)",
+        "char_count": 34,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.rahuKalam",
+        "text": "राहुकाळ (अशुभ वेळ - कार्य टाळावे)",
+        "char_count": 33,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.activeChoghadiya",
+        "text": "सध्याचा चौघडिया",
+        "char_count": 15,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.auspicious",
+        "text": "शुभ (अमृत / शुभ / लाभ)",
+        "char_count": 22,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.caution",
+        "text": "काळजी आवश्यक (उद्वेग / रोग / काळ)",
+        "char_count": 33,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.loadingData",
+        "text": "खगोलीय डेटा जोडत आहे...",
+        "char_count": 23,
+        "is_devanagari": true
+      },
+      {
+        "key": "panchang.liveNotice",
+        "text": "प्रमाणित स्विस एफिमेरिस खगोलीय नियमांद्वारे परिकलित",
+        "char_count": 51,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.eyebrow",
+        "text": "पवित्र विद्या आणि शास्त्र",
+        "char_count": 25,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.title",
+        "text": "वैदिक ज्ञान आणि ज्योतिष तत्त्वे",
+        "char_count": 31,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.subtitle",
+        "text": "प्राचीन ग्रंथांच्या आधारे काळ, कर्म आणि वैश्विक नियमांची सखोल ओळख.",
+        "char_count": 66,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.article1Title",
+        "text": "कर्म सिद्धांत आणि ग्रहांचे दशा चक्र",
+        "char_count": 35,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.article1Tag",
+        "text": "कर्म शास्त्र",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.article1Desc",
+        "text": "संचित आणि प्रारब्ध कर्मे ग्रहांच्या गोचराद्वारे आणि दशांच्या अचूक कालखंडात कशी फळास येतात.",
+        "char_count": 90,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.article2Title",
+        "text": "नवमांश चक्राचे (D-9) अनन्यसाधारण महत्त्व",
+        "char_count": 40,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.article2Tag",
+        "text": "वर्ग शास्त्र",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.article2Desc",
+        "text": "प्राचीन ऋषींनी नवव्या वर्गाला भाग्याचे, वैवाहिक सौख्याचे आणि उच्च आत्मिक धर्माचे खरे फळ का म्हटले.",
+        "char_count": 98,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.article3Title",
+        "text": "अयनांश रहस्य: सायन विरुद्ध निरयण राशी चक्र",
+        "char_count": 42,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.article3Tag",
+        "text": "खगोलशास्त्र",
+        "char_count": 11,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.article3Desc",
+        "text": "विषुववृत्ताची अयन गती आणि वैदिक ज्योतिष नक्की खऱ्या नक्षत्रांवर (निरयण) का आधारलेले आहे.",
+        "char_count": 88,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.article4Title",
+        "text": "ज्योतिषीय उपाय: प्रामाणिक सात्त्विक पद्धती",
+        "char_count": 42,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.article4Tag",
+        "text": "उपाय शास्त्र",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "knowledge.article4Desc",
+        "text": "भीती आणि गैरसमजांपासून दूर राहून शास्त्रीय मंत्र, दान, सेवा आणि रत्न विज्ञानाचा खरा आध्यात्मिक उपयोग.",
+        "char_count": 101,
+        "is_devanagari": true
+      },
+      {
+        "key": "closingCta.title",
+        "text": "आजच सुरू करा तुमचा खगोलीय प्रवास",
+        "char_count": 32,
+        "is_devanagari": true
+      },
+      {
+        "key": "closingCta.subtitle",
+        "text": "तुमच्या जन्माच्या क्षणी आकाशात कोरलेले ग्रहांचे रहस्य उलगडून पहा — अचूक, प्रामाणिक आणि जीवन समृद्ध करणारे.",
+        "char_count": 106,
+        "is_devanagari": true
+      },
+      {
+        "key": "closingCta.buttonPrimary",
+        "text": "मोफत जन्मकुंडली बनवा",
+        "char_count": 20,
+        "is_devanagari": true
+      },
+      {
+        "key": "closingCta.buttonSecondary",
+        "text": "आजचे मुहूर्त पहा",
+        "char_count": 16,
+        "is_devanagari": true
+      },
+      {
+        "key": "closingCta.guarantee",
+        "text": "नोंदणीची गरज नाही. शुद्ध खगोलीय अचूकता.",
+        "char_count": 39,
+        "is_devanagari": true
+      },
+      {
+        "key": "footer.brand",
+        "text": "ॲस्ट्रोलॉजिक",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "footer.slogan",
+        "text": "वैदिक ज्योतिष आणि खगोलीय प्रज्ञा",
+        "char_count": 32,
+        "is_devanagari": true
+      },
+      {
+        "key": "footer.motto",
+        "text": "सत्यं बृहत् ऋतं उग्रं दीक्षा तपो ब्रह्म यज्ञः पृथिवीं धारयन्ति",
+        "char_count": 62,
+        "is_devanagari": true
+      },
+      {
+        "key": "footer.mottoTrans",
+        "text": "सत्य, वैश्विक नियम आणि ज्ञानच या पृथ्वीचे रक्षण करतात (अथर्ववेद 12.1.1)",
+        "char_count": 71,
+        "is_devanagari": true
+      },
+      {
+        "key": "footer.colServices",
+        "text": "ज्योतिष सेवा",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "footer.colTools",
+        "text": "खगोलीय साधने",
+        "char_count": 12,
+        "is_devanagari": true
+      },
+      {
+        "key": "footer.colKnowledge",
+        "text": "सिद्धांत व ज्ञान",
+        "char_count": 16,
+        "is_devanagari": true
+      },
+      {
+        "key": "footer.disclaimerTitle",
+        "text": "वैदिक ज्योतिषीय सूचना",
+        "char_count": 21,
+        "is_devanagari": true
+      },
+      {
+        "key": "footer.disclaimerText",
+        "text": "ॲस्ट्रोलॉजिकची सर्व गणिते शास्त्रीय पराशर ज्योतिष सिद्धांत आणि स्विस एफिमेरिसवर आधारलेली आहेत. हा मजकूर शैक्षणिक, तत्त्वज्ञान आणि आत्म-चिंतनासाठी आहे. मानवाचे भविष्य हे त्याचे जागरूक प्रयत्न आणि ईश्वरी कृपेने घडते.",
+        "char_count": 214,
+        "is_devanagari": true
+      },
+      {
+        "key": "footer.rights",
+        "text": "सर्व हक्क राखीव. सॅक्रिड आल्मनॅक डिझाइन प्रणाली.",
+        "char_count": 48,
+        "is_devanagari": true
+      },
+      {
+        "key": "footer.privacy",
+        "text": "गोपनीयता धोरण",
+        "char_count": 13,
+        "is_devanagari": true
+      },
+      {
+        "key": "footer.terms",
+        "text": "सेवा शर्ती",
+        "char_count": 10,
+        "is_devanagari": true
+      },
+      {
+        "key": "footer.contact",
+        "text": "मदत आणि संपर्क",
+        "char_count": 14,
+        "is_devanagari": true
+      }
+    ],
+    "component_kundali": [
+      {
+        "text": "प्रामाणिक वैदिक जन्म कुंडली",
+        "char_count": 27
+      },
+      {
+        "text": "जन्म कुंडली एवं ग्रहीय विन्यास",
+        "char_count": 30
+      },
+      {
+        "text": "स्विस एफेमेरिस की सूक्ष्म गणनाओं पर आधारित जन्म चक्र, नवमांश (D9), विंशोत्तरी दशा चक्र एवं शास्त्रीय फलित विवेचना।",
+        "char_count": 114
+      },
+      {
+        "text": "जन्म विवरण प्रविष्ट करें",
+        "char_count": 24
+      },
+      {
+        "text": "वैदिक जन्म कुंडली हेतु प्रामाणिक जन्म विवरण प्रविष्ट करें",
+        "char_count": 57
+      },
+      {
+        "text": "पूरा नाम",
+        "char_count": 8
+      },
+      {
+        "text": "उदा. अर्जुन शर्मा",
+        "char_count": 17
+      },
+      {
+        "text": "जन्म तिथि",
+        "char_count": 9
+      },
+      {
+        "text": "जन्म समय (IST)",
+        "char_count": 14
+      },
+      {
+        "text": "जन्म स्थान / नगर",
+        "char_count": 16
+      },
+      {
+        "text": "नगर खोजें (उदा. दिल्ली, मुंबई, जयपुर)",
+        "char_count": 37
+      },
+      {
+        "text": "अयनांश",
+        "char_count": 6
+      },
+      {
+        "text": "कुंडली गणना करें",
+        "char_count": 16
+      },
+      {
+        "text": "खगोलीय गणना जारी है...",
+        "char_count": 22
+      },
+      {
+        "text": "नमूना कुंडली प्रयोग करें",
+        "char_count": 24
+      },
+      {
+        "text": "PDF रिपोर्ट डाउनलोड करें",
+        "char_count": 24
+      },
+      {
+        "text": "PDF रिपोर्ट बनाएं",
+        "char_count": 17
+      },
+      {
+        "text": "सार संक्षेप",
+        "char_count": 11
+      },
+      {
+        "text": "वैदिक चक्र",
+        "char_count": 10
+      },
+      {
+        "text": "नवग्रह सारणी",
+        "char_count": 12
+      },
+      {
+        "text": "भाव बल",
+        "char_count": 6
+      },
+      {
+        "text": "योग एवं दोष",
+        "char_count": 11
+      },
+      {
+        "text": "द्वादश भाव",
+        "char_count": 10
+      },
+      {
+        "text": "विंशोत्तरी दशा",
+        "char_count": 14
+      },
+      {
+        "text": "ज्योतिष AI सहायक",
+        "char_count": 16
+      },
+      {
+        "text": "जन्म पंचांग एवं खगोलीय आधार स्तम्भ",
+        "char_count": 34
+      },
+      {
+        "text": "जातक का नाम",
+        "char_count": 11
+      },
+      {
+        "text": "जन्म समय",
+        "char_count": 8
+      },
+      {
+        "text": "जन्म स्थान",
+        "char_count": 10
+      },
+      {
+        "text": "लग्न (प्रथम भाव)",
+        "char_count": 16
+      },
+      {
+        "text": "लग्न अंश",
+        "char_count": 8
+      },
+      {
+        "text": "चंद्र राशि",
+        "char_count": 10
+      },
+      {
+        "text": "जन्म नक्षत्र",
+        "char_count": 12
+      },
+      {
+        "text": "नक्षत्र चरण",
+        "char_count": 11
+      },
+      {
+        "text": "जन्म योग",
+        "char_count": 8
+      },
+      {
+        "text": "करण",
+        "char_count": 3
+      },
+      {
+        "text": "अयनांश (लाहिड़ी/चित्रा)",
+        "char_count": 23
+      },
+      {
+        "text": "जन्म समय दशा शेष",
+        "char_count": 16
+      },
+      {
+        "text": "जन्म चक्र (वर्ग कुंडलियां)",
+        "char_count": 26
+      },
+      {
+        "text": "कुंडली शैली",
+        "char_count": 11
+      },
+      {
+        "text": "उत्तर भारतीय (हीरा चक्र)",
+        "char_count": 24
+      },
+      {
+        "text": "दक्षिण भारतीय (चौकोर चक्र)",
+        "char_count": 26
+      },
+      {
+        "text": "D1 — लग्न/राशि चक्र",
+        "char_count": 19
+      },
+      {
+        "text": "भौतिक जीवन, व्यक्तित्व एवं संपूर्ण जीवन पथ",
+        "char_count": 42
+      },
+      {
+        "text": "D9 — नवमांश चक्र",
+        "char_count": 16
+      },
+      {
+        "text": "आध्यात्मिक गंतव्य, वैवाहिक सुख एवं अंतःसामर्थ्य",
+        "char_count": 47
+      },
+      {
+        "text": "नवग्रह स्पष्ट स्थिति एवं बल",
+        "char_count": 27
+      },
+      {
+        "text": "ग्रह",
+        "char_count": 4
+      },
+      {
+        "text": "राशि",
+        "char_count": 4
+      },
+      {
+        "text": "अंश एवं कला",
+        "char_count": 11
+      },
+      {
+        "text": "भाव",
+        "char_count": 3
+      },
+      {
+        "text": "नक्षत्र",
+        "char_count": 7
+      },
+      {
+        "text": "चरण",
+        "char_count": 3
+      },
+      {
+        "text": "नवमांश",
+        "char_count": 6
+      },
+      {
+        "text": "ग्रहीय अवस्था",
+        "char_count": 13
+      },
+      {
+        "text": "गति",
+        "char_count": 3
+      },
+      {
+        "text": "मार्गी",
+        "char_count": 6
+      },
+      {
+        "text": "वक्री ℞",
+        "char_count": 7
+      },
+      {
+        "text": "अस्त 🔥",
+        "char_count": 6
+      },
+      {
+        "text": "कुंडली बल एवं जीवन क्षेत्र प्रभाव",
+        "char_count": 33
+      },
+      {
+        "text": "समग्र शक्ति",
+        "char_count": 11
+      },
+      {
+        "text": "आजीविका एवं कर्म (दशम भाव)",
+        "char_count": 26
+      },
+      {
+        "text": "धन एवं समृद्धि (द्वितीय/एकादश)",
+        "char_count": 30
+      },
+      {
+        "text": "विवाह एवं साझेदारी (सप्तम भाव)",
+        "char_count": 30
+      },
+      {
+        "text": "आरोग्य एवं दीर्घायु (लग्न/षष्ठ/अष्टम)",
+        "char_count": 37
+      },
+      {
+        "text": "मानसिक शांति (चंद्र/पंचम भाव)",
+        "char_count": 29
+      },
+      {
+        "text": "धर्म एवं मोक्ष (नवम/द्वादश भाव)",
+        "char_count": 31
+      },
+      {
+        "text": "सक्रिय शुभ वैदिक योग",
+        "char_count": 20
+      },
+      {
+        "text": "ऋषि पराशर प्रतिपादित राजयोग, धनयोग एवं महापुरुष योग",
+        "char_count": 51
+      },
+      {
+        "text": "ग्रह दोष एवं निवारण उपाय",
+        "char_count": 24
+      },
+      {
+        "text": "मांगलिक दोष, साढ़े साती, कालसर्प एवं गंडमूल का सूक्ष्म विश्लेषण",
+        "char_count": 63
+      },
+      {
+        "text": "सक्रिय योग उपस्थित",
+        "char_count": 18
+      },
+      {
+        "text": "इस विन्यास में कोई प्रमुख शास्त्रीय योग नहीं पाया गया।",
+        "char_count": 54
+      },
+      {
+        "text": "तीव्र प्रभाव",
+        "char_count": 12
+      },
+      {
+        "text": "मध्यम प्रभाव",
+        "char_count": 12
+      },
+      {
+        "text": "दोष मुक्त / शमित",
+        "char_count": 16
+      },
+      {
+        "text": "शास्त्रीय वैदिक उपाय एवं शांति कर्म",
+        "char_count": 35
+      },
+      {
+        "text": "द्वादश भाव विस्तृत विवेचना",
+        "char_count": 26
+      },
+      {
+        "text": "प्रत्येक भाव के स्वामी, स्थित ग्रह एवं जीवन आयामों का विश्लेषण",
+        "char_count": 62
+      },
+      {
+        "text": "भाव राशि",
+        "char_count": 8
+      },
+      {
+        "text": "भावेश (स्वामी)",
+        "char_count": 14
+      },
+      {
+        "text": "स्थित ग्रह",
+        "char_count": 10
+      },
+      {
+        "text": "कारक ग्रह",
+        "char_count": 9
+      },
+      {
+        "text": "प्रमुख फल एवं कारकत्व",
+        "char_count": 21
+      },
+      {
+        "text": "विंशोत्तरी दशा चक्र",
+        "char_count": 19
+      },
+      {
+        "text": "वर्तमान महादशा",
+        "char_count": 14
+      },
+      {
+        "text": "वर्तमान अंतर्दशा",
+        "char_count": 16
+      },
+      {
+        "text": "अवशिष्ट काल",
+        "char_count": 11
+      },
+      {
+        "text": "120 वर्षीय विंशोत्तरी महादशा कालक्रम",
+        "char_count": 36
+      },
+      {
+        "text": "वर्ष",
+        "char_count": 4
+      },
+      {
+        "text": "अपनी जन्म कुंडली से प्रश्न पूछें",
+        "char_count": 32
+      },
+      {
+        "text": "आजीविका, विवाह काल अथवा ग्रहीय उपायों से संबंधित जिज्ञासा का उत्तर प्राप्त करें",
+        "char_count": 79
+      },
+      {
+        "text": "अपनी कुंडली के संबंध में प्रश्न पूछें...",
+        "char_count": 40
+      },
+      {
+        "text": "उत्तर प्राप्त करें",
+        "char_count": 18
+      },
+      {
+        "text": "मेरे दशम भाव के अनुसार कौन सा कार्यक्षेत्र सर्वाधिक अनुकूल रहेगा?",
+        "char_count": 65
+      },
+      {
+        "text": "वर्तमान महादशा मेरे वैवाहिक जीवन पर क्या प्रभाव डाल रही है?",
+        "char_count": 59
+      },
+      {
+        "text": "मेरी कुंडली के अनुसार कौन से वैदिक उपाय श्रेष्ठ फलदायक होंगे?",
+        "char_count": 61
+      },
+      {
+        "text": "प्रमाणित वैदिक जन्म कुंडली",
+        "char_count": 26
+      },
+      {
+        "text": "जन्म कुंडली आणि ग्रह स्थिती",
+        "char_count": 27
+      },
+      {
+        "text": "स्विस एफिमेरिसच्या अचूक गणितावर आधारित जन्म पत्रिका, नवमांश (D9), विंशोत्तरी महादशा आणि शास्त्रीय वैदिक फलादेश.",
+        "char_count": 111
+      },
+      {
+        "text": "जन्म तपशील प्रविष्ट करा",
+        "char_count": 23
+      },
+      {
+        "text": "वैदिक जन्म पत्रिका तयार करण्यासाठी अचूक माहिती प्रविष्ट करा",
+        "char_count": 59
+      },
+      {
+        "text": "पूर्ण नाव",
+        "char_count": 9
+      },
+      {
+        "text": "जन्म तारीख",
+        "char_count": 10
+      },
+      {
+        "text": "जन्म वेळ (IST)",
+        "char_count": 14
+      },
+      {
+        "text": "जन्म शहर",
+        "char_count": 8
+      },
+      {
+        "text": "शहर शोधा (उदा. पुणे, मुंबई, नागपूर)",
+        "char_count": 35
+      },
+      {
+        "text": "कुंडली तयार करा",
+        "char_count": 15
+      },
+      {
+        "text": "खगोलीय गणना सुरू आहे...",
+        "char_count": 23
+      },
+      {
+        "text": "नमुना पत्रिका वापरा",
+        "char_count": 19
+      },
+      {
+        "text": "PDF अहवाल डाउनलोड करा",
+        "char_count": 21
+      },
+      {
+        "text": "PDF अहवाल तयार करा",
+        "char_count": 18
+      },
+      {
+        "text": "आढावा",
+        "char_count": 5
+      },
+      {
+        "text": "वैदिक चक्रे",
+        "char_count": 11
+      },
+      {
+        "text": "भाव सामर्थ्य",
+        "char_count": 12
+      },
+      {
+        "text": "योग आणि दोष",
+        "char_count": 11
+      },
+      {
+        "text": "बारा भाव",
+        "char_count": 8
+      },
+      {
+        "text": "ज्योतिष AI सहाय्यक",
+        "char_count": 18
+      },
+      {
+        "text": "जन्म पंचांग आणि खगोलीय पाया",
+        "char_count": 27
+      },
+      {
+        "text": "जातकाचे नाव",
+        "char_count": 11
+      },
+      {
+        "text": "जन्म वेळ",
+        "char_count": 8
+      },
+      {
+        "text": "चंद्र राशी",
+        "char_count": 10
+      },
+      {
+        "text": "जन्म तिथी",
+        "char_count": 9
+      },
+      {
+        "text": "अयनांश (लाहिरी/चित्रा)",
+        "char_count": 22
+      },
+      {
+        "text": "जन्मावेळची दशा शिल्लक",
+        "char_count": 21
+      },
+      {
+        "text": "जन्म चक्रे (वर्ग पत्रिका)",
+        "char_count": 25
+      },
+      {
+        "text": "पत्रिका शैली",
+        "char_count": 12
+      },
+      {
+        "text": "उत्तर भारतीय (हिरा चक्र)",
+        "char_count": 24
+      },
+      {
+        "text": "दक्षिण भारतीय (चौकोनी चक्र)",
+        "char_count": 27
+      },
+      {
+        "text": "D1 — लग्न/राशी चक्र",
+        "char_count": 19
+      },
+      {
+        "text": "भौतिक अस्तित्व, व्यक्तिमत्त्व आणि जीवन मार्ग",
+        "char_count": 44
+      },
+      {
+        "text": "आध्यात्मिक गंतव्य, वैवाहिक जीवन आणि आत्मशक्ती",
+        "char_count": 45
+      },
+      {
+        "text": "नवग्रह स्पष्ट स्थिती आणि सामर्थ्य",
+        "char_count": 33
+      },
+      {
+        "text": "राशी",
+        "char_count": 4
+      },
+      {
+        "text": "अंश आणि कला",
+        "char_count": 11
+      },
+      {
+        "text": "ग्रहाची अवस्था",
+        "char_count": 14
+      },
+      {
+        "text": "गती",
+        "char_count": 3
+      },
+      {
+        "text": "पत्रिका सामर्थ्य आणि जीवन क्षेत्र प्रभाव",
+        "char_count": 40
+      },
+      {
+        "text": "एकूण सामर्थ्य",
+        "char_count": 13
+      },
+      {
+        "text": "उद्योग आणि कर्म (दशम भाव)",
+        "char_count": 25
+      },
+      {
+        "text": "धन आणि समृद्धी (द्वितीय/एकादश)",
+        "char_count": 30
+      },
+      {
+        "text": "विवाह आणि भागीदारी (सप्तम भाव)",
+        "char_count": 30
+      },
+      {
+        "text": "आरोग्य आणि दीर्घायुष्य (लग्न/षष्ठ/अष्टम)",
+        "char_count": 40
+      },
+      {
+        "text": "मानसिक समतोल (चंद्र/पंचम भाव)",
+        "char_count": 29
+      },
+      {
+        "text": "धर्म आणि मोक्ष (नवम/द्वादश भाव)",
+        "char_count": 31
+      },
+      {
+        "text": "ऋषी पराशर संमत राजयोग, धनयोग आणि महापुरुष योग",
+        "char_count": 45
+      },
+      {
+        "text": "ग्रह दोष आणि निवारण उपाय",
+        "char_count": 24
+      },
+      {
+        "text": "मांगलिक दोष, साडेसाती, कालसर्प आणि गंडमूळ यांचे सविस्तर विश्लेषण",
+        "char_count": 64
+      },
+      {
+        "text": "सक्रिय योग आढळले",
+        "char_count": 16
+      },
+      {
+        "text": "या पत्रिकेत कोणतेही मोठे शास्त्रीय योग आढळले नाहीत.",
+        "char_count": 51
+      },
+      {
+        "text": "दोष मुक्त / सौम्य",
+        "char_count": 17
+      },
+      {
+        "text": "शास्त्रीय वैदिक उपाय आणि शांती विधी",
+        "char_count": 35
+      },
+      {
+        "text": "बारा भाव सविस्तर विश्लेषण",
+        "char_count": 25
+      },
+      {
+        "text": "प्रत्येक भावाचे अधिपती, स्थित ग्रह आणि जीवन पैलूंचे स्पष्टीकरण",
+        "char_count": 62
+      },
+      {
+        "text": "भाव राशी",
+        "char_count": 8
+      },
+      {
+        "text": "प्रमुख कारकत्व आणि फळे",
+        "char_count": 22
+      },
+      {
+        "text": "सध्याची महादशा",
+        "char_count": 14
+      },
+      {
+        "text": "सध्याची अंतर्दशा",
+        "char_count": 16
+      },
+      {
+        "text": "उर्वरित कालावधी",
+        "char_count": 15
+      },
+      {
+        "text": "१२० वर्षांचे विंशोत्तरी महादशा कालचक्र",
+        "char_count": 38
+      },
+      {
+        "text": "वर्षे",
+        "char_count": 5
+      },
+      {
+        "text": "आपल्या पत्रिकेविषयी थेट विचारा",
+        "char_count": 30
+      },
+      {
+        "text": "कारकीर्द, विवाह काळ किंवा ग्रहीय उपायांविषयी मार्गदर्शक उत्तरे मिळवा",
+        "char_count": 68
+      },
+      {
+        "text": "आपल्या पत्रिकेविषयी प्रश्न विचारा...",
+        "char_count": 36
+      },
+      {
+        "text": "उत्तर मिळवा",
+        "char_count": 11
+      },
+      {
+        "text": "माझ्या दशम भावानुसार कोणती कारकीर्द सर्वात यशदायी ठरेल?",
+        "char_count": 55
+      },
+      {
+        "text": "सध्याच्या महादशेचा वैवाहिक जीवनावर काय परिणाम होईल?",
+        "char_count": 51
+      },
+      {
+        "text": "माझ्या ग्रहस्थितीनुसार कोणते वैदिक उपाय करणे हितावह राहील?",
+        "char_count": 58
+      },
+      {
+        "text": "मेष",
+        "char_count": 3
+      },
+      {
+        "text": "वृषभ",
+        "char_count": 4
+      },
+      {
+        "text": "मिथुन",
+        "char_count": 5
+      },
+      {
+        "text": "कर्क",
+        "char_count": 4
+      },
+      {
+        "text": "सिंह",
+        "char_count": 4
+      },
+      {
+        "text": "कन्या",
+        "char_count": 5
+      },
+      {
+        "text": "तुला",
+        "char_count": 4
+      },
+      {
+        "text": "वृश्चिक",
+        "char_count": 7
+      },
+      {
+        "text": "धनु",
+        "char_count": 3
+      },
+      {
+        "text": "मकर",
+        "char_count": 3
+      },
+      {
+        "text": "कुंभ",
+        "char_count": 4
+      },
+      {
+        "text": "मीन",
+        "char_count": 3
+      },
+      {
+        "text": "सूर्य",
+        "char_count": 5
+      },
+      {
+        "text": "चन्द्र",
+        "char_count": 6
+      },
+      {
+        "text": "चंद्र",
+        "char_count": 5
+      },
+      {
+        "text": "मंगल",
+        "char_count": 4
+      },
+      {
+        "text": "मंगळ",
+        "char_count": 4
+      },
+      {
+        "text": "बुध",
+        "char_count": 3
+      },
+      {
+        "text": "बृहस्पति (गुरु)",
+        "char_count": 15
+      },
+      {
+        "text": "गुरू",
+        "char_count": 4
+      },
+      {
+        "text": "शुक्र",
+        "char_count": 5
+      },
+      {
+        "text": "शनि",
+        "char_count": 3
+      },
+      {
+        "text": "शनी",
+        "char_count": 3
+      },
+      {
+        "text": "राहु",
+        "char_count": 4
+      },
+      {
+        "text": "राहू",
+        "char_count": 4
+      },
+      {
+        "text": "केतु",
+        "char_count": 4
+      },
+      {
+        "text": "केतू",
+        "char_count": 4
+      },
+      {
+        "text": "लग्न",
+        "char_count": 4
+      },
+      {
+        "text": "तनु भाव",
+        "char_count": 7
+      },
+      {
+        "text": "शारीरिक सौष्ठव, तेज, व्यक्तित्व, स्वभाव, रूप-रंग एवं संपूर्ण जीवन की प्राणशक्ति।",
+        "char_count": 80
+      },
+      {
+        "text": "शारीरिक रचना, व्यक्तिमत्त्व, स्वभाव, रूप-रंग आणि संपूर्ण जीवनाची मूलभूत ऊर्जा.",
+        "char_count": 78
+      },
+      {
+        "text": "Sun (सूर्य)",
+        "char_count": 11
+      },
+      {
+        "text": "धन भाव",
+        "char_count": 6
+      },
+      {
+        "text": "संचित धन, पैतृक संपत्ति, वाणी, कुल-परिवार, खानपान एवं मुख सौंदर्य।",
+        "char_count": 66
+      },
+      {
+        "text": "संचित धन, कौटुंबिक वारसा, वाणी, कुटुंब आणि खाण्यापिण्याच्या सवयी.",
+        "char_count": 65
+      },
+      {
+        "text": "Jupiter (गुरु)",
+        "char_count": 14
+      },
+      {
+        "text": "सहज भाव",
+        "char_count": 7
+      },
+      {
+        "text": "साहस, पराक्रम, छोटे भाई-बहन, संप्रेषण, लेखन कौशल एवं लघु यात्राएं।",
+        "char_count": 66
+      },
+      {
+        "text": "धैर्य, पराक्रम, लहान भावंडे, लेखन, संवाद कौशल्य आणि लहान प्रवास.",
+        "char_count": 64
+      },
+      {
+        "text": "Mars (मंगल)",
+        "char_count": 11
+      },
+      {
+        "text": "सुख भाव",
+        "char_count": 7
+      },
+      {
+        "text": "माता, गृहसुख, भूमि, भवन, वाहन, पैतृक सुख एवं आंतरिक मानसिक शांति।",
+        "char_count": 65
+      },
+      {
+        "text": "आई, घराचे सुख, स्थावर मालमत्ता, वाहने आणि अंतःकरणातील समाधान.",
+        "char_count": 61
+      },
+      {
+        "text": "Moon (चन्द्र)",
+        "char_count": 13
+      },
+      {
+        "text": "पुत्र भाव",
+        "char_count": 9
+      },
+      {
+        "text": "बुद्धि, संतान सुख, पूर्वजन्म संचित पुण्य, रचनात्मकता, मंत्र सिद्धि एवं विद्या।",
+        "char_count": 78
+      },
+      {
+        "text": "बुद्धिमत्ता, संतती, पूर्वपुण्याई, सर्जनशीलता आणि मंत्र ज्ञान.",
+        "char_count": 61
+      },
+      {
+        "text": "अरि / रोग भाव",
+        "char_count": 13
+      },
+      {
+        "text": "रोग, ऋण, शत्रु, प्रतिस्पर्धा विजय, नित्य सेवा, संघर्ष एवं विवाद निवृत्ति।",
+        "char_count": 73
+      },
+      {
+        "text": "रोग, शत्रू, कर्ज, स्पर्धा विजय, दैनंदिन सेवा आणि वाद निवारण.",
+        "char_count": 60
+      },
+      {
+        "text": "Mars / Saturn (मंगल / शनि)",
+        "char_count": 26
+      },
+      {
+        "text": "युवति भाव",
+        "char_count": 9
+      },
+      {
+        "text": "जीवनसाथी, वैवाहिक सौख्य, व्यावसायिक साझेदारी, जनसंपर्क एवं अनुबंध।",
+        "char_count": 66
+      },
+      {
+        "text": "जोडीदार, वैवाहिक सुख, व्यवसाय भागीदारी आणि सार्वजनिक संबंध.",
+        "char_count": 59
+      },
+      {
+        "text": "Venus (शुक्र)",
+        "char_count": 13
+      },
+      {
+        "text": "रन्ध्र भाव",
+        "char_count": 10
+      },
+      {
+        "text": "आयु, गूढ़ विद्या, आकस्मिक धनलाभ, गुप्त शोध, परिवर्तन एवं मोक्ष मार्ग।",
+        "char_count": 69
+      },
+      {
+        "text": "दीर्घायुष्य, गूढ ज्ञान, अचानक धनलाभ, गुप्त गोष्टी आणि आत्मिक परिवर्तन.",
+        "char_count": 70
+      },
+      {
+        "text": "Saturn (शनि)",
+        "char_count": 12
+      },
+      {
+        "text": "धर्म भाव",
+        "char_count": 8
+      },
+      {
+        "text": "भाग्य, धर्म, पिता, गुरु कृपा, उच्च शिक्षा, तीर्थाटन एवं सदगुण।",
+        "char_count": 62
+      },
+      {
+        "text": "भाग्य, धर्म, वडील, गुरूंची कृपा, उच्च शिक्षण आणि तीर्थयात्रा.",
+        "char_count": 61
+      },
+      {
+        "text": "कर्म भाव",
+        "char_count": 8
+      },
+      {
+        "text": "आजीविका, पद-प्रतिष्ठा, राज्य सम्मान, सामाजिक प्रभाव, कर्म सिद्धि एवं अधिकार।",
+        "char_count": 76
+      },
+      {
+        "text": "व्यवसाय, पद-प्रतिष्ठा, सामाजिक प्रभाव, कर्तृत्व आणि अधिकार योग.",
+        "char_count": 63
+      },
+      {
+        "text": "Sun / Mercury / Saturn (सूर्य / बुध / शनि)",
+        "char_count": 42
+      },
+      {
+        "text": "लाभ भाव",
+        "char_count": 7
+      },
+      {
+        "text": "सर्वविध लाभ, मनोकामना पूर्ति, बड़े भाई-बहन, मित्र मण्डली एवं आय के स्रोत।",
+        "char_count": 73
+      },
+      {
+        "text": "सर्व प्रकारचे लाभ, इच्छापूर्ती, मोठे बंधू-भगिनी, मित्रपरिवार आणि उत्पन्न.",
+        "char_count": 73
+      },
+      {
+        "text": "व्यय / मोक्ष भाव",
+        "char_count": 16
+      },
+      {
+        "text": "व्यय, विदेश प्रवास, ध्यान, निद्रा सुख, दान-पुण्य एवं मोक्ष प्राप्ति।",
+        "char_count": 68
+      },
+      {
+        "text": "खर्च, परदेश प्रवास, ध्यान, दानधर्म आणि अंतिम मुक्ती (मोक्ष).",
+        "char_count": 60
+      },
+      {
+        "text": "Saturn / Ketu (शनि / केतु)",
+        "char_count": 26
+      }
+    ],
+    "component_prediction": [
+      {
+        "text": "7th House · सप्तम भाव",
+        "char_count": 21
+      },
+      {
+        "text": "विवाह एवं सहजीवन",
+        "char_count": 16
+      },
+      {
+        "text": "विवाह आणि भागीदारी",
+        "char_count": 18
+      },
+      {
+        "text": "विवाह योग, जीवनसाथी स्वभाव, मांगलिक विचार एवं दांपत्य सुख",
+        "char_count": 57
+      },
+      {
+        "text": "विवाह योग, जोडीदाराचा स्वभाव, मांगलिक विचार आणि वैवाहिक सौख्य",
+        "char_count": 61
+      },
+      {
+        "text": "10th House · दशम भाव",
+        "char_count": 20
+      },
+      {
+        "text": "आजीविका एवं कर्म",
+        "char_count": 16
+      },
+      {
+        "text": "कारकीर्द आणि व्यवसाय",
+        "char_count": 20
+      },
+      {
+        "text": "कार्यक्षेत्र, पद-प्रतिष्ठा, व्यवसाय बनाम नौकरी एवं राजयोग",
+        "char_count": 57
+      },
+      {
+        "text": "उद्योग क्षेत्र, पद-प्रतिष्ठा, नोकरी की व्यवसाय आणि राजयोग",
+        "char_count": 57
+      },
+      {
+        "text": "2nd & 11th · द्वितीय/एकादश",
+        "char_count": 26
+      },
+      {
+        "text": "धन एवं समृद्धि",
+        "char_count": 14
+      },
+      {
+        "text": "धन आणि समृद्धी",
+        "char_count": 14
+      },
+      {
+        "text": "संचित धन, आकस्मिक लाभ, धनयोग एवं ऋण स्थिति",
+        "char_count": 42
+      },
+      {
+        "text": "संचित संपत्ती, अचानक धनलाभ, धनयोग आणि कर्ज निवारण",
+        "char_count": 49
+      },
+      {
+        "text": "1st & 6th · लग्न/षष्ठ",
+        "char_count": 21
+      },
+      {
+        "text": "स्वास्थ्य एवं दीर्घायु",
+        "char_count": 22
+      },
+      {
+        "text": "आरोग्य आणि दीर्घायुष्य",
+        "char_count": 22
+      },
+      {
+        "text": "शारीरिक ओज, त्रिदोष प्रकृति, शल्यक्रिया विचार एवं आरोग्य काल",
+        "char_count": 60
+      },
+      {
+        "text": "शारीरिक ऊर्जा, आयुर्वेदिक प्रकृती, संवेदनशील काळ आणि आरोग्य",
+        "char_count": 59
+      },
+      {
+        "text": "5th House · पंचम भाव",
+        "char_count": 20
+      },
+      {
+        "text": "संतान सुख एवं कुल",
+        "char_count": 17
+      },
+      {
+        "text": "संतती आणि कुटुंब",
+        "char_count": 16
+      },
+      {
+        "text": "संतान कारक गुरु, संतति योग, स्वभाव एवं पुत्र विचार",
+        "char_count": 50
+      },
+      {
+        "text": "संतती सुख, मुलांचा स्वभाव, गुरु कृपा आणि पूर्वपुण्याई",
+        "char_count": 53
+      },
+      {
+        "text": "4th & 5th · चतुर्थ/पंचम",
+        "char_count": 23
+      },
+      {
+        "text": "विद्या एवं ज्ञान",
+        "char_count": 16
+      },
+      {
+        "text": "उच्च शिक्षण आणि ज्ञान",
+        "char_count": 21
+      },
+      {
+        "text": "उच्च शिक्षा, प्रतियोगी परीक्षा, सरस्वती योग एवं बुद्धिमत्ता",
+        "char_count": 59
+      },
+      {
+        "text": "उच्च शिक्षण, स्पर्धा परीक्षा, सरस्वती योग आणि बौद्धिक कौशल्य",
+        "char_count": 60
+      },
+      {
+        "text": "4th House · सुख भाव",
+        "char_count": 19
+      },
+      {
+        "text": "भूमि, भवन एवं वाहन",
+        "char_count": 18
+      },
+      {
+        "text": "स्थावर संपत्ती व वास्तू",
+        "char_count": 23
+      },
+      {
+        "text": "गृह संपत्ति, भूमि लाभ, वाहन सुख, वास्तु एवं मानसिक शांति",
+        "char_count": 56
+      },
+      {
+        "text": "घर, जमीन खरेदी, वाहन सौख्य, वास्तू आणि कौटुंबिक समाधान",
+        "char_count": 54
+      },
+      {
+        "text": "6th, 8th & 12th · त्रिक भाव",
+        "char_count": 27
+      },
+      {
+        "text": "ग्रह दोष एवं बाधाएं",
+        "char_count": 19
+      },
+      {
+        "text": "दोष आणि संकटे",
+        "char_count": 13
+      },
+      {
+        "text": "साढ़ेसाती, कालसर्प, मांगलिक, पितृ दोष एवं निवारण",
+        "char_count": 48
+      },
+      {
+        "text": "साडेसाती, कालसर्प, मांगलिक, पितृ दोष आणि शांती उपाय",
+        "char_count": 51
+      },
+      {
+        "text": "9th & 12th · नवम/द्वादश",
+        "char_count": 23
+      },
+      {
+        "text": "विदेश यात्रा एवं प्रवास",
+        "char_count": 23
+      },
+      {
+        "text": "परदेश गमन आणि प्रवास",
+        "char_count": 20
+      },
+      {
+        "text": "विदेश गमन, नागरिकता योग, तीर्थाटन एवं सुदूर प्रवास",
+        "char_count": 50
+      },
+      {
+        "text": "परदेशात स्थायिक होणे, व्हिसा, परदेशी नोकरी आणि तीर्थयात्रा",
+        "char_count": 58
+      },
+      {
+        "text": "9th & 12th · धर्म/मोक्ष",
+        "char_count": 23
+      },
+      {
+        "text": "धर्म, मोक्ष एवं कर्म",
+        "char_count": 20
+      },
+      {
+        "text": "धर्म आणि अध्यात्म",
+        "char_count": 17
+      },
+      {
+        "text": "इष्ट देव, मोक्ष योग, पूर्वजन्म संचित कर्म एवं साधना पथ",
+        "char_count": 54
+      },
+      {
+        "text": "इष्ट देवता, मोक्ष योग, पूर्वजन्मीचे कर्म आणि अध्यात्मिक प्रगती",
+        "char_count": 62
+      },
+      {
+        "text": "प्रामाणिक वैदिक जीवन विश्लेषण",
+        "char_count": 29
+      },
+      {
+        "text": "१० जीवन आयाम फलादेश एवं ग्रहीय मार्गदर्शन",
+        "char_count": 41
+      },
+      {
+        "text": "महर्षि पराशर परंपरा के अनुसार भाव स्वामियों, विंशोत्तरी दशा काल, ग्रह गोचर एवं शास्त्रीय उपायों का सम्पूर्ण १० जीवन क्षेत्रों में गहन विवेचन।",
+        "char_count": 141
+      },
+      {
+        "text": "जन्म विवरण प्रविष्ट करें",
+        "char_count": 24
+      },
+      {
+        "text": "समस्त १० जीवन क्षेत्रों के फलित विश्लेषण हेतु जन्म विवरण दर्ज करें",
+        "char_count": 66
+      },
+      {
+        "text": "पूरा नाम",
+        "char_count": 8
+      },
+      {
+        "text": "उदा. अर्जुन शर्मा",
+        "char_count": 17
+      },
+      {
+        "text": "जन्म तिथि",
+        "char_count": 9
+      },
+      {
+        "text": "जन्म समय (IST)",
+        "char_count": 14
+      },
+      {
+        "text": "जन्म स्थान / नगर",
+        "char_count": 16
+      },
+      {
+        "text": "नगर खोजें (उदा. दिल्ली, मुंबई, जयपुर)",
+        "char_count": 37
+      },
+      {
+        "text": "१० जीवन क्षेत्रों का विश्लेषण करें",
+        "char_count": 34
+      },
+      {
+        "text": "दशा एवं गोचर की खगोलीय गणना जारी है...",
+        "char_count": 38
+      },
+      {
+        "text": "नमूना पत्रिका प्रयोग करें",
+        "char_count": 25
+      },
+      {
+        "text": "PDF रिपोर्ट बनाएं",
+        "char_count": 17
+      },
+      {
+        "text": "जीवन क्षेत्र सामर्थ्य चक्र",
+        "char_count": 26
+      },
+      {
+        "text": "विस्तृत शास्त्रीय फलित, फलित समय (गोचर) एवं वैदिक उपाय जानने के लिए किसी भी जीवन क्षेत्र पर क्लिक करें।",
+        "char_count": 103
+      },
+      {
+        "text": "सम्पूर्ण १० जीवन क्षेत्र",
+        "char_count": 24
+      },
+      {
+        "text": "क्षेत्र सामर्थ्य",
+        "char_count": 16
+      },
+      {
+        "text": "सक्रिय दशा",
+        "char_count": 10
+      },
+      {
+        "text": "सामान्य",
+        "char_count": 7
+      },
+      {
+        "text": "शास्त्रीय फलित विवेचना",
+        "char_count": 22
+      },
+      {
+        "text": "ग्रहीय आधार एवं कारकत्व",
+        "char_count": 23
+      },
+      {
+        "text": "गोचर एवं अनुकूल समय चक्र",
+        "char_count": 24
+      },
+      {
+        "text": "विंशोत्तरी दशा एवं गुरु-शनि गोचर पर आधारित शुभ समय",
+        "char_count": 50
+      },
+      {
+        "text": "श्रेष्ठ फलदायक समय",
+        "char_count": 18
+      },
+      {
+        "text": "विश्वास स्तर",
+        "char_count": 12
+      },
+      {
+        "text": "शास्त्रीय वैदिक उपाय",
+        "char_count": 20
+      },
+      {
+        "text": "उपयुक्त रत्न",
+        "char_count": 12
+      },
+      {
+        "text": "बीज मंत्र",
+        "char_count": 9
+      },
+      {
+        "text": "व्रत दिन",
+        "char_count": 8
+      },
+      {
+        "text": "दान संकल्प",
+        "char_count": 10
+      },
+      {
+        "text": "शांति विधान",
+        "char_count": 11
+      },
+      {
+        "text": "सक्रिय दोष एवं निवारण",
+        "char_count": 21
+      },
+      {
+        "text": "इस जीवन क्षेत्र में कोई गंभीर दोष नहीं है",
+        "char_count": 41
+      },
+      {
+        "text": "क्षेत्र सारांश",
+        "char_count": 14
+      },
+      {
+        "text": "जीवन फलादेश संबंधी प्रश्न पूछें",
+        "char_count": 31
+      },
+      {
+        "text": "विवाह मुहूर्त, पदोन्नति समय या ग्रहीय शांति उपायों के विषय में मार्गदर्शन पाएं",
+        "char_count": 78
+      },
+      {
+        "text": "करियर, विवाह समय या उपायों के विषय में पूछें...",
+        "char_count": 47
+      },
+      {
+        "text": "उत्तर पाएं",
+        "char_count": 10
+      },
+      {
+        "text": "प्रमाणित वैदिक जीवन विश्लेषण",
+        "char_count": 28
+      },
+      {
+        "text": "१० जीवन पैलू भविष्य आणि ग्रहीय मार्गदर्शन",
+        "char_count": 41
+      },
+      {
+        "text": "महर्षी पराशर परंपरेवर आधारित भावेश स्थिती, विंशोत्तरी महादशा, चालू ग्रह गोचर आणि शास्त्रीय उपायांचे सर्व १० जीवन अंगांमधील सखोल फलादेश.",
+        "char_count": 135
+      },
+      {
+        "text": "जन्म तपशील प्रविष्ट करा",
+        "char_count": 23
+      },
+      {
+        "text": "सर्व १० जीवन पैलूंचे सखोल विश्लेषण करण्यासाठी अचूक माहिती प्रविष्ट करा",
+        "char_count": 70
+      },
+      {
+        "text": "पूर्ण नाव",
+        "char_count": 9
+      },
+      {
+        "text": "जन्म तारीख",
+        "char_count": 10
+      },
+      {
+        "text": "जन्म वेळ (IST)",
+        "char_count": 14
+      },
+      {
+        "text": "जन्म शहर",
+        "char_count": 8
+      },
+      {
+        "text": "शहर शोधा (उदा. पुणे, मुंबई, नागपूर)",
+        "char_count": 35
+      },
+      {
+        "text": "सर्व १० जीवन पैलूंचे विश्लेषण करा",
+        "char_count": 33
+      },
+      {
+        "text": "दशा आणि गोचर चक्राची अचूक गणना सुरू आहे...",
+        "char_count": 42
+      },
+      {
+        "text": "नमुना पत्रिका वापरा",
+        "char_count": 19
+      },
+      {
+        "text": "PDF अहवाल तयार करा",
+        "char_count": 18
+      },
+      {
+        "text": "जीवन पैलू सामर्थ्य चक्र",
+        "char_count": 23
+      },
+      {
+        "text": "सविस्तर शास्त्रीय विश्लेषण, अनुकूल काळ (गोचर) आणि वैदिक उपाय पाहण्यासाठी कोणत्याही घटकावर क्लिक करा.",
+        "char_count": 100
+      },
+      {
+        "text": "सर्व १० जीवन पैलू",
+        "char_count": 17
+      },
+      {
+        "text": "पैलू सामर्थ्य",
+        "char_count": 13
+      },
+      {
+        "text": "दशा सक्रिय",
+        "char_count": 10
+      },
+      {
+        "text": "साधारण",
+        "char_count": 6
+      },
+      {
+        "text": "शास्त्रीय वैदिक फलादेश",
+        "char_count": 22
+      },
+      {
+        "text": "ग्रहीय आधार आणि कारकत्व",
+        "char_count": 23
+      },
+      {
+        "text": "गोचर आणि अनुकूल कालखंड",
+        "char_count": 22
+      },
+      {
+        "text": "विंशोत्तरी दशा आणि गुरू-शनी गोचरावर आधारित शुभ काळ",
+        "char_count": 50
+      },
+      {
+        "text": "सर्वात अनुकूल काळ",
+        "char_count": 17
+      },
+      {
+        "text": "अचूकता पातळी",
+        "char_count": 12
+      },
+      {
+        "text": "शिफारस केलेले रत्न",
+        "char_count": 18
+      },
+      {
+        "text": "उपवासाचा वार",
+        "char_count": 12
+      },
+      {
+        "text": "दान वस्तू",
+        "char_count": 9
+      },
+      {
+        "text": "शांती विधी",
+        "char_count": 10
+      },
+      {
+        "text": "सक्रिय ग्रह दोष आणि निवारण",
+        "char_count": 26
+      },
+      {
+        "text": "या घटकात कोणताही गंभीर दोष आढळला नाही",
+        "char_count": 37
+      },
+      {
+        "text": "पैलू सारांश",
+        "char_count": 11
+      },
+      {
+        "text": "जीवन भविष्य संदर्भात थेट विचारा",
+        "char_count": 31
+      },
+      {
+        "text": "नोकरीतील प्रगती, विवाह काळ किंवा ग्रहीय उपायांविषयी मार्गदर्शक उत्तरे मिळवा",
+        "char_count": 75
+      },
+      {
+        "text": "कारकीर्द, विवाह काळ किंवा वैदिक उपायांविषयी विचारा...",
+        "char_count": 53
+      },
+      {
+        "text": "उत्तर मिळवा",
+        "char_count": 11
+      }
+    ],
+    "component_panchang": [
+      {
+        "text": "दैनिक पवित्र पंचांग",
+        "char_count": 19
+      },
+      {
+        "text": "पंचांग आणि शुभ मुहूर्त",
+        "char_count": 22
+      },
+      {
+        "text": "काळाचे पाच महत्त्वाचे घटक (पंच-अंग) जे मानवी कर्मांना निसर्गाच्या तालाशी जोडतात.",
+        "char_count": 80
+      },
+      {
+        "text": "शेअर करा",
+        "char_count": 8
+      },
+      {
+        "text": "कॉपी झाले!",
+        "char_count": 10
+      },
+      {
+        "text": "कॅलेंडर डाऊनलोड (ICS)",
+        "char_count": 21
+      },
+      {
+        "text": "वैदिक खगोलीय पंचांग",
+        "char_count": 19
+      },
+      {
+        "text": "चंद्राची कला",
+        "char_count": 12
+      },
+      {
+        "text": "थेट वेळ (IST)",
+        "char_count": 13
+      },
+      {
+        "text": "पंचांग सेटिंग्ज",
+        "char_count": 15
+      },
+      {
+        "text": "स्थान (शहर) निवडा",
+        "char_count": 17
+      },
+      {
+        "text": "तारीख निवडा",
+        "char_count": 11
+      },
+      {
+        "text": "आज",
+        "char_count": 2
+      },
+      {
+        "text": "उद्या",
+        "char_count": 5
+      },
+      {
+        "text": "ताजे करा",
+        "char_count": 8
+      },
+      {
+        "text": "स्थान:",
+        "char_count": 6
+      },
+      {
+        "text": "अक्षांश-रेखांश:",
+        "char_count": 15
+      },
+      {
+        "text": "सूर्योदय",
+        "char_count": 8
+      },
+      {
+        "text": "सूर्यास्त",
+        "char_count": 9
+      },
+      {
+        "text": "चंद्रोदय",
+        "char_count": 8
+      },
+      {
+        "text": "चंद्रास्त",
+        "char_count": 9
+      },
+      {
+        "text": "सुवर्ण पहाट · सूर्य होरा प्रारंभ",
+        "char_count": 32
+      },
+      {
+        "text": "संध्याकाळची संध्या · प्रदोष काळ",
+        "char_count": 31
+      },
+      {
+        "text": "चंद्र उदय · मनःशांती व अंतर्ज्ञान",
+        "char_count": 33
+      },
+      {
+        "text": "चंद्र अस्त · रात्र काळ",
+        "char_count": 22
+      },
+      {
+        "text": "पंचांग — पाच पवित्र घटक",
+        "char_count": 23
+      },
+      {
+        "text": "सूर्य सिद्धांत अचूकता",
+        "char_count": 21
+      },
+      {
+        "text": "१. तिथी (चंद्र दिवस)",
+        "char_count": 20
+      },
+      {
+        "text": "२. नक्षत्र (चंद्र नक्षत्र)",
+        "char_count": 26
+      },
+      {
+        "text": "३. योग (सूर्य-चंद्र समन्वय)",
+        "char_count": 27
+      },
+      {
+        "text": "४. करण (अर्धी तिथी)",
+        "char_count": 19
+      },
+      {
+        "text": "५. वार (सौर दिवस)",
+        "char_count": 17
+      },
+      {
+        "text": "समाप्ती",
+        "char_count": 7
+      },
+      {
+        "text": "दिवसभरात सक्रिय",
+        "char_count": 15
+      },
+      {
+        "text": "चंद्र-सूर्य अंतर",
+        "char_count": 16
+      },
+      {
+        "text": "चरण",
+        "char_count": 3
+      },
+      {
+        "text": "चेतना आणि अंतर्ज्ञान",
+        "char_count": 20
+      },
+      {
+        "text": "संबंध आणि सात्त्विकता",
+        "char_count": 21
+      },
+      {
+        "text": "कर्म सिद्धी आणि कार्यशक्ती",
+        "char_count": 26
+      },
+      {
+        "text": "सौर तेज आणि दीर्घायुष्य",
+        "char_count": 23
+      },
+      {
+        "text": "शुभ मुहूर्त (सात्त्विक काल)",
+        "char_count": 27
+      },
+      {
+        "text": "नवीन कार्यासाठी सर्वोत्तम",
+        "char_count": 25
+      },
+      {
+        "text": "अभिजीत मुहूर्त",
+        "char_count": 14
+      },
+      {
+        "text": "सर्व विजयी मुहूर्त",
+        "char_count": 18
+      },
+      {
+        "text": "सर्व दोष दूर करणारा सर्वोत्तम मुहूर्त. नवीन करार, व्यवसाय प्रारंभ, खरेदी आणि शुभ कार्यांसाठी अत्यंत फलदायी मानला जातो.",
+        "char_count": 118
+      },
+      {
+        "text": "ब्राह्म मुहूर्त (अमृत वेला)",
+        "char_count": 27
+      },
+      {
+        "text": "आध्यात्मिक उषाकाल",
+        "char_count": 17
+      },
+      {
+        "text": "सूर्योदयापूर्वी १ तास ३६ मिनिटे सुरू होणारा काळ. ध्यान, मंत्र जप, प्राणायाम आणि ईश्वर चिंतनासाठी परम पवित्र.",
+        "char_count": 108
+      },
+      {
+        "text": "अशुभ काळ (सावधगिरी आवश्यक)",
+        "char_count": 26
+      },
+      {
+        "text": "नवीन कार्ये टाळावीत",
+        "char_count": 19
+      },
+      {
+        "text": "राहु काळ (राहु वेला)",
+        "char_count": 20
+      },
+      {
+        "text": "नवीन प्रारंभ वर्ज्य",
+        "char_count": 19
+      },
+      {
+        "text": "राहु ग्रहाचा प्रभाव असलेला काळ. या काळात नवीन करार, लांबचा प्रवास किंवा गृहप्रवेश करणे टाळावे.",
+        "char_count": 94
+      },
+      {
+        "text": "यमगंड काळ",
+        "char_count": 9
+      },
+      {
+        "text": "यम देवांचे अधिपत्य · कार्यात निष्फळता टाळा",
+        "char_count": 42
+      },
+      {
+        "text": "गुलिक काळ",
+        "char_count": 9
+      },
+      {
+        "text": "शनीपुत्र गुलिक · कामात विलंब शक्य",
+        "char_count": 33
+      },
+      {
+        "text": "दिशा शूल:",
+        "char_count": 9
+      },
+      {
+        "text": "दिवस व रात्र चौघडिया",
+        "char_count": 20
+      },
+      {
+        "text": "२४ तास ग्रहीय होरा",
+        "char_count": 18
+      },
+      {
+        "text": "ग्रह गोचर (सध्याची स्थिती)",
+        "char_count": 26
+      },
+      {
+        "text": "आगामी सण व उत्सव",
+        "char_count": 16
+      },
+      {
+        "text": "सध्या सुरू असलेला चौघडिया",
+        "char_count": 25
+      },
+      {
+        "text": "कालावधी:",
+        "char_count": 8
+      },
+      {
+        "text": "शिल्लक वेळ:",
+        "char_count": 11
+      },
+      {
+        "text": "दिवसाचा चौघडिया (सूर्योदय ते सूर्यास्त)",
+        "char_count": 39
+      },
+      {
+        "text": "रात्रीचा चौघडिया (सूर्यास्त ते पुढील सूर्योदय)",
+        "char_count": 46
+      },
+      {
+        "text": "सूर्योदयापासून प्राचीन काळाच्या नियमांनुसार २४ ग्रहीय होरा क्रमवार सुरू राहतात.",
+        "char_count": 79
+      },
+      {
+        "text": "१ होरा ≈ ६० मिनिटे",
+        "char_count": 18
+      },
+      {
+        "text": "होरा",
+        "char_count": 4
+      },
+      {
+        "text": "ग्रह (Planet)",
+        "char_count": 13
+      },
+      {
+        "text": "रास (Sign)",
+        "char_count": 10
+      },
+      {
+        "text": "अंश (Degrees)",
+        "char_count": 13
+      },
+      {
+        "text": "नक्षत्र",
+        "char_count": 7
+      },
+      {
+        "text": "गती (Motion)",
+        "char_count": 12
+      },
+      {
+        "text": "⟲ वक्री (Vakra)",
+        "char_count": 15
+      },
+      {
+        "text": "▶ मार्गी (Margi)",
+        "char_count": 16
+      },
+      {
+        "text": "सर्व सण",
+        "char_count": 7
+      },
+      {
+        "text": "प्रमुख सण",
+        "char_count": 9
+      },
+      {
+        "text": "एकादशी व्रते",
+        "char_count": 12
+      },
+      {
+        "text": "पवित्र व्रते",
+        "char_count": 12
+      },
+      {
+        "text": "पौर्णिमा / अमावास्या",
+        "char_count": 20
+      },
+      {
+        "text": "आजचा उत्सव",
+        "char_count": 10
+      },
+      {
+        "text": "सात्त्विक उपाय:",
+        "char_count": 15
+      },
+      {
+        "text": "उपाय:",
+        "char_count": 5
+      },
+      {
+        "text": "आगामी",
+        "char_count": 5
+      },
+      {
+        "text": "या वर्गवारीत सध्या कोणतेही आगामी सण उपलब्ध नाहीत.",
+        "char_count": 49
+      },
+      {
+        "text": "“तिथेश्च श्रियमाप्नोति वारादायुष्यवर्धनम्। नक्षत्राद्धरते पापं योगाद्रोगनिवारणम्। करणात्कार्यसिद्धिः स्यात् पञ्चाङ्गफलमुत्तमम्॥”",
+        "char_count": 128
+      },
+      {
+        "text": "“तिथीच्या ज्ञानाने ऐश्वर्य व समृद्धी मिळते, वाराने आयुष्य वाढते, नक्षत्राने पापांचा नाश होतो, योगाने रोगांचे निवारण होते आणि करणाने कार्य सिद्धीस जाते. असे हे पवित्र पंचांगाचे श्रेष्ठ फळ आहे.”",
+        "char_count": 192
+      },
+      {
+        "text": "सूर्य सिद्धांत आणि बृहत् पराशर होरा शास्त्र",
+        "char_count": 43
+      },
+      {
+        "text": "पंचांग एवं शुभ मुहूर्त",
+        "char_count": 22
+      },
+      {
+        "text": "समय के पांच अंग (पंच-अंग) जो मानवीय कर्मों को प्राकृतिक ब्रह्मांड के साथ सामंजस्य में लाते हैं।",
+        "char_count": 95
+      },
+      {
+        "text": "साझा करें",
+        "char_count": 9
+      },
+      {
+        "text": "कॉपी किया गया!",
+        "char_count": 14
+      },
+      {
+        "text": "कैलेंडर डाउनलोड (ICS)",
+        "char_count": 21
+      },
+      {
+        "text": "चंद्र कला",
+        "char_count": 9
+      },
+      {
+        "text": "लाइव समय (IST)",
+        "char_count": 14
+      },
+      {
+        "text": "पंचांग विन्यास",
+        "char_count": 14
+      },
+      {
+        "text": "स्थान (शहर) चुनें",
+        "char_count": 17
+      },
+      {
+        "text": "दिनांक चुनें",
+        "char_count": 12
+      },
+      {
+        "text": "कल",
+        "char_count": 2
+      },
+      {
+        "text": "रिफ्रेश करें",
+        "char_count": 12
+      },
+      {
+        "text": "निर्देशांक:",
+        "char_count": 11
+      },
+      {
+        "text": "स्वर्णिम प्रभात · सूर्य होरा प्रारंभ",
+        "char_count": 36
+      },
+      {
+        "text": "सायं संध्या · प्रदोष काल",
+        "char_count": 24
+      },
+      {
+        "text": "चंद्र उदय · मानसिक शांति एवं अंतर्दृष्टि",
+        "char_count": 40
+      },
+      {
+        "text": "चंद्र अस्त · रात्रि काल",
+        "char_count": 23
+      },
+      {
+        "text": "पंचांग — पाँच पवित्र अंग",
+        "char_count": 24
+      },
+      {
+        "text": "सूर्य सिद्धांत परिशुद्धता",
+        "char_count": 25
+      },
+      {
+        "text": "१. तिथि (चंद्र दिवस)",
+        "char_count": 20
+      },
+      {
+        "text": "३. योग (सूर्य-चंद्र सामंजस्य)",
+        "char_count": 29
+      },
+      {
+        "text": "४. करण (अर्ध-तिथि)",
+        "char_count": 18
+      },
+      {
+        "text": "समाप्ति",
+        "char_count": 7
+      },
+      {
+        "text": "दिनभर सक्रिय",
+        "char_count": 12
+      },
+      {
+        "text": "चेतना एवं अंतर्ज्ञान",
+        "char_count": 20
+      },
+      {
+        "text": "संबंध एवं सात्विकता",
+        "char_count": 19
+      },
+      {
+        "text": "कर्म सिद्धि एवं कार्यशक्ति",
+        "char_count": 26
+      },
+      {
+        "text": "सौर तेज एवं दीर्घायु",
+        "char_count": 20
+      },
+      {
+        "text": "शुभ मुहूर्त (सात्विक काल)",
+        "char_count": 25
+      },
+      {
+        "text": "नवीन कार्यों हेतु सर्वोत्तम",
+        "char_count": 27
+      },
+      {
+        "text": "सर्व दोषों को शांत करने वाला उत्तम मुहूर्त। नवीन अनुबंध, व्यापार शुभारंभ और मांगलिक कार्यों हेतु सर्वश्रेष्ठ।",
+        "char_count": 109
+      },
+      {
+        "text": "सूर्योदय से १ घंटा ३६ मिनट पूर्व का काल। ध्यान, जप, प्राणायाम और पवित्र विद्याध्ययन हेतु परम फलदायी।",
+        "char_count": 100
+      },
+      {
+        "text": "अशुभ काल (सावधानी आवश्यक)",
+        "char_count": 25
+      },
+      {
+        "text": "नवीन कार्य आरंभ न करें",
+        "char_count": 22
+      },
+      {
+        "text": "राहु काल (राहु वेला)",
+        "char_count": 20
+      },
+      {
+        "text": "नवीन प्रारंभ वर्जित",
+        "char_count": 19
+      },
+      {
+        "text": "राहु ग्रह के प्रभाव का समय। इसमें नए अनुबंध, यात्रा या गृह प्रवेश करने से बचें।",
+        "char_count": 79
+      },
+      {
+        "text": "यमगंड काल",
+        "char_count": 9
+      },
+      {
+        "text": "यम का प्रभाव · कार्यों में निष्फलता से बचें",
+        "char_count": 43
+      },
+      {
+        "text": "गुलिक काल",
+        "char_count": 9
+      },
+      {
+        "text": "शनिपुत्र गुलिक · कार्यों में विलंब संभव",
+        "char_count": 39
+      },
+      {
+        "text": "दिन एवं रात्रि चौघड़िया",
+        "char_count": 23
+      },
+      {
+        "text": "२४ घंटे ग्रहीय होरा",
+        "char_count": 19
+      },
+      {
+        "text": "ग्रह गोचर (वर्तमान स्थिति)",
+        "char_count": 26
+      },
+      {
+        "text": "आगामी व्रत एवं त्यौहार",
+        "char_count": 22
+      },
+      {
+        "text": "वर्तमान में सक्रिय चौघड़िया",
+        "char_count": 27
+      },
+      {
+        "text": "अवधि:",
+        "char_count": 5
+      },
+      {
+        "text": "शेष समय:",
+        "char_count": 8
+      },
+      {
+        "text": "दिन का चौघड़िया (सूर्योदय से सूर्यास्त)",
+        "char_count": 39
+      },
+      {
+        "text": "रात्रि का चौघड़िया (सूर्यास्त से सूर्योदय)",
+        "char_count": 42
+      },
+      {
+        "text": "सूर्योदय से शास्त्रीय क्रम के अनुसार २४ ग्रहीय होरा निरंतर चलती हैं।",
+        "char_count": 68
+      },
+      {
+        "text": "१ होरा ≈ ६० मिनट",
+        "char_count": 16
+      },
+      {
+        "text": "राशि (Sign)",
+        "char_count": 11
+      },
+      {
+        "text": "गति (Motion)",
+        "char_count": 12
+      },
+      {
+        "text": "सभी त्यौहार",
+        "char_count": 11
+      },
+      {
+        "text": "प्रमुख त्यौहार",
+        "char_count": 14
+      },
+      {
+        "text": "एकादशी व्रत",
+        "char_count": 11
+      },
+      {
+        "text": "पवित्र व्रत",
+        "char_count": 11
+      },
+      {
+        "text": "पूर्णिमा / अमावस्या",
+        "char_count": 19
+      },
+      {
+        "text": "आज का उत्सव",
+        "char_count": 11
+      },
+      {
+        "text": "सात्विक उपाय:",
+        "char_count": 13
+      },
+      {
+        "text": "इस श्रेणी में कोई आगामी त्यौहार उपलब्ध नहीं है।",
+        "char_count": 47
+      },
+      {
+        "text": "“तिथि के ज्ञान से ऐश्वर्य मिलता है, वार से आयु बढ़ती है, नक्षत्र से पापों का शमन होता है, योग से रोग दूर होते हैं, और करण से कार्य सिद्धि होती है। ऐसा पवित्र पंचांग का उत्तम फल है।”",
+        "char_count": 181
+      },
+      {
+        "text": "सूर्य सिद्धांत एवं बृहत् पराशर होरा शास्त्र",
+        "char_count": 43
+      },
+      {
+        "text": "पुणे",
+        "char_count": 4
+      },
+      {
+        "text": "मुंबई",
+        "char_count": 5
+      },
+      {
+        "text": "नवी दिल्ली",
+        "char_count": 10
+      },
+      {
+        "text": "नई दिल्ली",
+        "char_count": 9
+      },
+      {
+        "text": "वाराणसी (काशी)",
+        "char_count": 14
+      },
+      {
+        "text": "बेंगळुरू",
+        "char_count": 8
+      },
+      {
+        "text": "बेंगलुरु",
+        "char_count": 8
+      },
+      {
+        "text": "चेन्नई",
+        "char_count": 6
+      },
+      {
+        "text": "कोलकाता",
+        "char_count": 7
+      },
+      {
+        "text": "हैदराबाद",
+        "char_count": 8
+      },
+      {
+        "text": "अहमदाबाद",
+        "char_count": 8
+      },
+      {
+        "text": "जयपूर",
+        "char_count": 5
+      },
+      {
+        "text": "जयपुर",
+        "char_count": 5
+      },
+      {
+        "text": "उज्जैन (अवन्तिका)",
+        "char_count": 17
+      },
+      {
+        "text": "उज्जैन",
+        "char_count": 6
+      },
+      {
+        "text": "हरिद्वार",
+        "char_count": 8
+      },
+      {
+        "text": "सूर्य देव · रविवार (Ravi-vara)",
+        "char_count": 30
+      },
+      {
+        "text": "चंद्र देव · सोमवार (Soma-vara)",
+        "char_count": 30
+      },
+      {
+        "text": "मंगळ देव · मंगळवार (Mangala-vara)",
+        "char_count": 33
+      },
+      {
+        "text": "मंगल देव · मंगलवार (Mangala-vara)",
+        "char_count": 33
+      },
+      {
+        "text": "बुध देव · बुधवार (Budha-vara)",
+        "char_count": 29
+      },
+      {
+        "text": "बृहस्पती (गुरु) देव · गुरुवार (Guru-vara)",
+        "char_count": 41
+      },
+      {
+        "text": "बृहस्पति (गुरु) देव · गुरुवार (Guru-vara)",
+        "char_count": 41
+      },
+      {
+        "text": "शुक्र देव · शुक्रवार (Shukra-vara)",
+        "char_count": 34
+      },
+      {
+        "text": "शनी देव · शनिवार (Shani-vara)",
+        "char_count": 29
+      },
+      {
+        "text": "शनि देव · शनिवार (Shani-vara)",
+        "char_count": 29
+      },
+      {
+        "text": "प्रतिपदा",
+        "char_count": 8
+      },
+      {
+        "text": "द्वितीया",
+        "char_count": 8
+      },
+      {
+        "text": "तृतीया",
+        "char_count": 6
+      },
+      {
+        "text": "चतुर्थी",
+        "char_count": 7
+      },
+      {
+        "text": "पंचमी",
+        "char_count": 5
+      },
+      {
+        "text": "षष्ठी",
+        "char_count": 5
+      },
+      {
+        "text": "सप्तमी",
+        "char_count": 6
+      },
+      {
+        "text": "अष्टमी",
+        "char_count": 6
+      },
+      {
+        "text": "नवमी",
+        "char_count": 4
+      },
+      {
+        "text": "दशमी",
+        "char_count": 4
+      },
+      {
+        "text": "एकादशी",
+        "char_count": 6
+      },
+      {
+        "text": "द्वादशी",
+        "char_count": 7
+      },
+      {
+        "text": "त्रयोदशी",
+        "char_count": 8
+      },
+      {
+        "text": "चतुर्दशी",
+        "char_count": 8
+      },
+      {
+        "text": "पौर्णिमा",
+        "char_count": 8
+      },
+      {
+        "text": "पूर्णिमा",
+        "char_count": 8
+      },
+      {
+        "text": "अमावास्या",
+        "char_count": 9
+      },
+      {
+        "text": "अमावस्या",
+        "char_count": 8
+      },
+      {
+        "text": "अश्विनी",
+        "char_count": 7
+      },
+      {
+        "text": "भरणी",
+        "char_count": 4
+      },
+      {
+        "text": "कृत्तिका",
+        "char_count": 8
+      },
+      {
+        "text": "रोहिणी",
+        "char_count": 6
+      },
+      {
+        "text": "मृगशीर्ष",
+        "char_count": 8
+      },
+      {
+        "text": "आर्द्रा",
+        "char_count": 7
+      },
+      {
+        "text": "पुनर्वसु",
+        "char_count": 8
+      },
+      {
+        "text": "पुष्य",
+        "char_count": 5
+      },
+      {
+        "text": "आश्लेषा",
+        "char_count": 7
+      },
+      {
+        "text": "मघा",
+        "char_count": 3
+      },
+      {
+        "text": "पूर्वा फाल्गुनी",
+        "char_count": 15
+      },
+      {
+        "text": "उत्तरा फाल्गुनी",
+        "char_count": 15
+      },
+      {
+        "text": "हस्त",
+        "char_count": 4
+      },
+      {
+        "text": "चित्रा",
+        "char_count": 6
+      },
+      {
+        "text": "स्वाती",
+        "char_count": 6
+      },
+      {
+        "text": "स्वाति",
+        "char_count": 6
+      },
+      {
+        "text": "विशाखा",
+        "char_count": 6
+      },
+      {
+        "text": "अनुराधा",
+        "char_count": 7
+      },
+      {
+        "text": "ज्येष्ठा",
+        "char_count": 8
+      },
+      {
+        "text": "मूळ (मूल)",
+        "char_count": 9
+      },
+      {
+        "text": "मूल",
+        "char_count": 3
+      },
+      {
+        "text": "पूर्वाषाढा",
+        "char_count": 10
+      },
+      {
+        "text": "पूर्वाषाढ़ा",
+        "char_count": 11
+      },
+      {
+        "text": "उत्तराषाढा",
+        "char_count": 10
+      },
+      {
+        "text": "उत्तराषाढ़ा",
+        "char_count": 11
+      },
+      {
+        "text": "श्रवण",
+        "char_count": 5
+      },
+      {
+        "text": "धनिष्ठा",
+        "char_count": 7
+      },
+      {
+        "text": "शतभिषा",
+        "char_count": 6
+      },
+      {
+        "text": "पूर्वाभाद्रपदा",
+        "char_count": 14
+      },
+      {
+        "text": "पूर्वाभाद्रपद",
+        "char_count": 13
+      },
+      {
+        "text": "उत्तराभाद्रपदा",
+        "char_count": 14
+      },
+      {
+        "text": "उत्तराभाद्रपद",
+        "char_count": 13
+      },
+      {
+        "text": "रेवती",
+        "char_count": 5
+      },
+      {
+        "text": "विष्कंभ",
+        "char_count": 7
+      },
+      {
+        "text": "विष्कम्भ",
+        "char_count": 8
+      },
+      {
+        "text": "प्रीती",
+        "char_count": 6
+      },
+      {
+        "text": "प्रीति",
+        "char_count": 6
+      },
+      {
+        "text": "आयुष्मान",
+        "char_count": 8
+      },
+      {
+        "text": "सौभाग्य",
+        "char_count": 7
+      },
+      {
+        "text": "शोभन",
+        "char_count": 4
+      },
+      {
+        "text": "अतिगंड",
+        "char_count": 6
+      },
+      {
+        "text": "अतिगण्ड",
+        "char_count": 7
+      },
+      {
+        "text": "सुकर्मा",
+        "char_count": 7
+      },
+      {
+        "text": "धृती",
+        "char_count": 4
+      },
+      {
+        "text": "धृति",
+        "char_count": 4
+      },
+      {
+        "text": "शूल",
+        "char_count": 3
+      },
+      {
+        "text": "गंड",
+        "char_count": 3
+      },
+      {
+        "text": "गण्ड",
+        "char_count": 4
+      },
+      {
+        "text": "वृद्धी",
+        "char_count": 6
+      },
+      {
+        "text": "वृद्धि",
+        "char_count": 6
+      },
+      {
+        "text": "ध्रुव",
+        "char_count": 5
+      },
+      {
+        "text": "व्याघात",
+        "char_count": 7
+      },
+      {
+        "text": "हर्षण",
+        "char_count": 5
+      },
+      {
+        "text": "वज्र",
+        "char_count": 4
+      },
+      {
+        "text": "सिद्धी",
+        "char_count": 6
+      },
+      {
+        "text": "सिद्धि",
+        "char_count": 6
+      },
+      {
+        "text": "व्यतीपात",
+        "char_count": 8
+      },
+      {
+        "text": "वरीयान",
+        "char_count": 6
+      },
+      {
+        "text": "परिघ",
+        "char_count": 4
+      },
+      {
+        "text": "शिव",
+        "char_count": 3
+      },
+      {
+        "text": "सिद्ध",
+        "char_count": 5
+      },
+      {
+        "text": "साध्य",
+        "char_count": 5
+      },
+      {
+        "text": "शुभ",
+        "char_count": 3
+      },
+      {
+        "text": "शुक्ल",
+        "char_count": 5
+      },
+      {
+        "text": "ब्रह्म",
+        "char_count": 6
+      },
+      {
+        "text": "इंद्र",
+        "char_count": 5
+      },
+      {
+        "text": "इन्द्र",
+        "char_count": 6
+      },
+      {
+        "text": "वैधृती",
+        "char_count": 6
+      },
+      {
+        "text": "वैधृति",
+        "char_count": 6
+      },
+      {
+        "text": "बव",
+        "char_count": 2
+      },
+      {
+        "text": "बालव",
+        "char_count": 4
+      },
+      {
+        "text": "कौलव",
+        "char_count": 4
+      },
+      {
+        "text": "तैतिल",
+        "char_count": 5
+      },
+      {
+        "text": "गर",
+        "char_count": 2
+      },
+      {
+        "text": "वणिज",
+        "char_count": 4
+      },
+      {
+        "text": "विष्टी (भद्रा)",
+        "char_count": 14
+      },
+      {
+        "text": "विष्टि (भद्रा)",
+        "char_count": 14
+      },
+      {
+        "text": "भद्रा (विष्टी)",
+        "char_count": 14
+      },
+      {
+        "text": "भद्रा (विष्टि)",
+        "char_count": 14
+      },
+      {
+        "text": "शकुनी",
+        "char_count": 5
+      },
+      {
+        "text": "शकुनि",
+        "char_count": 5
+      },
+      {
+        "text": "चतुष्पाद",
+        "char_count": 8
+      },
+      {
+        "text": "नाग",
+        "char_count": 3
+      },
+      {
+        "text": "किम्स्तुघ्न",
+        "char_count": 11
+      },
+      {
+        "text": "किंस्तुघ्न",
+        "char_count": 10
+      },
+      {
+        "text": "मेष",
+        "char_count": 3
+      },
+      {
+        "text": "वृषभ",
+        "char_count": 4
+      },
+      {
+        "text": "मिथुन",
+        "char_count": 5
+      },
+      {
+        "text": "कर्क",
+        "char_count": 4
+      },
+      {
+        "text": "सिंह",
+        "char_count": 4
+      },
+      {
+        "text": "कन्या",
+        "char_count": 5
+      },
+      {
+        "text": "तूळ (तुला)",
+        "char_count": 10
+      },
+      {
+        "text": "तुला",
+        "char_count": 4
+      },
+      {
+        "text": "वृश्चिक",
+        "char_count": 7
+      },
+      {
+        "text": "धनु",
+        "char_count": 3
+      },
+      {
+        "text": "मकर",
+        "char_count": 3
+      },
+      {
+        "text": "कुंभ",
+        "char_count": 4
+      },
+      {
+        "text": "मीन",
+        "char_count": 3
+      },
+      {
+        "text": "सूर्य (Surya)",
+        "char_count": 13
+      },
+      {
+        "text": "चंद्र (Chandra)",
+        "char_count": 15
+      },
+      {
+        "text": "मंगळ (Mangala)",
+        "char_count": 14
+      },
+      {
+        "text": "मंगल (Mangala)",
+        "char_count": 14
+      },
+      {
+        "text": "बुध (Budha)",
+        "char_count": 11
+      },
+      {
+        "text": "गुरु (बृहस्पती)",
+        "char_count": 15
+      },
+      {
+        "text": "गुरु (बृहस्पति)",
+        "char_count": 15
+      },
+      {
+        "text": "शुक्र (Shukra)",
+        "char_count": 14
+      },
+      {
+        "text": "शनी (Shani)",
+        "char_count": 11
+      },
+      {
+        "text": "शनि (Shani)",
+        "char_count": 11
+      },
+      {
+        "text": "राहू (Rahu)",
+        "char_count": 11
+      },
+      {
+        "text": "राहु (Rahu)",
+        "char_count": 11
+      },
+      {
+        "text": "केतू (Ketu)",
+        "char_count": 11
+      },
+      {
+        "text": "केतु (Ketu)",
+        "char_count": 11
+      },
+      {
+        "text": "शुभ (उत्तम)",
+        "char_count": 11
+      },
+      {
+        "text": "लाभ",
+        "char_count": 3
+      },
+      {
+        "text": "शुभ (लाभ)",
+        "char_count": 9
+      },
+      {
+        "text": "अमृत",
+        "char_count": 4
+      },
+      {
+        "text": "सर्वोत्तम अमृत",
+        "char_count": 14
+      },
+      {
+        "text": "चर",
+        "char_count": 2
+      },
+      {
+        "text": "सामान्य / प्रवास",
+        "char_count": 16
+      },
+      {
+        "text": "सामान्य / यात्रा",
+        "char_count": 16
+      },
+      {
+        "text": "रोग",
+        "char_count": 3
+      },
+      {
+        "text": "अशुभ (रोग)",
+        "char_count": 10
+      },
+      {
+        "text": "काळ",
+        "char_count": 3
+      },
+      {
+        "text": "अशुभ (हानी)",
+        "char_count": 11
+      },
+      {
+        "text": "काल",
+        "char_count": 3
+      },
+      {
+        "text": "अशुभ (हानि)",
+        "char_count": 11
+      },
+      {
+        "text": "उद्वेग",
+        "char_count": 6
+      },
+      {
+        "text": "अशुभ (चिंता)",
+        "char_count": 12
+      },
+      {
+        "text": "अहोई अष्टमी",
+        "char_count": 11
+      },
+      {
+        "text": "संतानाचे उत्तम आरोग्य, दीर्घायुष्य आणि सौख्यासाठी मातांचा निर्जला उपवास.",
+        "char_count": 72
+      },
+      {
+        "text": "संध्याकाळी तारे पाहिल्यानंतर अहोई मातेचे पूजन व अर्घ्य द्यावे.",
+        "char_count": 62
+      },
+      {
+        "text": "संतान के दीर्घायु, स्वास्थ्य और सुख-समृद्धि हेतु माताओं का निर्जला व्रत।",
+        "char_count": 72
+      },
+      {
+        "text": "सायंकाल तारों के दर्शन पश्चात अहोई माता का विधिवत पूजन करें।",
+        "char_count": 60
+      },
+      {
+        "text": "रमा एकादशी",
+        "char_count": 10
+      },
+      {
+        "text": "दिवाळीपूर्वी भगवान विष्णू आणि माता महालक्ष्मीला समर्पित पवित्र एकादशी.",
+        "char_count": 70
+      },
+      {
+        "text": "विष्णू सहस्रनाम पठण करा आणि तुळशीजवळ सायंकाळी दिवा लावा.",
+        "char_count": 56
+      },
+      {
+        "text": "दीपावली पूर्व भगवान श्रीहरि विष्णु एवं महालक्ष्मी को समर्पित पावन एकादशी।",
+        "char_count": 73
+      },
+      {
+        "text": "विष्णु सहस्रनाम का पाठ करें तथा तुलसी जी के समक्ष दीप प्रज्वलित करें।",
+        "char_count": 69
+      },
+      {
+        "text": "धनत्रयोदशी (धन्वंतरी जयंती)",
+        "char_count": 27
+      },
+      {
+        "text": "आरोग्याचे दैवत भगवान धन्वंतरी जयंती व कुबेर-लक्ष्मी पूजन.",
+        "char_count": 57
+      },
+      {
+        "text": "तांबे, चांदी किंवा पितळेची भांडी खरेदी करावीत; घराबाहेर १३ यमदीप प्रज्वलित करावेत.",
+        "char_count": 82
+      },
+      {
+        "text": "धनतेरस (धन्वंतरि जयंती)",
+        "char_count": 23
+      },
+      {
+        "text": "आरोग्य प्रदाता भगवान धन्वंतरि प्राकट्योत्सव एवं धन-समृद्धि की साधना।",
+        "char_count": 68
+      },
+      {
+        "text": "तांबे, चांदी अथवा नए पात्र खरीदें; मुख्य द्वार पर १३ यमदीप प्रज्वलित करें।",
+        "char_count": 74
+      },
+      {
+        "text": "नरक चतुर्दशी (अभ्यंगस्नान / छोटी दिवाळी)",
+        "char_count": 40
+      },
+      {
+        "text": "अपमृत्यू निवारणासाठी अभ्यंगस्नान, यम तर्पण आणि नरकासुर वध विजयोत्सव.",
+        "char_count": 68
+      },
+      {
+        "text": "सूर्योदयापूर्वी उटणे लावून अभ्यंगस्नान करा व चार मुखी दिवा लावा.",
+        "char_count": 64
+      },
+      {
+        "text": "नरक चतुर्दशी (काली चौदस / छोटी दिवाली)",
+        "char_count": 38
+      },
+      {
+        "text": "अपमृत्यु निवारण, यम तर्पण एवं भगवान श्रीकृष्ण द्वारा भौमासुर मर्दन विजय।",
+        "char_count": 72
+      },
+      {
+        "text": "सूर्योदय से पूर्व उबटन युक्त स्नान करें तथा चतुर्मुखी दीप जलाएं।",
+        "char_count": 64
+      },
+      {
+        "text": "लक्ष्मी पूजन (दीपावली महापूजा)",
+        "char_count": 30
+      },
+      {
+        "text": "ऐश्वर्य, बुद्धी आणि मांगल्याचे प्रतीक असलेली दीपावली महापूजा.",
+        "char_count": 61
+      },
+      {
+        "text": "प्रदोष काळात श्री सूक्त व कनकधारा स्तोत्रासह महालक्ष्मी व गणेशाचे पूजन.",
+        "char_count": 71
+      },
+      {
+        "text": "लक्ष्मी पूजन (दीपावली)",
+        "char_count": 22
+      },
+      {
+        "text": "सर्व ऐश्वर्य, सद्बुद्धि एवं कल्याणकारी महालक्ष्मी-गणेश की महापूजा।",
+        "char_count": 66
+      },
+      {
+        "text": "प्रदोष काल में श्री सूक्त एवं कनकधारा स्तोत्र से पूजन कर दीपदान करें।",
+        "char_count": 69
+      },
+      {
+        "text": "गोवर्धन पूजा (अन्नकूट उत्सव)",
+        "char_count": 28
+      },
+      {
+        "text": "निसर्ग, गोमाता आणि गोवर्धन पर्वताची कृतज्ञतापूर्वक आराधना.",
+        "char_count": 58
+      },
+      {
+        "text": "गोमातेला चारा द्या आणि ५६ भोगाचा अन्नकूट नैवेद्य अर्पण करा.",
+        "char_count": 59
+      },
+      {
+        "text": "गोवर्धन पूजा (अन्नकूट)",
+        "char_count": 22
+      },
+      {
+        "text": "प्रकृति, गौ-माता एवं भगवान श्रीकृष्ण द्वारा रक्षित गोवर्धन की कृतज्ञ पूजा।",
+        "char_count": 74
+      },
+      {
+        "text": "गौमाता को ग्रास दें एवं भगवान को विविध मिष्ठान्न अन्नकूट अर्पित करें।",
+        "char_count": 69
+      },
+      {
+        "text": "भाऊबीज (यम द्वितीया)",
+        "char_count": 20
+      },
+      {
+        "text": "भाऊ-बहिणीच्या पवित्र प्रेमाचे प्रतीक आणि यमराज-यमुना मिलन दिन.",
+        "char_count": 62
+      },
+      {
+        "text": "बहिणीने भावाला ओवाळावे आणि यमराजाच्या कृपेसाठी प्रार्थना करावी.",
+        "char_count": 63
+      },
+      {
+        "text": "भाई दूज (यम द्वितीया)",
+        "char_count": 21
+      },
+      {
+        "text": "भाई-बहन के अगाध स्नेह का पावन पर्व एवं यमराज-यमुना मिलन स्मृति।",
+        "char_count": 63
+      },
+      {
+        "text": "बहनें भाई का तिलक कर आरती करें तथा दीर्घायु की प्रार्थना करें।",
+        "char_count": 62
+      },
+      {
+        "text": "प्रबोधिनी / देवउठणी एकादशी (तुळशी विवाह प्रारंभ)",
+        "char_count": 48
+      },
+      {
+        "text": "चातुर्मास समाप्ती, भगवान विष्णूंची योगनिद्रा समाप्ती व मांगलिक कार्यांचा प्रारंभ.",
+        "char_count": 81
+      },
+      {
+        "text": "उपवास ठेवावा आणि ऊस, आवळा, बोरे अर्पण करून तुळशी विवाह साजरा करावा.",
+        "char_count": 67
+      },
+      {
+        "text": "देवउठनी एकादशी (प्रबोधिनी एकादशी)",
+        "char_count": 33
+      },
+      {
+        "text": "चातुर्मास समाप्ति, श्रीहरि का जागरण एवं समस्त शुभ-मांगलिक कार्यों का प्रारंभ।",
+        "char_count": 77
+      },
+      {
+        "text": "एकादशी व्रत रखें तथा तुलसी-शालिग्राम विवाह उत्सव मनाएं।",
+        "char_count": 55
+      },
+      {
+        "text": "देव दीपावली (त्रिपुरारी पौर्णिमा)",
+        "char_count": 33
+      },
+      {
+        "text": "काशीमध्ये देवांनी साजरा केलेला दीपोत्सव आणि त्रिपुरासुर वध विजय.",
+        "char_count": 64
+      },
+      {
+        "text": "नदीकाठी किंवा मंदिरात दिवे लावावेत व शिव स्तोत्रांचे पठण करावे.",
+        "char_count": 63
+      },
+      {
+        "text": "देव दीपावली (कार्तिक पूर्णिमा)",
+        "char_count": 30
+      },
+      {
+        "text": "काशी के पावन तटों पर देवताओं द्वारा मनाया जाने वाला दिव्य प्रकाश पर्व।",
+        "char_count": 70
+      },
+      {
+        "text": "सरोवरों व मंदिरों में दीपदान करें एवं शिव महिम्न स्तोत्र का पाठ करें।",
+        "char_count": 69
+      },
+      {
+        "text": "शुक्ल प्रदोष व्रत",
+        "char_count": 17
+      },
+      {
+        "text": "मनोकामना पूर्तीसाठी प्रदोष वेळेत भगवान शिव आणि माता पार्वतीचे पूजन.",
+        "char_count": 67
+      },
+      {
+        "text": "प्रदोष काळात शंकराला बेलाची पाने व दुधाचा अभिषेक अर्पण करावा.",
+        "char_count": 61
+      },
+      {
+        "text": "समस्त मनोरथ सिद्धि हेतु सांध्यवेला में भगवान शिव-पार्वती का अभिषेक।",
+        "char_count": 67
+      },
+      {
+        "text": "प्रदोष काल में शिवलिंग पर कच्चा दूध व बिल्वपत्र अर्पित करें।",
+        "char_count": 60
+      },
+      {
+        "text": "संकष्ट चतुर्थी",
+        "char_count": 14
+      },
+      {
+        "text": "संकटनाशक श्री गणेश व्रत; चंद्रोदयानंतर नैवेद्य दाखवून उपवास सोडतात.",
+        "char_count": 67
+      },
+      {
+        "text": "चंद्रोदयापर्यंत उपवास ठेवा, २१ दुर्वा व मोदक गणेशाला अर्पण करा.",
+        "char_count": 63
+      },
+      {
+        "text": "संकष्टी चतुर्थी",
+        "char_count": 15
+      },
+      {
+        "text": "संकटों के हरण हेतु श्री गणेश का पावन व्रत; चंद्रोदय दर्शनोपरांत पारण।",
+        "char_count": 69
+      },
+      {
+        "text": "चंद्रोदय तक उपवास रखें तथा भगवान गणेश को २१ दूर्वा व मोदक अर्पित करें।",
+        "char_count": 70
+      },
+      {
+        "text": "कृष्ण सप्तमी",
+        "char_count": 12
+      },
+      {
+        "text": "शुक्ल दशमी",
+        "char_count": 10
+      },
+      {
+        "text": "कृष्ण",
+        "char_count": 5
+      },
+      {
+        "text": "रविवार",
+        "char_count": 6
+      },
+      {
+        "text": "विक्रम संवत २०८३ · आनंद",
+        "char_count": 23
+      },
+      {
+        "text": "विक्रम संवत",
+        "char_count": 11
+      },
+      {
+        "text": "शक",
+        "char_count": 2
+      },
+      {
+        "text": "चैत्र",
+        "char_count": 5
+      },
+      {
+        "text": "वैशाख",
+        "char_count": 5
+      },
+      {
+        "text": "ज्येष्ठ",
+        "char_count": 7
+      },
+      {
+        "text": "आषाढ",
+        "char_count": 4
+      },
+      {
+        "text": "आषाढ़",
+        "char_count": 5
+      },
+      {
+        "text": "श्रावण",
+        "char_count": 6
+      },
+      {
+        "text": "भाद्रपद",
+        "char_count": 7
+      },
+      {
+        "text": "अश्विन",
+        "char_count": 6
+      },
+      {
+        "text": "कार्तिक",
+        "char_count": 7
+      },
+      {
+        "text": "मार्गशीर्ष",
+        "char_count": 10
+      },
+      {
+        "text": "पौष",
+        "char_count": 3
+      },
+      {
+        "text": "माघ",
+        "char_count": 3
+      },
+      {
+        "text": "फाल्गुन",
+        "char_count": 7
+      },
+      {
+        "text": "पूर्व (Purva) — प्रवासापूर्वी आले किंवा मोहरी खाऊन निघावे.",
+        "char_count": 58
+      },
+      {
+        "text": "पूर्व (Purva) — यात्रा से पूर्व अदरक अथवा राई ग्रहण करें।",
+        "char_count": 57
+      },
+      {
+        "text": "पश्चिम (Pashchim)",
+        "char_count": 17
+      },
+      {
+        "text": "पूर्व (Purva)",
+        "char_count": 13
+      },
+      {
+        "text": "उत्तर (Uttar)",
+        "char_count": 13
+      },
+      {
+        "text": "दक्षिण (Dakshin)",
+        "char_count": 16
+      },
+      {
+        "text": "रविवारी पश्चिम दिशेला लांबचा प्रवास टाळावा",
+        "char_count": 42
+      },
+      {
+        "text": "रविवार को पश्चिम दिशा में दूरस्थ यात्रा से बचें",
+        "char_count": 47
+      },
+      {
+        "text": "सोमवारी पूर्व दिशेला लांबचा प्रवास टाळावा",
+        "char_count": 41
+      },
+      {
+        "text": "सोमवार को पूर्व दिशा में दूरस्थ यात्रा से बचें",
+        "char_count": 46
+      },
+      {
+        "text": "मंगळवारी उत्तर दिशेला लांबचा प्रवास टाळावा",
+        "char_count": 42
+      },
+      {
+        "text": "मंगलवार को उत्तर दिशा में दूरस्थ यात्रा से बचें",
+        "char_count": 47
+      },
+      {
+        "text": "उपाय: प्रवासापूर्वी आले किंवा मोहरी खाऊन निघावे",
+        "char_count": 47
+      },
+      {
+        "text": "उपाय: यात्रा से पूर्व अदरक या सरसों का सेवन करें",
+        "char_count": 48
+      },
+      {
+        "text": "उपाय: प्रवासापूर्वी विड्याचे पान खावे",
+        "char_count": 37
+      },
+      {
+        "text": "उपाय: यात्रा से पूर्व पान का सेवन करें",
+        "char_count": 38
+      },
+      {
+        "text": "उपाय: प्रवासापूर्वी थोडे दही खावे",
+        "char_count": 33
+      },
+      {
+        "text": "उपाय: यात्रा से पूर्व दही का सेवन करें",
+        "char_count": 38
+      },
+      {
+        "text": "उपाय: प्रवासापूर्वी गूळ खाऊन निघावे",
+        "char_count": 35
+      },
+      {
+        "text": "उपाय: यात्रा से पूर्व गुड़ खाकर निकलें",
+        "char_count": 38
+      }
+    ],
+    "component_horoscope": [
+      {
+        "text": "मेष",
+        "char_count": 3
+      },
+      {
+        "text": "२१ मार्च – १९ अप्रैल",
+        "char_count": 20
+      },
+      {
+        "text": "अग्नि",
+        "char_count": 5
+      },
+      {
+        "text": "मंगल",
+        "char_count": 4
+      },
+      {
+        "text": "वृषभ",
+        "char_count": 4
+      },
+      {
+        "text": "२० अप्रैल – २० मई",
+        "char_count": 17
+      },
+      {
+        "text": "पृथ्वी",
+        "char_count": 6
+      },
+      {
+        "text": "शुक्र",
+        "char_count": 5
+      },
+      {
+        "text": "मिथुन",
+        "char_count": 5
+      },
+      {
+        "text": "२१ मई – २० जून",
+        "char_count": 14
+      },
+      {
+        "text": "वायु",
+        "char_count": 4
+      },
+      {
+        "text": "बुध",
+        "char_count": 3
+      },
+      {
+        "text": "कर्क",
+        "char_count": 4
+      },
+      {
+        "text": "२१ जून – २२ जुलाई",
+        "char_count": 17
+      },
+      {
+        "text": "जल",
+        "char_count": 2
+      },
+      {
+        "text": "चंद्र",
+        "char_count": 5
+      },
+      {
+        "text": "सिंह",
+        "char_count": 4
+      },
+      {
+        "text": "२३ जुलाई – २२ अगस्त",
+        "char_count": 19
+      },
+      {
+        "text": "सूर्य",
+        "char_count": 5
+      },
+      {
+        "text": "कन्या",
+        "char_count": 5
+      },
+      {
+        "text": "२३ अगस्त – २२ सितंबर",
+        "char_count": 20
+      },
+      {
+        "text": "तुला",
+        "char_count": 4
+      },
+      {
+        "text": "२३ सितंबर – २२ अक्टूबर",
+        "char_count": 22
+      },
+      {
+        "text": "वृश्चिक",
+        "char_count": 7
+      },
+      {
+        "text": "२३ अक्टूबर – २१ नवंबर",
+        "char_count": 21
+      },
+      {
+        "text": "धनु",
+        "char_count": 3
+      },
+      {
+        "text": "२२ नवंबर – २१ दिसंबर",
+        "char_count": 20
+      },
+      {
+        "text": "गुरु",
+        "char_count": 4
+      },
+      {
+        "text": "मकर",
+        "char_count": 3
+      },
+      {
+        "text": "२२ दिसंबर – १९ जनवरी",
+        "char_count": 20
+      },
+      {
+        "text": "शनि",
+        "char_count": 3
+      },
+      {
+        "text": "कुंभ",
+        "char_count": 4
+      },
+      {
+        "text": "२० जनवरी – १८ फरवरी",
+        "char_count": 19
+      },
+      {
+        "text": "मीन",
+        "char_count": 3
+      },
+      {
+        "text": "१९ फरवरी – २० मार्च",
+        "char_count": 19
+      },
+      {
+        "text": "२१ मार्च – १९ एप्रिल",
+        "char_count": 20
+      },
+      {
+        "text": "अग्नी",
+        "char_count": 5
+      },
+      {
+        "text": "मंगळ",
+        "char_count": 4
+      },
+      {
+        "text": "२० एप्रिल – २० मे",
+        "char_count": 17
+      },
+      {
+        "text": "२१ मे – २० जून",
+        "char_count": 14
+      },
+      {
+        "text": "वायू",
+        "char_count": 4
+      },
+      {
+        "text": "२१ जून – २२ जुलै",
+        "char_count": 16
+      },
+      {
+        "text": "२३ जुलै – २२ ऑगस्ट",
+        "char_count": 18
+      },
+      {
+        "text": "२३ ऑगस्ट – २२ सप्टेंबर",
+        "char_count": 22
+      },
+      {
+        "text": "तूळ",
+        "char_count": 3
+      },
+      {
+        "text": "२३ सप्टेंबर – २२ ऑक्टोबर",
+        "char_count": 24
+      },
+      {
+        "text": "२३ ऑक्टोबर – २१ नोव्हेंबर",
+        "char_count": 25
+      },
+      {
+        "text": "२२ नोव्हेंबर – २१ डिसेंबर",
+        "char_count": 25
+      },
+      {
+        "text": "गुरू",
+        "char_count": 4
+      },
+      {
+        "text": "२२ डिसेंबर – १९ जानेवारी",
+        "char_count": 24
+      },
+      {
+        "text": "शनी",
+        "char_count": 3
+      },
+      {
+        "text": "२० जानेवारी – १८ फेब्रुवारी",
+        "char_count": 27
+      },
+      {
+        "text": "१९ फेब्रुवारी – २० मार्च",
+        "char_count": 24
+      },
+      {
+        "text": "गतिशील वैदिक गोचर प्रणाली",
+        "char_count": 25
+      },
+      {
+        "text": "दैनिक राशिफल एवं ग्रह गोचर",
+        "char_count": 26
+      },
+      {
+        "text": "स्विस एफिमेरिस के सटीक खगोलीय गोचर पर आधारित · सायन नहीं, निरयण लाहिड़ी अयनांश · कोई स्थिर पाठ नहीं",
+        "char_count": 99
+      },
+      {
+        "text": "आज के ग्रह प्रभाव और शुभ दिशा जानने के लिए अपनी राशि चुनें",
+        "char_count": 58
+      },
+      {
+        "text": "आज का खगोलीय एवं पंचांगीय समन्वय",
+        "char_count": 32
+      },
+      {
+        "text": "तिथि",
+        "char_count": 4
+      },
+      {
+        "text": "पक्ष",
+        "char_count": 4
+      },
+      {
+        "text": "चंद्र नक्षत्र",
+        "char_count": 13
+      },
+      {
+        "text": "वार स्वामी",
+        "char_count": 10
+      },
+      {
+        "text": "सक्रिय ग्रह प्रभाव एवं भाव गोचर",
+        "char_count": 31
+      },
+      {
+        "text": "आज का समग्र फलादेश",
+        "char_count": 18
+      },
+      {
+        "text": "प्रेम एवं संबंध",
+        "char_count": 15
+      },
+      {
+        "text": "करियर, व्यापार एवं कर्मक्षेत्र",
+        "char_count": 30
+      },
+      {
+        "text": "स्वास्थ्य एवं जीवन ऊर्जा",
+        "char_count": 24
+      },
+      {
+        "text": "दैनिक ऊर्जा संतुलन एवं अंक",
+        "char_count": 26
+      },
+      {
+        "text": "समग्र",
+        "char_count": 5
+      },
+      {
+        "text": "प्रेम",
+        "char_count": 5
+      },
+      {
+        "text": "करियर",
+        "char_count": 5
+      },
+      {
+        "text": "स्वास्थ्य",
+        "char_count": 9
+      },
+      {
+        "text": "वित्त",
+        "char_count": 5
+      },
+      {
+        "text": "भाग्य",
+        "char_count": 5
+      },
+      {
+        "text": "आज के शुभ निर्देशांक",
+        "char_count": 20
+      },
+      {
+        "text": "शुभ अंक",
+        "char_count": 7
+      },
+      {
+        "text": "शुभ रंग",
+        "char_count": 7
+      },
+      {
+        "text": "शुभ रत्न",
+        "char_count": 8
+      },
+      {
+        "text": "शासक ग्रह",
+        "char_count": 9
+      },
+      {
+        "text": "शुभ मुहूर्त समय",
+        "char_count": 15
+      },
+      {
+        "text": "अनुकूल दिशा",
+        "char_count": 11
+      },
+      {
+        "text": "आज की अनुकूल राशियां",
+        "char_count": 20
+      },
+      {
+        "text": "दैनिक नक्षत्र मंत्र",
+        "char_count": 19
+      },
+      {
+        "text": "दैनिक वैदिक मार्गदर्शन",
+        "char_count": 22
+      },
+      {
+        "text": "दैनिक राशिफल प्रिंट करें",
+        "char_count": 24
+      },
+      {
+        "text": "खगोलीय गोचर की गणना की जा रही है…",
+        "char_count": 33
+      },
+      {
+        "text": "गोचर गणना में क्षणिक विलंब। कृपया पुनः प्रयास करें।",
+        "char_count": 51
+      },
+      {
+        "text": "दैनिक राशीभविष्य आणि ग्रह गोचर",
+        "char_count": 30
+      },
+      {
+        "text": "स्विस एफिमेरिसच्या अचूक खगोलीय ग्रह गोचरावर आधारित · निरयन लाहिड़ी अयनांश · कोणतेही स्थिर भाकीत नाही",
+        "char_count": 100
+      },
+      {
+        "text": "आजचे ग्रहांचे शुभ-अशुभ प्रवाह जाणून घेण्यासाठी आपली रास निवडा",
+        "char_count": 61
+      },
+      {
+        "text": "आजचा खगोलीय व पंचांग समन्वय",
+        "char_count": 27
+      },
+      {
+        "text": "तिथी",
+        "char_count": 4
+      },
+      {
+        "text": "वार अधिपती",
+        "char_count": 10
+      },
+      {
+        "text": "सक्रिय ग्रह प्रभाव आणि भाव गोचर",
+        "char_count": 31
+      },
+      {
+        "text": "आजचा समग्र दृष्टीकोन",
+        "char_count": 20
+      },
+      {
+        "text": "प्रेम आणि नातेसंबंध",
+        "char_count": 19
+      },
+      {
+        "text": "करिअर आणि कार्यक्षेत्र",
+        "char_count": 22
+      },
+      {
+        "text": "आरोग्य आणि शारीरिक ऊर्जा",
+        "char_count": 24
+      },
+      {
+        "text": "दैनिक ऊर्जा संतुलन गुण",
+        "char_count": 22
+      },
+      {
+        "text": "एकूण",
+        "char_count": 4
+      },
+      {
+        "text": "करिअर",
+        "char_count": 5
+      },
+      {
+        "text": "आरोग्य",
+        "char_count": 6
+      },
+      {
+        "text": "आजचे शुभ निर्देशांक",
+        "char_count": 19
+      },
+      {
+        "text": "स्वामी ग्रह",
+        "char_count": 11
+      },
+      {
+        "text": "शुभ मुहूर्त वेळ",
+        "char_count": 15
+      },
+      {
+        "text": "आजच्या अनुकूल राशी",
+        "char_count": 18
+      },
+      {
+        "text": "राशीभविष्य अहवाल प्रिंट करा",
+        "char_count": 27
+      },
+      {
+        "text": "खगोलीय ग्रह स्थितीची गणना सुरू आहे…",
+        "char_count": 35
+      },
+      {
+        "text": "ग्रह गोचर गणनेत क्षणिक अडथळा. कृपया पुन्हा प्रयत्न करा.",
+        "char_count": 55
+      }
+    ],
+    "component_blog": [
+      {
+        "text": "सभी लेख",
+        "char_count": 7
+      },
+      {
+        "text": "ग्रह एवं नवग्रह",
+        "char_count": 15
+      },
+      {
+        "text": "योग एवं दोष",
+        "char_count": 11
+      },
+      {
+        "text": "दशा एवं काल गणना",
+        "char_count": 16
+      },
+      {
+        "text": "२७ नक्षत्र",
+        "char_count": 10
+      },
+      {
+        "text": "शास्त्रीय उपाय",
+        "char_count": 14
+      },
+      {
+        "text": "वैदिक दर्शन",
+        "char_count": 11
+      },
+      {
+        "text": "सर्व लेख",
+        "char_count": 8
+      },
+      {
+        "text": "ग्रह आणि नवग्रह",
+        "char_count": 15
+      },
+      {
+        "text": "योग आणि दोष",
+        "char_count": 11
+      },
+      {
+        "text": "दशा आणि कालनिर्णय",
+        "char_count": 17
+      },
+      {
+        "text": "२७ नक्षत्रे",
+        "char_count": 11
+      },
+      {
+        "text": "वैदिक उपाय",
+        "char_count": 10
+      },
+      {
+        "text": "ज्योतिष तत्त्वज्ञान",
+        "char_count": 19
+      },
+      {
+        "text": "वैदिक ज्ञान एवं ज्योतिषीय आलेख",
+        "char_count": 30
+      },
+      {
+        "text": "ज्योतिष लेख एवं आकाशीय रहस्य",
+        "char_count": 28
+      },
+      {
+        "text": "भारतीय ज्योतिष के मूलभूत सिद्धांत, काल गणना, नवग्रहों का प्रभाव और जीवनोपयोगी शास्त्रीय उपाय।",
+        "char_count": 93
+      },
+      {
+        "text": "ग्रह, योग, दशा या विषय से लेख खोजें…",
+        "char_count": 36
+      },
+      {
+        "text": "प्रमुख वैदिक आलेख",
+        "char_count": 17
+      },
+      {
+        "text": "पूरा लेख पढ़ें →",
+        "char_count": 16
+      },
+      {
+        "text": "मिनट पठन",
+        "char_count": 8
+      },
+      {
+        "text": "प्रकाशित",
+        "char_count": 8
+      },
+      {
+        "text": "लेखक",
+        "char_count": 4
+      },
+      {
+        "text": "आपकी खोज या चुने गए विषय से संबंधित कोई लेख नहीं मिला।",
+        "char_count": 54
+      },
+      {
+        "text": "फ़िल्टर हटाएं",
+        "char_count": 13
+      },
+      {
+        "text": "← सभी लेखों पर वापस जाएं",
+        "char_count": 24
+      },
+      {
+        "text": "संबंधित वैदिक लेख",
+        "char_count": 17
+      },
+      {
+        "text": "प्रमुख ज्योतिष विषय",
+        "char_count": 19
+      },
+      {
+        "text": "वैदिक ज्ञान सार",
+        "char_count": 15
+      },
+      {
+        "text": "वैदिक ज्योतिष में ग्रह पूर्वजन्म के संचित कर्मों के निर्देशक (कारक) हैं। शास्त्र का उद्देश्य भय नहीं, बल्कि विवेक और आत्म-कल्याण है।",
+        "char_count": 132
+      },
+      {
+        "text": "लेख लोड हो रहे हैं…",
+        "char_count": 19
+      },
+      {
+        "text": "वैदिक ज्ञान आणि ज्योतिषीय लेख",
+        "char_count": 29
+      },
+      {
+        "text": "ज्योतिष शास्त्र लेख आणि खगोलीय रहस्ये",
+        "char_count": 37
+      },
+      {
+        "text": "प्राचीन भारतीय खगोलशास्त्र, दशा विचार, नवग्रहांचे प्रभाव आणि शास्त्रीय वैदिक उपायांचे सखोल मार्गदर्शन.",
+        "char_count": 102
+      },
+      {
+        "text": "ग्रह, योग, दशा किंवा विषयानुसार शोधा…",
+        "char_count": 37
+      },
+      {
+        "text": "विशेष वैदिक आलेख",
+        "char_count": 16
+      },
+      {
+        "text": "संपूर्ण लेख वाचा →",
+        "char_count": 18
+      },
+      {
+        "text": "मिनिट वाचन",
+        "char_count": 10
+      },
+      {
+        "text": "दिनांक",
+        "char_count": 6
+      },
+      {
+        "text": "आपल्या शोधाशी किंवा निवडलेल्या विषयाशी जुळणारे लेख उपलब्ध नाहीत.",
+        "char_count": 64
+      },
+      {
+        "text": "फिल्टर काढा",
+        "char_count": 11
+      },
+      {
+        "text": "← सर्व लेखांकडे परत या",
+        "char_count": 22
+      },
+      {
+        "text": "वैदिक ज्ञान संदेश",
+        "char_count": 17
+      },
+      {
+        "text": "ज्योतिषशास्त्र हे कर्म आणि काळाचे शास्त्र आहे. ग्रह हे केवळ सूचना देतात, पुरुषार्थ आणि संयमाने आपण आपल्या जीवनाला योग्य दिशा देऊ शकतो.",
+        "char_count": 134
+      },
+      {
+        "text": "लेख लोड होत आहेत…",
+        "char_count": 17
+      }
+    ]
+  }
+}

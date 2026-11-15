@@ -38,6 +38,7 @@ import {
   localizeFestivalItem,
 } from './panchangLocalization';
 import { openPrintablePanchangReport } from './panchangReportGenerator';
+import LocalHorizonDome from './LocalHorizonDome';
 
 interface PanchangData {
   city?: string;
@@ -548,14 +549,15 @@ https://astrologic.com/panchang`;
 
               {/* City Selection */}
               <div className="space-y-1.5 mb-4">
-                <label className="text-xs font-semibold text-[#421A10]/80 uppercase tracking-wider block">
+                <label htmlFor="panchang-city-select" className="text-xs font-semibold text-[#421A10]/80 uppercase tracking-wider block cursor-pointer">
                   {ui.selectLocation}
                 </label>
                 <div className="relative">
                   <select
+                    id="panchang-city-select"
                     value={selectedCity}
                     onChange={(e) => setSelectedCity(e.target.value)}
-                    className="w-full appearance-none bg-[#FDF5E6] border border-[#F9DAB5] rounded-xl px-3.5 py-2.5 text-sm font-medium text-[#421A10] focus:outline-none focus:ring-2 focus:ring-[#821C17]/30 cursor-pointer shadow-xs"
+                    className="w-full appearance-none bg-[#FDF5E6] border border-[#F9DAB5] rounded-xl px-3.5 py-2.5 text-sm font-medium text-[#421A10] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#821C17] cursor-pointer shadow-xs"
                   >
                     {CITIES.map((c) => (
                       <option key={c} value={c}>
@@ -569,15 +571,16 @@ https://astrologic.com/panchang`;
 
               {/* Date Selection */}
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#421A10]/80 uppercase tracking-wider block">
+                <label htmlFor="panchang-date-input" className="text-xs font-semibold text-[#421A10]/80 uppercase tracking-wider block cursor-pointer">
                   {ui.selectDate}
                 </label>
                 <div className="relative">
                   <input
+                    id="panchang-date-input"
                     type="date"
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
-                    className="w-full bg-[#FDF5E6] border border-[#F9DAB5] rounded-xl px-3.5 py-2.5 text-sm font-medium text-[#421A10] focus:outline-none focus:ring-2 focus:ring-[#821C17]/30 shadow-xs cursor-pointer"
+                    className="w-full bg-[#FDF5E6] border border-[#F9DAB5] rounded-xl px-3.5 py-2.5 text-sm font-medium text-[#421A10] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#821C17] shadow-xs cursor-pointer"
                   />
                   <CalendarIcon className="w-4 h-4 text-[#C46B1E] absolute right-3 top-3 pointer-events-none" />
                 </div>
@@ -620,6 +623,18 @@ https://astrologic.com/panchang`;
             </div>
           </div>
         </div>
+
+        {/* ========================================================= */}
+        {/* LOCAL HORIZON SKY DOME & SOLAR ARC                        */}
+        {/* ========================================================= */}
+        <LocalHorizonDome
+          sunrise={panchang?.sunrise}
+          sunset={panchang?.sunset}
+          moonrise={panchang?.moonrise}
+          moonset={panchang?.moonset}
+          city={selectedCity}
+          locale={locale}
+        />
 
         {/* ========================================================= */}
         {/* SUN & MOON TIMINGS (4 CARDS)                              */}

@@ -205,11 +205,13 @@ export default function BlogListModule({ locale }: BlogListModuleProps) {
         <div className="max-w-2xl mx-auto relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C46B1E]" />
           <input
+            id="blog-search-query"
+            aria-label={t.searchPlaceholder}
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t.searchPlaceholder}
-            className="w-full pl-11 pr-4 py-3 text-sm rounded-2xl bg-[#FDF5E6] border border-[#F9DAB5] text-[#421A10] placeholder-[#421A10]/40 shadow-xs focus:outline-none focus:ring-2 focus:ring-[#821C17]/30 transition-all"
+            className="w-full pl-11 pr-4 py-3 text-sm rounded-2xl bg-[#FDF5E6] border border-[#F9DAB5] text-[#421A10] placeholder-[#421A10]/40 shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-[#821C17] transition-all"
           />
         </div>
 

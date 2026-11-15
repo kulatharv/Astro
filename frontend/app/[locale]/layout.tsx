@@ -6,6 +6,9 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { AuthProvider } from '@/components/auth/AuthContext';
+import AuthModal from '@/components/auth/AuthModal';
+import { TelemetryProvider } from '@/components/telemetry/TelemetryHarvester';
 import '../globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -93,9 +96,14 @@ export default async function LocaleLayout({
         className="min-h-screen flex flex-col bg-[#FAF6F0] text-[#24120B] font-sans antialiased selection:bg-[#7A1612] selection:text-[#FAF6F0] notranslate"
       >
         <NextIntlClientProvider messages={messages}>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <AuthProvider>
+            <TelemetryProvider>
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <AuthModal />
+            </TelemetryProvider>
+          </AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>

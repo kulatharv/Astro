@@ -1,0 +1,152 @@
+{
+  "mr": [
+    {
+      "url": "http://localhost:3000/mr",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/mr/kundali",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/mr/predictions",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/mr/panchang",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/mr/horoscope",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/mr/blogs",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/mr/profile",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/mr/admin",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    }
+  ],
+  "en": [
+    {
+      "url": "http://localhost:3000/en",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/en/kundali",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/en/predictions",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/en/panchang",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/en/horoscope",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/en/blogs",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/en/profile",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/en/admin",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    }
+  ],
+  "hi": [
+    {
+      "url": "http://localhost:3000/hi",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/hi/kundali",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/hi/predictions",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/hi/panchang",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/hi/horoscope",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/hi/blogs",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/hi/profile",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    },
+    {
+      "url": "http://localhost:3000/hi/admin",
+      "status": 0,
+      "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>",
+      "ok": false
+    }
+  ]
+}

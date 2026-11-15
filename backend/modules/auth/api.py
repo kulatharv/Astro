@@ -234,6 +234,112 @@ def admin_login(request: Request, username: str = Form(...), password: str = For
     return templates.TemplateResponse("admin-login.html", {"request": request, "error": "Invalid administrator credentials"}, status_code=200)
 
 
+from app.schemas.auth_schema import (
+    GoogleAuthRequest,
+    WhatsAppOtpRequest,
+    WhatsAppOtpVerifyRequest,
+    ClaimGuestChartRequest,
+    AuthResponse,
+    UserAuthSummary,
+)
+from app.services.user_service import user_service
+
+
+@auth_router.post("/api/auth/google", response_model=AuthResponse)
+def api_google_auth(request: Request, data: GoogleAuthRequest, db: Session = Depends(get_db)):
+    """Authenticates or signs up a user via Google One-Tap credential."""
+    from app.services.auth_service import auth_service
+    try:
+        res = auth_service.authenticate_google(db, data)
+        request.session["user_id"] = res.user.id
+        return res
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@auth_router.post("/api/auth/whatsapp/send-otp")
+def api_whatsapp_send_otp(data: WhatsAppOtpRequest, db: Session = Depends(get_db)):
+    """Sends a 6-digit verification code to the user's WhatsApp number."""
+    from app.services.auth_service import auth_service
+    try:
+        return auth_service.send_whatsapp_otp(db, data)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@auth_router.post("/api/auth/whatsapp/verify-otp", response_model=AuthResponse)
+def api_whatsapp_verify_otp(request: Request, data: WhatsAppOtpVerifyRequest, db: Session = Depends(get_db)):
+    """Verifies WhatsApp OTP, generates session, and returns JWT."""
+    from app.services.auth_service import auth_service
+    try:
+        res = auth_service.verify_whatsapp_otp(db, data)
+        request.session["user_id"] = res.user.id
+        return res
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=str(ve))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@auth_router.post("/api/auth/claim-guest-chart")
+def api_claim_guest_chart(request: Request, data: ClaimGuestChartRequest, db: Session = Depends(get_db)):
+    """Promotes a guest calculation into the authenticated user's Family Vault."""
+    from app.services.auth_service import auth_service
+    user_id = request.session.get("user_id")
+    if not user_id:
+        auth_header = request.headers.get("Authorization", "")
+        if auth_header.startswith("Bearer "):
+            token = auth_header[7:].strip()
+            decoded = auth_service.decode_jwt_token(token)
+            if decoded and "sub" in decoded:
+                user_id = int(decoded["sub"])
+
+    if not user_id:
+        raise HTTPException(status_code=401, detail="Authentication required to claim this chart.")
+
+    try:
+        return auth_service.claim_guest_chart(db, user_id, data)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@auth_router.get("/api/auth/me")
+def api_auth_me(request: Request, db: Session = Depends(get_db)):
+    """Returns the current authenticated user identity and Cosmic Badges."""
+    from app.services.auth_service import auth_service
+    user_id = request.session.get("user_id")
+    if not user_id:
+        auth_header = request.headers.get("Authorization", "")
+        if auth_header.startswith("Bearer "):
+            token = auth_header[7:].strip()
+            decoded = auth_service.decode_jwt_token(token)
+            if decoded and "sub" in decoded:
+                user_id = int(decoded["sub"])
+
+    if not user_id:
+        return {"authenticated": False, "user": None}
+
+    user = auth_engine.get_user_by_id(db, user_id)
+    if not user:
+        return {"authenticated": False, "user": None}
+
+    badges = user_service.calculate_cosmic_badges(user.profile) if user.profile else None
+    return {
+        "authenticated": True,
+        "user": {
+            "id": user.id,
+            "name": user.name,
+            "email": user.email,
+            "phone": user.phone,
+            "auth_provider": user.auth_provider or "email",
+            "preferred_language": user.preferred_language or "en",
+            "whatsapp_opt_in": user.profile.whatsapp_opt_in if user.profile else False,
+            "whatsapp_number": user.profile.whatsapp_number if user.profile else None,
+            "cosmic_badges": badges,
+        },
+    }
+
+
 @auth_router.post("/api/auth/signup", status_code=201)
 def api_signup(request: Request, data: UserRegister, db: Session = Depends(get_db)):
     """JSON API endpoint for user registration."""
@@ -241,7 +347,12 @@ def api_signup(request: Request, data: UserRegister, db: Session = Depends(get_d
     if err:
         raise HTTPException(status_code=400, detail=err)
     request.session["user_id"] = user.id
-    return {"status": "ok", "user": {"id": user.id, "email": user.email, "name": user.name}}
+    access_token = auth_service.create_jwt_token(user.id, email=user.email)
+    return {
+        "status": "ok",
+        "access_token": access_token,
+        "user": {"id": user.id, "email": user.email, "name": user.name},
+    }
 
 
 @auth_router.post("/api/auth/login")
@@ -251,7 +362,12 @@ def api_login(request: Request, data: UserLogin, db: Session = Depends(get_db)):
     if not user:
         raise HTTPException(status_code=401, detail="Invalid email or password")
     request.session["user_id"] = user.id
-    return {"status": "ok", "user": {"id": user.id, "email": user.email, "name": user.name}}
+    access_token = auth_service.create_jwt_token(user.id, email=user.email)
+    return {
+        "status": "ok",
+        "access_token": access_token,
+        "user": {"id": user.id, "email": user.email, "name": user.name},
+    }
 
 
 @auth_router.post("/api/auth/logout")
@@ -259,5 +375,36 @@ def api_logout(request: Request):
     """JSON API endpoint for user logout."""
     request.session.clear()
     return {"status": "ok", "message": "Logged out successfully"}
+
+
+@auth_router.post("/api/auth/guest-session")
+def api_save_guest_session(data: dict, db: Session = Depends(get_db)):
+    """
+    Saves an unauthenticated calculation into the guest session cache
+    keyed by the 42-parameter composite device fingerprint for ghost recovery.
+    """
+    from app.services.auth_service import auth_service
+    from app.schemas.auth_schema import GuestSessionCreateRequest
+    try:
+        req = GuestSessionCreateRequest(**data)
+        return auth_service.save_guest_session(db, req)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+
+@auth_router.get("/api/auth/ghost-session")
+def api_get_ghost_session(fingerprint: str = "", db: Session = Depends(get_db)):
+    """
+    Retrieves the latest unexpired, unclaimed guest chart for the given device fingerprint.
+    Powers zero-cookie Ghost Session Recovery.
+    """
+    from app.services.auth_service import auth_service
+    try:
+        return auth_service.get_ghost_session_by_fingerprint(db, fingerprint)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
 
 

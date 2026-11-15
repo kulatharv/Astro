@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
-import { RotateCcw, Play, Pause, Orbit } from 'lucide-react';
+import { RotateCcw, Play, Pause, Orbit, FastForward } from 'lucide-react';
 
 interface PlanetConfig {
   id: string;
@@ -40,6 +40,8 @@ export default function CelestialSphere() {
 
   const [viewMode, setViewMode] = useState<'3d' | '2d'>('3d');
   const [isAutoRotating, setIsAutoRotating] = useState(true);
+  const [speedMultiplier, setSpeedMultiplier] = useState<number>(1);
+  const speedRef = useRef<number>(1);
   const [selectedPlanetId, setSelectedPlanetId] = useState<string>('shani');
   const [selectedRashiId, setSelectedRashiId] = useState<string | null>(null);
   const [isHovering, setIsHovering] = useState(false);
@@ -156,8 +158,8 @@ export default function CelestialSphere() {
       anglesRef.current.y += (anglesRef.current.targetY - anglesRef.current.y) * 0.08;
 
       if (!prefersReducedMotion && isAutoRotating && !anglesRef.current.isDragging) {
-        anglesRef.current.targetY += 0.0014;
-        animStateRef.current.globalTime += 0.012;
+        anglesRef.current.targetY += 0.0014 * Math.min(speedRef.current, 5);
+        animStateRef.current.globalTime += 0.012 * speedRef.current;
       }
 
       // ── 1. BACKGROUND DETAILS (Sacred Almanac Parchment surface) ──
@@ -412,12 +414,34 @@ export default function CelestialSphere() {
         ctx.arc(item.x, item.y, item.size * 2.2, 0, Math.PI * 2);
         ctx.fill();
 
-        // Planet body
+        // Volumetric 3D Spherical Shading with Specular Light Point (top-left offset)
+        const lightOffsetX = item.x - item.size * 0.32;
+        const lightOffsetY = item.y - item.size * 0.32;
+        const sphereGrad = ctx.createRadialGradient(
+          lightOffsetX,
+          lightOffsetY,
+          item.size * 0.08,
+          item.x,
+          item.y,
+          item.size
+        );
+        if (isSelected) {
+          sphereGrad.addColorStop(0, '#FFFFFF');
+          sphereGrad.addColorStop(0.25, '#B3392E');
+          sphereGrad.addColorStop(0.75, '#791412');
+          sphereGrad.addColorStop(1, '#3E0A08');
+        } else {
+          sphereGrad.addColorStop(0, '#FFFFFF');
+          sphereGrad.addColorStop(0.28, item.cfg.color);
+          sphereGrad.addColorStop(0.82, item.cfg.color);
+          sphereGrad.addColorStop(1, '#1A0C06');
+        }
+
         ctx.beginPath();
         ctx.arc(item.x, item.y, item.size, 0, Math.PI * 2);
-        ctx.fillStyle = isSelected ? '#791412' : item.cfg.color;
+        ctx.fillStyle = sphereGrad;
         ctx.fill();
-        ctx.strokeStyle = '#FAF3E7';
+        ctx.strokeStyle = isSelected ? '#FAF3E7' : 'rgba(250, 243, 231, 0.85)';
         ctx.lineWidth = 1.3;
         ctx.stroke();
 
@@ -787,8 +811,8 @@ export default function CelestialSphere() {
 
         {/* ── BOTTOM INTERACTION CONTROLS ── */}
         <div className="relative z-20 mt-3 pt-3 border-t border-[#E8D5B9]/80 flex flex-col sm:flex-row items-center justify-between gap-3">
-          {/* Left Buttons: Pause/Resume & Reset */}
-          <div className="flex items-center gap-2 w-full sm:w-auto justify-start">
+          {/* Left Buttons: Pause/Resume, Reset & Cosmic Speed Scrubber */}
+          <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-start">
             <button
               type="button"
               onClick={() => setIsAutoRotating(!isAutoRotating)}
@@ -806,6 +830,30 @@ export default function CelestialSphere() {
               <RotateCcw className="w-3.5 h-3.5 text-[#791412]" />
               <span>{t('controls.resetView')}</span>
             </button>
+
+            {/* Cosmic Time Flow Scrubber */}
+            <div className="inline-flex items-center gap-0.5 p-1 rounded-lg bg-[#FAF3E7] border border-[#E8D5B9] shadow-2xs">
+              <FastForward className="w-3 h-3 text-[#DC9955] ml-1 mr-0.5" />
+              {[1, 5, 25].map((spd) => (
+                <button
+                  key={spd}
+                  type="button"
+                  onClick={() => {
+                    setSpeedMultiplier(spd);
+                    speedRef.current = spd;
+                  }}
+                  className={`px-2 py-0.5 text-[10px] font-mono font-bold rounded transition-all ${
+                    speedMultiplier === spd
+                      ? 'bg-[#791412] text-[#FFFFFF] shadow-2xs scale-105'
+                      : 'text-[#30221A] hover:text-[#791412]'
+                  }`}
+                  aria-pressed={speedMultiplier === spd}
+                  title={`Cosmic Time Flow ${spd}x`}
+                >
+                  {spd}x
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Right Instruction Notice */}

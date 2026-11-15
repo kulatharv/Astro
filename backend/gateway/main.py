@@ -23,6 +23,7 @@ from shared.cache.redis_client import CacheService
 
 # Import 8 extracted service module routers
 from modules.auth.api import router as auth_router, admin_router
+from modules.user.api import router as user_router
 from modules.kundali.api import router as kundali_router
 from modules.panchang.api import router as panchang_router
 from modules.prediction.api import router as prediction_router
@@ -30,6 +31,8 @@ from modules.narrative.api import router as narrative_router
 from modules.horoscope.api import router as horoscope_router
 from modules.blog.api import router as blog_router
 from modules.feedback.api import router as feedback_router
+from modules.monetization.api import monetization_router
+from modules.admin.api import admin_monitoring_router
 from gateway.pages import router as pages_router
 
 
@@ -58,9 +61,11 @@ class DefaultDenyAuthMiddleware(BaseHTTPMiddleware):
         "/api/prediction",
         "/api/chat",
         "/api/system/ephemeris",
-        "/api/auth/login",
-        "/api/auth/signup",
-        "/api/auth/logout",
+        "/api/user",
+        "/api/auth",
+        "/api/monetization",
+        "/api/admin",
+        "/api/blogs",
     )
 
     async def dispatch(self, request: Request, call_next):
@@ -245,6 +250,7 @@ app.add_middleware(
 
 # Register All Sub-Routers
 app.include_router(auth_router)
+app.include_router(user_router)
 app.include_router(kundali_router)
 app.include_router(prediction_router)
 app.include_router(panchang_router)
@@ -253,6 +259,8 @@ app.include_router(blog_router)
 app.include_router(admin_router)
 app.include_router(feedback_router)
 app.include_router(narrative_router)
+app.include_router(monetization_router)
+app.include_router(admin_monitoring_router)
 app.include_router(pages_router)
 
 

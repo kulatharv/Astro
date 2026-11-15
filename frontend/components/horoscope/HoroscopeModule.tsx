@@ -26,6 +26,7 @@ import {
   HOROSCOPE_TRANSLATIONS,
   ZodiacSignMeta,
 } from './horoscopeLocalization';
+import ConstellationGlobe from './ConstellationGlobe';
 
 interface PlanetPosition {
   name: string;
@@ -294,9 +295,13 @@ export default function HoroscopeModule({ locale }: HoroscopeModuleProps) {
         {/* ── Active Sign Overview Banner & Action Controls ── */}
         <div className="p-6 sm:p-7 rounded-2xl bg-[#FFFFFF] border border-[#C5A059]/35 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-[#7A1612] to-[#24120B] flex items-center justify-center text-[#FAF6F0] shadow-md border border-[#C5A059]/40 shrink-0">
-              <span className="text-3xl">{currentSign.glyph}</span>
-            </div>
+            <ConstellationGlobe
+              signId={currentSign.id}
+              signName={currentSign.name}
+              glyph={currentSign.glyph}
+              element={currentSign.element}
+              rulingPlanet={currentSign.ruler}
+            />
             <div>
               <div className="flex flex-wrap items-center gap-2.5">
                 <h2 className="font-serif text-2xl font-bold text-[#7A1612] tracking-tight">
