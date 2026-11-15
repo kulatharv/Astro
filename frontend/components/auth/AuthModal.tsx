@@ -55,8 +55,6 @@ export default function AuthModal() {
     }
   }, [isModalOpen]);
 
-  if (!isModalOpen) return null;
-
   // Dynamic Contextual Headers
   const getHeaderInfo = () => {
     switch (modalOptions.reason) {
@@ -241,6 +239,8 @@ export default function AuthModal() {
       setLoading(false);
     }
   };
+
+  if (!isModalOpen) return null;
 
   return (
     <div
