@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     app_name: str = "Astro-Platform"
     API_V1_STR: str = "/api"
     SECRET_KEY: str = "astrologic-ai-super-secret-jwt-key-2026-production-secure"
+    ADMIN_SECRET_KEY: str = "AstroLogicMasterAdmin2026!"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
 

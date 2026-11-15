@@ -64,7 +64,6 @@ class DefaultDenyAuthMiddleware(BaseHTTPMiddleware):
         "/api/user",
         "/api/auth",
         "/api/monetization",
-        "/api/admin",
         "/api/blogs",
     )
 
@@ -73,6 +72,18 @@ class DefaultDenyAuthMiddleware(BaseHTTPMiddleware):
 
         # Non-API routes (HTML pages, static files, docs) are allowed
         if not path.startswith("/api/"):
+            return await call_next(request)
+
+        # Protected Administrator API routes (Strict passkey or admin session required)
+        if path.startswith("/api/admin"):
+            admin_key = request.headers.get("x-admin-key")
+            expected_key = getattr(settings, "ADMIN_SECRET_KEY", "AstroLogicMasterAdmin2026!")
+            is_admin_session = request.session.get("admin") == "true"
+            if not is_admin_session and admin_key != expected_key:
+                return JSONResponse(
+                    status_code=403,
+                    content={"detail": "Administrator authorization required. Access logged and denied."},
+                )
             return await call_next(request)
 
         # Public API routes allowed without authentication

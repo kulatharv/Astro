@@ -31,6 +31,11 @@ import {
   ExternalLink,
   X,
   FileText,
+  Lock,
+  Unlock,
+  Eye,
+  EyeOff,
+  LogOut,
 } from 'lucide-react';
 
 interface AdminMetrics {
@@ -106,6 +111,13 @@ interface BlogItem {
 }
 
 export default function AdminObservatoryPage() {
+  // Master Admin Authentication State
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean | null>(null);
+  const [adminPasskey, setAdminPasskey] = useState('');
+  const [passkeyError, setPasskeyError] = useState<string | null>(null);
+  const [verifyingPasskey, setVerifyingPasskey] = useState(false);
+  const [showPasskey, setShowPasskey] = useState(false);
+
   const [activeTab, setActiveTab] = useState<'funnel' | 'users' | 'ghosts' | 'monetization' | 'system' | 'blogs'>('funnel');
   const [metrics, setMetrics] = useState<AdminMetrics | null>(null);
   const [users, setUsers] = useState<UserItem[]>([]);
@@ -173,11 +185,73 @@ export default function AdminObservatoryPage() {
     }
   };
 
+  const checkAdminAuth = async () => {
+    try {
+      const res = await fetch('/api/admin/verify');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.authenticated) {
+          setIsAdminAuthenticated(true);
+          fetchAllData();
+          return;
+        }
+      }
+      setIsAdminAuthenticated(false);
+    } catch {
+      setIsAdminAuthenticated(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetchAllData();
+    checkAdminAuth();
+  }, []);
+
+  useEffect(() => {
+    if (!isAdminAuthenticated) return;
     const interval = setInterval(fetchAllData, 15000); // 15s auto-refresh
     return () => clearInterval(interval);
-  }, []);
+  }, [isAdminAuthenticated]);
+
+  const handleAdminLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!adminPasskey.trim()) return;
+    setVerifyingPasskey(true);
+    setPasskeyError(null);
+    try {
+      const res = await fetch('/api/admin/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ passkey: adminPasskey }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setIsAdminAuthenticated(true);
+        setAdminPasskey('');
+        fetchAllData();
+      } else {
+        setPasskeyError(data.detail || 'Invalid Master Passkey. Access Denied.');
+      }
+    } catch {
+      setPasskeyError('Network error connecting to security server.');
+    } finally {
+      setVerifyingPasskey(false);
+    }
+  };
+
+  const handleAdminLogout = async () => {
+    try {
+      await fetch('/api/admin/logout', { method: 'POST' });
+    } catch {
+      // Ignore
+    }
+    setIsAdminAuthenticated(false);
+    setMetrics(null);
+    setUsers([]);
+    setGhostSessions([]);
+    setBlogs([]);
+  };
 
   const handleTriggerWhatsApp = async (dryRun: boolean) => {
     setExecutingAction(true);
@@ -339,6 +413,108 @@ export default function AdminObservatoryPage() {
     );
   });
 
+  if (isAdminAuthenticated === null) {
+    return (
+      <div className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-12 h-12 rounded-full border-3 border-[#C5A059]/30 border-t-[#7A1612] animate-spin mb-4" />
+        <p className="text-sm font-medium text-[#24120B]/70 tracking-wide font-serif">
+          Verifying Sacred Vault Credentials...
+        </p>
+      </div>
+    );
+  }
+
+  if (!isAdminAuthenticated) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
+        <div className="w-full max-w-md bg-white rounded-3xl border-2 border-[#C5A059]/40 shadow-2xl p-6 sm:p-8 relative overflow-hidden">
+          {/* Subtle cosmic background glow */}
+          <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-[#7A1612]/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#7A1612] to-[#500c0a] text-[#C5A059] shadow-lg mb-4 ring-4 ring-[#C5A059]/20">
+              <Lock className="w-8 h-8" />
+            </div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#7A1612]/10 text-[#7A1612] text-xs font-semibold uppercase tracking-wider mb-2">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>Restricted Governance Portal</span>
+            </div>
+            <h1 className="font-serif text-2xl font-bold text-[#24120B]">
+              AstroLogic Administration
+            </h1>
+            <p className="text-xs text-[#24120B]/70 mt-2 leading-relaxed">
+              Master authorization is required to access system telemetry, user registries, identity vaults, and Swiss Ephemeris controls.
+            </p>
+          </div>
+
+          <form onSubmit={handleAdminLogin} className="space-y-4">
+            <div>
+              <label htmlFor="admin-passkey-input" className="block text-xs font-semibold text-[#24120B] mb-1.5 tracking-wide">
+                Master Security Passkey
+              </label>
+              <div className="relative">
+                <input
+                  id="admin-passkey-input"
+                  aria-label="Master Security Passkey"
+                  type={showPasskey ? 'text' : 'password'}
+                  value={adminPasskey}
+                  onChange={(e) => {
+                    setAdminPasskey(e.target.value);
+                    if (passkeyError) setPasskeyError(null);
+                  }}
+                  placeholder="Enter administrator passkey..."
+                  required
+                  autoFocus
+                  className="w-full px-4 py-3 pr-11 rounded-xl bg-[#FAF6F0] border border-[#EADBC8] text-sm text-[#24120B] placeholder-[#24120B]/40 focus:outline-none focus:ring-2 focus:ring-[#7A1612] focus:border-transparent transition-all font-mono"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPasskey(!showPasskey)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-[#24120B]/50 hover:text-[#24120B] transition-colors cursor-pointer"
+                  aria-label={showPasskey ? 'Hide passkey' : 'Show passkey'}
+                >
+                  {showPasskey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {passkeyError && (
+              <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-medium flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-red-600" />
+                <span>{passkeyError}</span>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={verifyingPasskey || !adminPasskey.trim()}
+              className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#7A1612] via-[#8c1c18] to-[#7A1612] text-[#FAF6F0] text-sm font-semibold tracking-wide shadow-md hover:shadow-lg hover:from-[#65120e] hover:to-[#65120e] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {verifyingPasskey ? (
+                <>
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                  <span>Verifying Passkey...</span>
+                </>
+              ) : (
+                <>
+                  <Unlock className="w-4 h-4" />
+                  <span>Unlock Sacred Console</span>
+                </>
+              )}
+            </button>
+          </form>
+
+          <div className="mt-6 pt-5 border-t border-[#EADBC8] text-center">
+            <p className="text-[11px] text-[#24120B]/50">
+              🔒 256-Bit Encrypted Session • Unauthorized attempts are fingerprinted and logged.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="pt-6 sm:pt-10 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
       {/* ── Header & Live Controls ── */}
@@ -374,6 +550,15 @@ export default function AdminObservatoryPage() {
           >
             <Zap className="w-3.5 h-3.5" />
             <span>Flush Ephemeris Cache</span>
+          </button>
+
+          <button
+            onClick={handleAdminLogout}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#7A1612] hover:bg-[#5E100D] text-[#FAF6F0] shadow-sm transition-all cursor-pointer"
+            title="Lock Administrator Session"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            <span>Lock Console</span>
           </button>
 
           <button
